@@ -1,0 +1,63 @@
+/* =========================================================================
+   Seção SOBRE (resumida) — foto à esquerda, texto à direita
+   Tokens vêm de style.css. Fundo off-white, logo depois da seção terracota.
+   ========================================================================= */
+
+.about {
+  padding: clamp(88px, 14vh, 160px) var(--gutter);
+  background: var(--offwhite); color: var(--grafite);
+}
+
+.about__inner {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  column-gap: clamp(40px, 7vw, 120px); align-items: center;
+  max-width: 1300px; margin-inline: auto;
+}
+
+/* ---------- Foto ---------- */
+.about__media { position: relative; margin: 0; max-width: 520px; justify-self: end; width: 100%; }
+
+/* bloco verde-sálvia deslocado atrás da foto: dá profundidade e "assenta" a foto
+   (a foto tem fundo creme parecido com o da página, então sem isso ela se perde) */
+.about__media::before {
+  content: ""; position: absolute; z-index: 0;
+  inset: 7% -7% -7% 7%;
+  background: var(--salvia); border-radius: 6px;
+  transform-origin: left center;
+  transform: scaleX(var(--block, 1));     /* o sobre.js anima --block de 0 a 1 na entrada */
+}
+.about__media img {
+  position: relative; z-index: 1;
+  display: block; width: 100%; height: auto; aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 50% 92%;         /* corta o excedente de parede no topo e mantém as duas sentadas */
+  border-radius: 6px;
+}
+
+/* ---------- Texto ---------- */
+.about__text { max-width: 36rem; }
+.about__text h2 {
+  margin: 0 0 1.1em; font-family: var(--serif); font-weight: 500;
+  font-size: clamp(34px, 4vw, 60px); line-height: 1.05; letter-spacing: -.01em;
+}
+.about__text h2 em { font-style: italic; color: var(--terracota); }
+.about__text p { margin: 0 0 1.15em; font-size: clamp(15px, 1.15vw, 17px); line-height: 1.75; color: rgba(31, 31, 31, .82); }
+.about__text strong { font-weight: 400; color: var(--terracota); }      /* destaques do texto original, sem pesar */
+.about__text .eyebrow { margin-bottom: 1.1em; color: var(--terracota); }   /* vence o estilo genérico dos parágrafos */
+.about__hello { font-family: var(--serif); font-style: italic; font-size: clamp(22px, 1.9vw, 28px) !important; line-height: 1.25 !important; color: var(--grafite) !important; margin-bottom: .7em !important; }
+
+.about__link {
+  display: inline-flex; align-items: center; gap: .7em; margin-top: 1.2em; padding-bottom: 4px;
+  font-size: 13px; letter-spacing: .16em; text-transform: lowercase; color: var(--terracota);
+  border-bottom: 1px solid currentColor; transition: gap .3s ease, color .3s ease;
+}
+.about__link:hover, .about__link:focus-visible { gap: 1.1em; color: var(--grafite); }
+.about__link:focus-visible { outline: 2px solid var(--terracota); outline-offset: 4px; }
+
+/* ---------- Mobile / retrato: foto em cima, texto embaixo ---------- */
+@media (max-width: 860px) {
+  .about__inner { grid-template-columns: minmax(0, 1fr); row-gap: 56px; }
+  .about__media { justify-self: center; max-width: 420px; width: calc(100% - 7%); margin-right: 7%; }   /* reserva a margem do bloco verde */
+  .about__text { max-width: none; }
+  .about__text h2 { font-size: clamp(32px, 9vw, 46px); }
+}

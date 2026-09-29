@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="cards.css">
   <link rel="stylesheet" href="servicos.css">
+  <link rel="stylesheet" href="sobre.css">
 </head>
 <body>
 
@@ -211,6 +212,32 @@
         </ol>
       </div>
     </section>
+
+    <!-- SOBRE (resumido): foto à esquerda, texto à direita.
+         A página /sobre completa vem depois; por ora o link é um placeholder. -->
+    <section class="about" id="sobre" aria-labelledby="aboutTitle">
+      <div class="about__inner">
+
+        <figure class="about__media" id="aboutMedia">
+          <!-- FOTO PROVISÓRIA: baixa resolução (854×1280, 44 KB). Substituir pelo original
+               da cliente mantendo a proporção retrato; o recorte 4:5 é feito por CSS (object-position). -->
+          <img src="assets/sobre-nos.jpg" width="854" height="1280" loading="lazy" decoding="async"
+               alt="Malu e Laura, arquitetas do Studio Óri, sentadas no chão com amostras de materiais e plantas de projeto">
+        </figure>
+
+        <div class="about__text" id="aboutText">
+          <p class="eyebrow">quem somos</p>
+          <h2 id="aboutTitle">Projetos começam na <em>conversa</em>.</h2>
+
+          <p class="about__hello">Olá, somos Malu e Laura!</p>
+          <p>Somos arquitetas e urbanistas formadas pela <strong>Universidade de Brasília (FAU-UnB)</strong>. Atuamos no desenvolvimento de projetos de arquitetura e interiores com foco em precisão técnica, planejamento e qualidade construtiva, e acreditamos que cada projeto deve refletir quem as pessoas são, respeitando suas <strong>histórias, origens e modos de viver</strong>.</p>
+          <p>Nosso processo começa com o diálogo. Entender o cliente é essencial para criar espaços que realmente façam sentido para quem vai vivê-los.</p>
+
+          <a class="about__link" href="#sobre-completo">Conheça nossa história <span aria-hidden="true">→</span></a>
+        </div>
+
+      </div>
+    </section>
   </main>
 
   <!-- Símbolo das 5 folhas (vetorizado do manual de marca), reutilizado via <use> -->
@@ -224,5 +251,6 @@
   <script src="hero.js"></script>
   <script src="cards.js"></script>
   <script src="servicos.js"></script>
+  <script src="sobre.js"></script>
 </body>
 </html>
