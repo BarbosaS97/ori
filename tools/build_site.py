@@ -39,6 +39,15 @@ def img_tag(slug, it, cls="", sizes="100vw", alt="", pos=None, eager=False, hero
             f'srcset="{pre}{base}-s.webp {it["sw"]}w, {pre}{base}.webp {it["w"]}w" sizes="{sizes}" '
             f'width="{it["w"]}" height="{it["h"]}" alt="{esc(alt)}" {load} decoding="async"{style}>')
 
+# Foto que só começa a baixar quando o projetos.js pede (perto da seção ou ao avançar até ela).
+# Sem isso o navegador carregava as 9 capas logo na abertura, competindo com o hero.
+PLACEHOLDER = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+def deferred_img(slug, it, sizes, alt, pos):
+    base = f"assets/projetos/{slug}/{it['n']:02d}"
+    return (f'<img src="{PLACEHOLDER}" data-src="{base}-s.webp" '
+            f'data-srcset="{base}-s.webp {it["sw"]}w, {base}.webp {it["w"]}w" sizes="{sizes}" '
+            f'width="{it["w"]}" height="{it["h"]}" alt="{esc(alt)}" decoding="async" style="object-position:{pos}">')
+
 ARROW_L = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 ARROW_R = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 
@@ -180,7 +189,7 @@ def home_block():
         cover = MANIFEST[p["slug"]][0]
         return f'''          <figure class="pv{" is-active" if i == 0 else ""}" data-i="{i}" style="--c1:{p["tone"][0]};--c2:{p["tone"][1]}">
             <div class="pv__img">
-              {img_tag(p["slug"], cover, sizes="(max-width: 860px) 100vw, 46vw", alt=f"Render do projeto {p['name']}", pos=p["cover_pos"])}
+              {deferred_img(p["slug"], cover, sizes="(max-width: 860px) 100vw, 46vw", alt=f"Render do projeto {p['name']}", pos=p["cover_pos"])}
             </div>
             <figcaption class="pv__cap">
               <span class="pv__num">{i + 1:02d}</span>
@@ -189,6 +198,8 @@ def home_block():
               <span class="pv__cta">ver projeto <span aria-hidden="true">→</span></span>
             </figcaption>
             <a class="pv__link" href="projetos/{p["slug"]}/" tabindex="-1" aria-hidden="true"></a>
+            <!-- carregamento (mesma linguagem do loader do site): some quando a foto do projeto termina de carregar -->
+            <div class="pv__loader" aria-hidden="true"><span class="brand brand--lg"><span>studio</span><b>ÓRI</b></span><i></i></div>
           </figure>'''
     row1 = "\n".join(tile(i, PROJECTS[i]) for i in range(6))
     row2 = "\n".join(tile(i, PROJECTS[i]) for i in range(6, 9))
@@ -219,6 +230,9 @@ def home_block():
         <div class="pvbox">
           <div class="pvframe" id="pvFrame">
 {pvs}
+            <!-- setas laterais (só no celular): projeto anterior / próximo, mudando a letra ativa -->
+            <button class="pvnav pvnav--prev" id="pvPrev" type="button" aria-label="Projeto anterior">{ARROW_L}</button>
+            <button class="pvnav pvnav--next" id="pvNext" type="button" aria-label="Próximo projeto">{ARROW_R}</button>
           </div>
           <div class="pvbar">
             <span class="pvbar__count" aria-hidden="true"><b id="pvCount">01</b> / 09</span>

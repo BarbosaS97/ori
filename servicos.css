@@ -11,7 +11,7 @@
   padding: clamp(88px, 14vh, 160px) var(--gutter);
   background: var(--terracota); color: var(--offwhite);
 }
-.services .eyebrow { color: rgba(243, 239, 236, .75); }
+.services .eyebrow { color: rgba(243, 239, 236, .92); }   /* contraste ≥ 4,5:1 sobre o terracota */
 
 /* símbolo gigante e apagado ao fundo (referência às folhas do site antigo) */
 .services__leaf {
@@ -33,7 +33,7 @@
   font-size: clamp(30px, 3.5vw, 54px); line-height: 1.08; letter-spacing: -.01em;
 }
 .services__intro h2 em { font-style: italic; color: var(--offwhite); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; text-decoration-color: rgba(243, 239, 236, .5); }
-.services__bim { margin: 1.8em 0 0; max-width: 32rem; font-size: 15px; color: rgba(243, 239, 236, .8); }
+.services__bim { margin: 1.8em 0 0; max-width: 32rem; font-size: 15px; color: rgba(243, 239, 236, .9); }
 
 /* ---------- Lista / acordeão ---------- */
 .svc-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(243, 239, 236, .3); }
@@ -69,7 +69,7 @@
 /* ---------- Painel ---------- */
 .svc__body { padding: 0 0 clamp(26px, 4vh, 40px) calc(2rem + clamp(16px, 2.4vw, 32px));   /* alinha com o título: largura do número + gap */ max-width: 44rem; }
 .svc__desc { margin: 0; font-size: clamp(16px, 1.25vw, 18px); line-height: 1.6; color: rgba(243, 239, 236, .88); }
-.svc__ideal { margin: 1.3em 0 0; font-size: 15px; line-height: 1.6; color: rgba(243, 239, 236, .8); }
+.svc__ideal { margin: 1.3em 0 0; font-size: 15px; line-height: 1.6; color: rgba(243, 239, 236, .9); }
 .svc__ideal strong { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 1.15em; color: var(--offwhite); }
 .svc__link {
   display: inline-flex; gap: .6em; align-items: center; margin-top: 1.6em; padding-bottom: 3px;

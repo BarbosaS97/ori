@@ -17,7 +17,7 @@
   font-size: clamp(32px, 3.9vw, 58px); line-height: 1.05; letter-spacing: -.01em;
 }
 .letters__head h2 em { font-style: italic; color: var(--terracota); }
-.letters__hint { margin: 1.1em 0 0; font-size: 14px; color: rgba(31, 31, 31, .6); }
+.letters__hint { margin: 1.1em 0 0; font-size: 14px; color: rgba(31, 31, 31, .72); }   /* contraste ≥ 4,5:1 */
 
 /* ---------- Grade principal ---------- */
 .lx {
@@ -124,7 +124,7 @@
 .pv__link { position: absolute; inset: 0; z-index: 3; }
 .pv:hover .pv__cta { background: var(--offwhite); color: var(--terracota); }
 
-.pvbar { display: flex; justify-content: space-between; align-items: center; margin-top: 26px; font-size: 12px; letter-spacing: .24em; color: rgba(31, 31, 31, .55); }
+.pvbar { display: flex; justify-content: space-between; align-items: center; margin-top: 26px; font-size: 12px; letter-spacing: .24em; color: rgba(31, 31, 31, .72); }
 .pvbar__count b { font-weight: 400; color: var(--terracota); font-variant-numeric: tabular-nums; }
 .pvbar__auto { background: none; border: 0; padding: 4px 0; cursor: pointer; font-size: 12px; letter-spacing: .2em; text-transform: lowercase; color: var(--terracota); border-bottom: 1px solid currentColor; }
 .pvbar__auto:focus-visible { outline: 2px solid var(--terracota); outline-offset: 4px; }
@@ -133,6 +133,28 @@
 .cta { display: grid; justify-items: center; gap: 22px; text-align: center; margin-top: clamp(40px, 7vh, 72px); }
 .cta__lead { margin: 0; font-family: var(--serif); font-style: italic; font-size: clamp(20px, 2vw, 30px); color: var(--terracota); }
 .cta__row { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+
+/* ---------- Carregamento da prévia: logo + barra, como o loader do site ---------- */
+.pv__loader {
+  position: absolute; inset: 0; z-index: 4; display: grid; place-content: center; justify-items: center; gap: 24px;
+  background: var(--offwhite); color: var(--terracota); pointer-events: none;
+  transition: opacity .6s ease, visibility 0s linear .6s;
+}
+.pv.is-loaded .pv__loader { opacity: 0; visibility: hidden; }
+.pv__loader i { display: block; width: 120px; height: 1px; background: rgba(151, 67, 21, .2); position: relative; overflow: hidden; }
+.pv__loader i::after { content: ""; position: absolute; inset: 0; background: var(--terracota); transform-origin: left; animation: pvload 1.4s cubic-bezier(.6, 0, .3, 1) infinite; }
+@keyframes pvload { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+
+/* ---------- Setas laterais da prévia (celular) ---------- */
+.pvnav {
+  display: none; position: absolute; top: 50%; z-index: 6; width: 44px; height: 44px; padding: 0;
+  place-items: center; border: 0; border-radius: 50%; cursor: pointer; transform: translateY(-50%);
+  background: rgba(243, 239, 236, .92); color: var(--grafite); box-shadow: 0 6px 18px -8px rgba(31, 31, 31, .55);
+  -webkit-tap-highlight-color: transparent; transition: transform .25s ease, background .3s ease, color .3s ease;
+}
+.pvnav--prev { left: 10px; } .pvnav--next { right: 10px; }
+.pvnav:active { transform: translateY(-50%) scale(.92); background: var(--terracota); color: var(--offwhite); }
+.pvnav:focus-visible { outline: 2px solid var(--terracota); outline-offset: 3px; }
 
 /* ---------- Mobile / retrato: nome em miniatura no topo, painel embaixo ---------- */
 @media (max-width: 860px), (max-aspect-ratio: 4 / 5) {
@@ -143,6 +165,8 @@
   .tile.is-active { transform: translateY(-6px); }
   .tile.is-active .tile__face { box-shadow: 0 0 0 1.5px var(--offwhite), 0 0 0 3px var(--terracota), 0 14px 20px -12px rgba(31, 31, 31, .55); }
   .pvbox { width: 100%; justify-self: stretch; }
+  .pvnav { display: grid; }
+  .pvframe { touch-action: pan-y; }              /* scroll vertical livre; deslizar na horizontal troca de projeto */
   .cta__row { flex-direction: column; align-items: stretch; width: 100%; max-width: 340px; }   /* botões empilhados com a mesma largura */
   .cta__row .btn { justify-content: center; }
   .pvframe::before { inset: 10px -8px -10px 8px; }
@@ -153,6 +177,8 @@
 
 /* ---------- prefers-reduced-motion ---------- */
 @media (prefers-reduced-motion: reduce) {
+  .pv__loader i::after { animation: none; transform: none; opacity: .5; }
+  .pvnav { transition: none; }
   .tile, .tile__face, .tile__face::before, .tile__face::after { transition: none; }
   .pvbar__auto { display: none; }
 }
