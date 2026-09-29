@@ -59,5 +59,14 @@ Cada letra da Home leva a uma página própria, gerada por script (não edite os
 - **Acessibilidade:** auditado com axe-core (WCAG 2.2 AA + boas práticas) na Home e nas páginas de projeto, sem violações. Contraste de texto pequeno corrigido.
 - **Checagem estática:** `python tools/audit_static.py` confere links, recursos (com diferenciação de maiúsculas, como no GitHub Pages), ids duplicados, `alt`, dimensões de imagem e hierarquia de títulos. Os únicos avisos são os links ainda sem página (`#contato`, `#sobre-completo`, `#servico-*`, `#projetos-todos`).
 
+## Página de links (`/links/`)
+
+Página "link na bio" exclusiva do Studio Óri, no lugar do Linktree (`linktr.ee/ori.arqui`). Fora do menu do site: o endereço é `…/links/`.
+Foto em arco das arquitetas, logotipo, slogan e 5 botões (Site & Portfólio, Orçamentos, WhatsApp em destaque, Instagram, Facebook), com animação de entrada e preenchimento no hover/toque. Sem JavaScript.
+
+    python tools/build_links.py     # edite LINKS no script para trocar, reordenar ou adicionar links
+
+Está com `noindex` (como o resto do protótipo). Sem estatísticas de clique (o Linktree tinha): se precisar, dá para adicionar analytics depois.
+
 ### Testes
 Ative "reduzir movimento" no sistema operacional para testar o modo sem animação.

@@ -211,7 +211,7 @@ button { font: inherit; color: inherit; }
 
 
 /* ---------- Menu do celular ---------- */
-.nav__burger { display: none; width: 44px; height: 44px; margin-left: 8px; padding: 0; background: none; border: 0; color: inherit; cursor: pointer; place-items: center; align-content: center; gap: 7px; -webkit-tap-highlight-color: transparent; }
+.nav__burger { -webkit-appearance: none; appearance: none; display: none; width: 44px; height: 44px; margin-left: 8px; padding: 0; background: none; border: 0; color: inherit; cursor: pointer; place-items: center; align-content: center; gap: 7px; -webkit-tap-highlight-color: transparent; }
 .nav__burger i { display: block; width: 24px; height: 1.5px; background: currentColor; transition: transform .45s cubic-bezier(.2, .7, .2, 1); }
 .nav__burger:focus-visible { outline: 2px solid var(--terracota); outline-offset: 2px; border-radius: 6px; }
 .menu-open .nav__burger i:first-child { transform: translateY(4.25px) rotate(45deg); }

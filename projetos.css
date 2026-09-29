@@ -147,6 +147,7 @@
 
 /* ---------- Setas laterais da prévia (celular) ---------- */
 .pvnav {
+  -webkit-appearance: none; appearance: none;
   display: none; position: absolute; top: 50%; z-index: 6; width: 44px; height: 44px; padding: 0;
   place-items: center; border: 0; border-radius: 50%; cursor: pointer; transform: translateY(-50%);
   background: rgba(243, 239, 236, .92); color: var(--grafite); box-shadow: 0 6px 18px -8px rgba(31, 31, 31, .55);

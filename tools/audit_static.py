@@ -1,6 +1,6 @@
 import os,re,glob,sys,collections
 root='.'
-pages=['index.html']+sorted(glob.glob('projetos/*/index.html'))
+pages=['index.html']+sorted(glob.glob('projetos/*/index.html'))+glob.glob('links/index.html')
 def exists_cs(path):
     """existência com diferenciação de maiúsculas (como no GitHub Pages/Linux)"""
     parts=os.path.normpath(path).split(os.sep); cur='.' 
@@ -38,6 +38,13 @@ for pg in pages:
     for tag in re.findall(r'<img\b[^>]*>',h):
         if 'alt=' not in tag: issues[pg].append(f'img sem alt: {tag[:70]}')
         if 'width=' not in tag and 'class="lb__img"' not in tag: issues[pg].append(f'img sem width/height: {tag[:70]}')
+    # versões de cache (?v=hash) em dia com o conteúdo do arquivo?
+    import hashlib
+    for r in set(re.findall(r'(?:src|href|data-src)="([^"]+\?v=[0-9a-f]{8})"',h)):
+        clean,ver=r.split('?v=')
+        t2=os.path.join(base,clean)
+        if os.path.isfile(t2) and hashlib.md5(open(t2,'rb').read()).hexdigest()[:8]!=ver:
+            issues[pg].append(f'versão de cache DESATUALIZADA (rode python tools/build_site.py): {clean}')
     # cabeçalhos
     hs=[int(x) for x in re.findall(r'<h([1-6])\b',h)]
     if hs.count(1)!=1: issues[pg].append(f'h1 count={hs.count(1)}')

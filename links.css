@@ -1,0 +1,117 @@
+/* =========================================================================
+   Página de LINKS (link na bio) — links/index.html, gerada por tools/build_links.py
+   Feita para o celular (abre pelo Instagram), mas boa no desktop também.
+   Tokens de marca (--terracota, --offwhite, --salvia, --grafite) e .brand vêm de style.css.
+   Sem JavaScript: as animações são CSS puro e respeitam prefers-reduced-motion.
+   ========================================================================= */
+
+.lk { min-height: 100vh; min-height: 100svh; background: var(--offwhite); color: var(--grafite); overflow-x: hidden; }
+
+/* ---------- Fundo: manchas suaves + símbolo gigante girando devagar ---------- */
+.lk__bg {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+  background:
+    radial-gradient(60vmax 60vmax at 105% -10%, rgba(141, 149, 126, .28), transparent 60%),
+    radial-gradient(55vmax 55vmax at -15% 105%, rgba(151, 67, 21, .13), transparent 62%);
+}
+.lk__bgleaf {
+  position: absolute; right: -22vmax; top: 6vh; width: 62vmax; height: auto; color: var(--terracota); opacity: .06;
+  animation: lkspin 140s linear infinite;
+}
+@keyframes lkspin { to { transform: rotate(360deg); } }
+
+/* ---------- Coluna central ---------- */
+.lk__wrap {
+  position: relative; z-index: 1;
+  width: min(100%, 470px); margin: 0 auto;
+  padding: clamp(28px, 6vh, 56px) 22px calc(32px + env(safe-area-inset-bottom));
+  display: grid; gap: clamp(26px, 4.5vh, 40px);
+}
+
+/* ---------- Cabeçalho ---------- */
+.lk__head { display: grid; justify-items: center; text-align: center; }
+
+/* foto em arco, com contorno deslocado e bloco sálvia atrás (mesma linguagem do "Sobre" do site) */
+.lk__arch {
+  position: relative; margin: 0 0 clamp(20px, 3.4vh, 30px); width: clamp(150px, 44vw, 200px); aspect-ratio: 5 / 6;
+}
+.lk__arch::before {                                 /* bloco sálvia deslocado */
+  content: ""; position: absolute; inset: 7% -8% -6% 8%; z-index: 0;
+  border-radius: 999px 999px 18px 18px; background: var(--salvia);
+}
+.lk__arch::after {                                  /* contorno terracota */
+  content: ""; position: absolute; inset: -9px 9px 9px -9px; z-index: 0;
+  border: 1px solid var(--terracota); border-radius: 999px 999px 22px 22px; opacity: .6;
+}
+.lk__arch img {
+  position: relative; z-index: 1; display: block; width: 100%; height: 100%;
+  object-fit: cover; object-position: 50% 90%;      /* enquadra as duas sentadas */
+  border-radius: 999px 999px 18px 18px; box-shadow: 0 24px 40px -22px rgba(31, 31, 31, .45);
+}
+
+.lk__mark { width: 34px; height: auto; aspect-ratio: 1996 / 1969; color: var(--terracota); margin-bottom: 12px; }
+.lk__brand { margin: 0; display: inline-flex; align-items: baseline; gap: .7em; line-height: 1; color: var(--terracota); }
+.lk__brand span { font-size: 15px; letter-spacing: .34em; font-weight: 400; }
+.lk__brand b { font-family: var(--serif); font-weight: 500; font-size: 58px; letter-spacing: .02em; }
+.lk__role { margin: 10px 0 0; font-size: 12px; letter-spacing: .32em; text-transform: lowercase; color: rgba(31, 31, 31, .72); }
+.lk__slogan { margin: 22px 0 0; font-family: var(--serif); font-size: clamp(21px, 5.6vw, 26px); line-height: 1.25; }
+.lk__slogan em { font-style: normal; color: var(--terracota); }      /* o "ori" de "originalidade" */
+
+/* ---------- Lista de links ---------- */
+.lk__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+
+.lk__item {
+  position: relative; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 16px;
+  padding: 14px 14px 14px 22px;
+  border: 1px solid var(--terracota); border-radius: 999px; color: var(--terracota); text-decoration: none; overflow: hidden;
+  background: linear-gradient(var(--terracota), var(--terracota)) no-repeat left center / 0% 100%;    /* "preenchimento" no hover */
+  -webkit-tap-highlight-color: transparent;
+  transition: background-size .7s cubic-bezier(.2, .7, .2, 1), color .45s ease, transform .35s ease;
+}
+.lk__icon { transition: transform .7s cubic-bezier(.2, .7, .2, 1); }
+.lk__text { display: grid; gap: 2px; text-align: left; min-width: 0; }
+.lk__text strong { font-family: var(--serif); font-weight: 500; font-size: 23px; line-height: 1.1; letter-spacing: .01em; color: var(--grafite); transition: color .45s ease; }
+.lk__text small { font-size: 12.5px; letter-spacing: .06em; opacity: .9; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lk__go {
+  width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid currentColor; border-radius: 50%;
+  transition: transform .5s cubic-bezier(.2, .7, .2, 1), background .4s ease, color .4s ease, border-color .4s ease;
+}
+
+.lk__item:hover, .lk__item:focus-visible, .lk__item:active { background-size: 100% 100%; color: var(--offwhite); }
+.lk__item:hover .lk__text strong, .lk__item:focus-visible .lk__text strong, .lk__item:active .lk__text strong { color: var(--offwhite); }
+.lk__item:hover .lk__go, .lk__item:focus-visible .lk__go, .lk__item:active .lk__go { transform: translateX(4px); background: var(--offwhite); color: var(--terracota); border-color: var(--offwhite); }
+.lk__item:hover .lk__icon, .lk__item:focus-visible .lk__icon { transform: rotate(-12deg) scale(1.1); }
+.lk__item:focus-visible { outline: 2px solid var(--terracota); outline-offset: 4px; }
+
+/* botão principal (WhatsApp): já vem preenchido */
+.lk__item--primary { background-size: 100% 100%; color: var(--offwhite); box-shadow: 0 18px 30px -18px rgba(151, 67, 21, .7); }
+.lk__item--primary .lk__text strong { color: var(--offwhite); }
+.lk__item--primary .lk__go { background: var(--offwhite); color: var(--terracota); border-color: var(--offwhite); }
+.lk__item--primary:hover, .lk__item--primary:focus-visible, .lk__item--primary:active { background-size: 100% 100%; background-color: var(--grafite); }
+.lk__item--primary:hover { background-image: linear-gradient(var(--grafite), var(--grafite)); }
+
+/* ---------- Rodapé ---------- */
+.lk__foot { display: grid; justify-items: center; gap: 8px; text-align: center; color: rgba(31, 31, 31, .72); }
+.lk__footleaf { width: 22px; height: auto; aspect-ratio: 1996 / 1969; color: var(--terracota); }
+.lk__foot p { margin: 0; font-size: 12px; letter-spacing: .2em; text-transform: lowercase; }
+
+/* ---------- Entrada em cascata ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .lk__arch img { animation: lkreveal 1.1s cubic-bezier(.2, .7, .2, 1) backwards; }   /* só na foto (o clip-path cortaria o contorno e o bloco sálvia) e sem manter o corte depois */
+  .lk__mark { animation: lkleaf 1.3s cubic-bezier(.2, .7, .2, 1) .35s both; }
+  .lk__brand, .lk__role, .lk__slogan { animation: lkrise .9s cubic-bezier(.2, .7, .2, 1) both; }
+  .lk__brand { animation-delay: .5s; } .lk__role { animation-delay: .6s; } .lk__slogan { animation-delay: .7s; }
+  .lk__list li { animation: lkrise .9s cubic-bezier(.2, .7, .2, 1) both; animation-delay: calc(.85s + var(--i) * .09s); }
+  .lk__foot { animation: lkrise .9s ease 1.6s both; }
+}
+@keyframes lkrise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+@keyframes lkreveal { from { clip-path: inset(100% 0 0 0); transform: scale(1.04); } to { clip-path: inset(0 0 0 0); transform: none; } }
+@keyframes lkleaf { from { opacity: 0; transform: rotate(-144deg) scale(.6); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .lk__bgleaf { animation: none; } .lk__item, .lk__go, .lk__icon, .lk__text strong { transition: none; } }
+
+/* ---------- Telas baixas (celular pequeno): compacta o cabeçalho ---------- */
+@media (max-height: 700px) {
+  .lk__arch { width: 132px; }
+  .lk__brand b { font-size: 48px; }
+  .lk__slogan { margin-top: 14px; }
+}

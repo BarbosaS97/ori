@@ -270,3 +270,4 @@ if __name__ == "__main__":
         open(os.path.join(d, "index.html"), "w", encoding="utf-8").write(page(i))
     patch_home()
     print(f"{N} páginas em projetos/ e bloco da Home atualizado.")
+    import version_assets; version_assets.run()      # cache busting: style.css?v=hash ...
