@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Studio Óri — Protótipo do hero</title>
+  <meta name="description" content="Studio Óri Arquitetura e Interiores. Valorizamos história e originalidade.">
+  <meta name="theme-color" content="#F3EFEC">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%23974315'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="assets/hero-socias.webp" type="image/webp">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="brand brand--lg"><span>studio</span><b>ÓRI</b></div>
+    <div class="loader__bar"><i id="loaderBar"></i></div>
+  </div>
+
+  <header class="nav" id="nav">
+    <a class="brand" href="#" aria-label="Studio Óri — início"><span>studio</span><b>ÓRI</b></a>
+    <nav class="nav__links" aria-label="Principal">
+      <a href="#">Home</a>
+      <a href="#sobre">Quem somos</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <a class="pill" href="#contato"><span class="pill__long">Quero transformar o meu espaço</span><span class="pill__short">Fale conosco</span></a>
+  </header>
+
+  <main>
+    <section class="hero" id="hero" aria-label="Apresentação">
+      <div class="stage" id="stage">
+
+        <!-- CENA 1–2: as sócias (fixas) e a câmera avançando pela parede off-white -->
+        <div class="sceneA" id="sceneA">
+          <div class="photo" id="photo">
+            <img src="assets/hero-socias.webp" alt="Malu e Laura caminhando em um ambiente off-white" fetchpriority="high" decoding="async">
+          </div>
+          <div class="headline" id="headline">
+            <h1>Valorizamos história<br>e <em>ori</em>ginalidade.</h1>
+            <p class="headline__sub">Arquitetura e interiores · Brasília</p>
+          </div>
+          <div class="hint" id="hint" aria-hidden="true"><span>role para entrar</span><i></i></div>
+        </div>
+
+        <!-- CENA 3–5: portal → ambiente → desenho técnico -->
+        <div class="portal" id="portal">
+          <div class="filmwrap" id="filmwrap">
+            <canvas id="film" aria-hidden="true"></canvas>
+          </div>
+          <div class="veil" id="veil"></div>
+          <div class="endtext" id="endtext">
+            <p class="eyebrow">03 · do desenho à obra</p>
+            <h2>Projetos começam<br>na conversa.</h2>
+            <p class="endtext__p">Arquitetura baseada na escuta, no entendimento do que faz sentido para quem vai viver o espaço.</p>
+            <div class="endtext__cta">
+              <a class="btn btn--solid" href="#contato">Quero transformar o meu espaço <span aria-hidden="true">→</span></a>
+              <a class="btn btn--ghost" href="#projetos">Ver projetos <span aria-hidden="true">↓</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="ring" id="ring" aria-hidden="true"></div>
+
+        <div class="hud" aria-hidden="true">
+          <span class="hud__label" id="label">01 · escuta</span>
+          <span class="hud__tag" id="tag">ilustração conceitual</span>
+        </div>
+        <button class="skip" id="skip" type="button">pular introdução <span aria-hidden="true">↓</span></button>
+      </div>
+    </section>
+
+    <!-- Marcador da próxima etapa: seção de projetos (cards + letras) -->
+    <section class="next" id="projetos">
+      <p class="eyebrow">próxima etapa</p>
+      <h2>Projetos: a pilha de cards<br>que forma <em>studio óri</em>.</h2>
+      <p>Aqui entra a seção seguinte. O hero destrava o scroll neste ponto.</p>
+    </section>
+  </main>
+
+  <script src="vendor/gsap.min.js"></script>
+  <script src="vendor/ScrollTrigger.min.js"></script>
+  <script src="hero.js"></script>
+</body>
+</html>
