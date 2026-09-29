@@ -1,0 +1,112 @@
+/* =========================================================================
+   Seção SERVIÇOS — acordeão numerado sobre fundo terracota
+   Tokens vêm de style.css. Texto off-white sobre #974315 (contraste ≈ 6,9:1).
+
+   Sem JS (html sem .js): todos os painéis ficam abertos, então o conteúdo
+   continua legível. Com JS: um painel aberto por vez.
+   ========================================================================= */
+
+.services {
+  position: relative; overflow: hidden;
+  padding: clamp(88px, 14vh, 160px) var(--gutter);
+  background: var(--terracota); color: var(--offwhite);
+}
+.services .eyebrow { color: rgba(243, 239, 236, .75); }
+
+/* símbolo gigante e apagado ao fundo (referência às folhas do site antigo) */
+.services__leaf {
+  position: absolute; right: -8vw; bottom: -14vw; width: clamp(360px, 46vw, 720px); height: auto;
+  color: var(--offwhite); opacity: .06; pointer-events: none;
+}
+
+.services__inner {
+  position: relative;
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  column-gap: clamp(40px, 7vw, 120px); align-items: start;
+  max-width: 1400px; margin-inline: auto;
+}
+
+/* Introdução: fica "grudada" enquanto o acordeão abre/fecha ao lado */
+.services__intro { position: sticky; top: clamp(96px, 16vh, 150px); }
+.services__intro h2 {
+  margin: 0; font-family: var(--serif); font-weight: 500;
+  font-size: clamp(30px, 3.5vw, 54px); line-height: 1.08; letter-spacing: -.01em;
+}
+.services__intro h2 em { font-style: italic; color: var(--offwhite); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; text-decoration-color: rgba(243, 239, 236, .5); }
+.services__bim { margin: 1.8em 0 0; max-width: 32rem; font-size: 15px; color: rgba(243, 239, 236, .8); }
+
+/* ---------- Lista / acordeão ---------- */
+.svc-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(243, 239, 236, .3); }
+.svc { border-bottom: 1px solid rgba(243, 239, 236, .3); }
+.svc__head { margin: 0; font: inherit; }
+
+.svc__btn {
+  width: 100%; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: clamp(16px, 2.4vw, 32px);
+  padding: clamp(20px, 3vh, 30px) 0; background: none; border: 0; color: inherit; text-align: left; cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+/* símbolo das folhas no lugar da numeração; ao abrir, acende e dá uma volta de 72° (1/5 do círculo) */
+.svc__leaf {
+  width: 2rem; height: auto; aspect-ratio: 1996 / 1969; flex: none;
+  color: var(--offwhite); opacity: .6;
+  transition: opacity .3s ease, transform .7s cubic-bezier(.2, .7, .2, 1);
+}
+.svc__title { font-family: var(--serif); font-weight: 500; font-size: clamp(26px, 2.9vw, 44px); line-height: 1.05; letter-spacing: -.005em; transition: transform .45s cubic-bezier(.2, .7, .2, 1); }
+.svc__btn:hover .svc__title, .svc__btn:focus-visible .svc__title { transform: translateX(8px); }
+.svc__btn:focus-visible { outline: 2px solid var(--offwhite); outline-offset: 4px; border-radius: 2px; }
+.svc.is-open .svc__leaf { opacity: 1; transform: rotate(72deg); }
+
+/* ícone +/×: duas barras; a vertical gira e some ao abrir */
+.svc__icon { position: relative; width: 22px; height: 22px; flex: none; }
+.svc__icon::before, .svc__icon::after {
+  content: ""; position: absolute; left: 50%; top: 50%; width: 100%; height: 1.5px; background: currentColor;
+  transform: translate(-50%, -50%); transition: transform .45s cubic-bezier(.2, .7, .2, 1);
+}
+.svc__icon::after { transform: translate(-50%, -50%) rotate(90deg); }
+.svc.is-open .svc__icon::before { transform: translate(-50%, -50%) rotate(180deg); }
+.svc.is-open .svc__icon::after  { transform: translate(-50%, -50%) rotate(0deg); }
+
+/* ---------- Painel ---------- */
+.svc__body { padding: 0 0 clamp(26px, 4vh, 40px) calc(2rem + clamp(16px, 2.4vw, 32px));   /* alinha com o título: largura do número + gap */ max-width: 44rem; }
+.svc__desc { margin: 0; font-size: clamp(16px, 1.25vw, 18px); line-height: 1.6; color: rgba(243, 239, 236, .88); }
+.svc__ideal { margin: 1.3em 0 0; font-size: 15px; line-height: 1.6; color: rgba(243, 239, 236, .8); }
+.svc__ideal strong { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 1.15em; color: var(--offwhite); }
+.svc__link {
+  display: inline-flex; gap: .6em; align-items: center; margin-top: 1.6em; padding-bottom: 3px;
+  font-size: 13px; letter-spacing: .16em; text-transform: lowercase;
+  border-bottom: 1px solid rgba(243, 239, 236, .55); transition: border-color .3s ease, gap .3s ease;
+}
+.svc__link:hover, .svc__link:focus-visible { border-color: var(--offwhite); gap: 1em; }
+.svc__link:focus-visible { outline: 2px solid var(--offwhite); outline-offset: 4px; }
+
+/* Com JS: painel recolhido usa a técnica de grid (0fr → 1fr) — anima altura "auto" só com CSS.
+   `visibility` esconde o conteúdo recolhido do teclado e de leitores de tela. */
+.js .svc__panel {
+  display: grid; grid-template-rows: 0fr; visibility: hidden;
+  transition: grid-template-rows .6s cubic-bezier(.2, .7, .2, 1), visibility 0s linear .6s;
+}
+.js .svc.is-open .svc__panel { grid-template-rows: 1fr; visibility: visible; transition-delay: 0s; }
+.js .svc__body { overflow: hidden; min-height: 0; }
+
+/* o conteúdo entra em cascata depois que a altura abre */
+.js .svc__body > * { opacity: 0; transform: translateY(10px); transition: opacity .4s ease, transform .5s cubic-bezier(.2, .7, .2, 1); }
+.js .svc.is-open .svc__body > * { opacity: 1; transform: none; }
+.js .svc.is-open .svc__body > :nth-child(1) { transition-delay: .12s; }
+.js .svc.is-open .svc__body > :nth-child(2) { transition-delay: .2s; }
+.js .svc.is-open .svc__body > :nth-child(3) { transition-delay: .28s; }
+
+/* ---------- Mobile / retrato ---------- */
+@media (max-width: 860px) {
+  .services__inner { grid-template-columns: minmax(0, 1fr); row-gap: 36px; }
+  .services__intro { position: static; }
+  .services__intro h2 { font-size: clamp(28px, 7.6vw, 40px); }
+  .services__leaf { right: -30vw; bottom: -20vw; width: 90vw; }
+  .svc__body { padding-left: 0; }
+  .svc__btn { grid-template-columns: auto 1fr auto; gap: 14px; }
+  .svc__title { font-size: clamp(24px, 6.6vw, 32px); }
+}
+
+/* ---------- prefers-reduced-motion: sem transições ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .js .svc__panel, .js .svc__body > *, .svc__icon::before, .svc__icon::after, .svc__title, .svc__leaf { transition: none !important; }
+}

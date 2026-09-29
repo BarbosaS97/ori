@@ -2,6 +2,8 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
+  <script>document.documentElement.classList.add('js')</script>
+  <noscript><style>.loader{display:none}</style></noscript>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Studio Óri — Protótipo do hero</title>
   <meta name="description" content="Studio Óri Arquitetura e Interiores. Valorizamos história e originalidade.">
@@ -14,6 +16,7 @@
   <link rel="preload" as="image" href="assets/hero-socias.webp" type="image/webp">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="cards.css">
+  <link rel="stylesheet" href="servicos.css">
 </head>
 <body>
 
@@ -113,6 +116,101 @@
 
       <p class="sr-only" id="live" aria-live="polite"></p>
     </section>
+
+    <!-- SERVIÇOS: acordeão numerado, um serviço aberto por vez.
+         O conteúdo é HTML estático; servicos.js só adiciona abrir/fechar e a entrada. -->
+    <section class="services" id="servicos" aria-labelledby="svcTitle">
+      <svg class="services__leaf" viewBox="0 0 1996 1969" aria-hidden="true" focusable="false"><use href="#simbolo"/></svg>
+      <div class="services__inner">
+        <header class="services__intro">
+          <p class="eyebrow">serviços</p>
+          <h2 id="svcTitle">Projetos pensados para unir estética, funcionalidade e <em>identidade</em>.</h2>
+          <p class="services__bim">Todo projeto é conduzido com planejamento técnico e metodologia BIM, que integra as informações construtivas em um modelo digital preciso.</p>
+        </header>
+        <ol class="svc-list" id="svcList">
+        <li class="svc is-open">
+          <h3 class="svc__head">
+            <button class="svc__btn" type="button" id="svc-1-btn" aria-expanded="true" aria-controls="svc-1">
+              <svg class="svc__leaf" viewBox="0 0 1996 1969" aria-hidden="true" focusable="false"><use href="#simbolo"/></svg>
+              <span class="svc__title">Consultoria Técnica</span>
+              <span class="svc__icon" aria-hidden="true"></span>
+            </button>
+          </h3>
+          <div class="svc__panel" id="svc-1" role="region" aria-labelledby="svc-1-btn">
+            <div class="svc__body">
+              <p class="svc__desc">Uma consultoria online ou presencial com um olhar técnico e sensível sobre o seu espaço. A partir do seu estilo de vida e das suas referências, indicamos soluções estratégicas e personalizadas.</p>
+              <p class="svc__ideal"><strong>Ideal para quem</strong> quer transformar o ambiente de forma prática, com orientações profissionais e sem a necessidade de uma grande obra.</p>
+              <a class="svc__link" href="#servico-consultoria-tecnica">Saiba mais <span class="sr-only">sobre Consultoria Técnica</span><span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </li>
+        <li class="svc">
+          <h3 class="svc__head">
+            <button class="svc__btn" type="button" id="svc-2-btn" aria-expanded="false" aria-controls="svc-2">
+              <svg class="svc__leaf" viewBox="0 0 1996 1969" aria-hidden="true" focusable="false"><use href="#simbolo"/></svg>
+              <span class="svc__title">Projeto de Arquitetura</span>
+              <span class="svc__icon" aria-hidden="true"></span>
+            </button>
+          </h3>
+          <div class="svc__panel" id="svc-2" role="region" aria-labelledby="svc-2-btn">
+            <div class="svc__body">
+              <p class="svc__desc">Projeto arquitetônico completo, do processo criativo à documentação técnica para a execução da obra. Ambientes funcionais e acolhedores, com identidade.</p>
+              <p class="svc__ideal"><strong>Ideal para quem</strong> quer construir, reformar ou dar novos significados aos espaços com um projeto estratégico.</p>
+              <a class="svc__link" href="#servico-projeto-de-arquitetura">Saiba mais <span class="sr-only">sobre Projeto de Arquitetura</span><span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </li>
+        <li class="svc">
+          <h3 class="svc__head">
+            <button class="svc__btn" type="button" id="svc-3-btn" aria-expanded="false" aria-controls="svc-3">
+              <svg class="svc__leaf" viewBox="0 0 1996 1969" aria-hidden="true" focusable="false"><use href="#simbolo"/></svg>
+              <span class="svc__title">Projeto de Interiores</span>
+              <span class="svc__icon" aria-hidden="true"></span>
+            </button>
+          </h3>
+          <div class="svc__panel" id="svc-3" role="region" aria-labelledby="svc-3-btn">
+            <div class="svc__body">
+              <p class="svc__desc">Ambientes funcionais, elegantes e bem planejados, com soluções completas para reformas e ambientação de apartamentos, residências e espaços comerciais.</p>
+              <p class="svc__ideal"><strong>Ideal para quem</strong> busca um planejamento completo do espaço, com marcenaria, iluminação, mobiliário, marmoraria e layout.</p>
+              <a class="svc__link" href="#servico-projeto-de-interiores">Saiba mais <span class="sr-only">sobre Projeto de Interiores</span><span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </li>
+        <li class="svc">
+          <h3 class="svc__head">
+            <button class="svc__btn" type="button" id="svc-4-btn" aria-expanded="false" aria-controls="svc-4">
+              <svg class="svc__leaf" viewBox="0 0 1996 1969" aria-hidden="true" focusable="false"><use href="#simbolo"/></svg>
+              <span class="svc__title">Acompanhamento de Obra</span>
+              <span class="svc__icon" aria-hidden="true"></span>
+            </button>
+          </h3>
+          <div class="svc__panel" id="svc-4" role="region" aria-labelledby="svc-4-btn">
+            <div class="svc__body">
+              <p class="svc__desc">Acompanhamento próximo e estratégico, do início da execução à finalização, verificando se as soluções previstas estão sendo realizadas conforme o planejamento.</p>
+              <p class="svc__ideal"><strong>Ideal para quem</strong> busca mais segurança, organização e tranquilidade durante a execução da obra.</p>
+              <a class="svc__link" href="#servico-acompanhamento-de-obra">Saiba mais <span class="sr-only">sobre Acompanhamento de Obra</span><span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </li>
+        <li class="svc">
+          <h3 class="svc__head">
+            <button class="svc__btn" type="button" id="svc-5-btn" aria-expanded="false" aria-controls="svc-5">
+              <svg class="svc__leaf" viewBox="0 0 1996 1969" aria-hidden="true" focusable="false"><use href="#simbolo"/></svg>
+              <span class="svc__title">Execução de Obra</span>
+              <span class="svc__icon" aria-hidden="true"></span>
+            </button>
+          </h3>
+          <div class="svc__panel" id="svc-5" role="region" aria-labelledby="svc-5-btn">
+            <div class="svc__body">
+              <p class="svc__desc">Gestão e execução completas da obra, do planejamento inicial à entrega dos ambientes finalizados, coordenando equipes, materiais e fornecedores.</p>
+              <p class="svc__ideal"><strong>Ideal para quem</strong> busca praticidade e segurança para transformar o projeto em realidade, com uma equipe responsável pela condução da obra.</p>
+              <a class="svc__link" href="#servico-execucao-de-obra">Saiba mais <span class="sr-only">sobre Execução de Obra</span><span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </li>
+        </ol>
+      </div>
+    </section>
   </main>
 
   <!-- Símbolo das 5 folhas (vetorizado do manual de marca), reutilizado via <use> -->
@@ -125,5 +223,6 @@
   <script src="vendor/Flip.min.js"></script>
   <script src="hero.js"></script>
   <script src="cards.js"></script>
+  <script src="servicos.js"></script>
 </body>
 </html>
