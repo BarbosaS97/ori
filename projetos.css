@@ -1,0 +1,156 @@
+/* =========================================================================
+   Seção PROJETOS — o nome "STUDIO ÓRI" já formado; cada letra é um projeto
+   Tokens vêm de style.css (--terracota, --offwhite, --salvia, --grafite, --azul).
+
+   Desktop: [nome em blocos] [painel de pré-visualização do projeto]
+   Mobile : nome em miniatura no topo, painel embaixo.
+   ========================================================================= */
+
+.letters {
+  position: relative;
+  padding: clamp(84px, 11vh, 120px) var(--gutter) clamp(48px, 8vh, 96px);
+  background: var(--offwhite);
+}
+.letters__head { max-width: 40rem; }
+.letters__head h2 {
+  margin: 0; font-family: var(--serif); font-weight: 500;
+  font-size: clamp(32px, 3.9vw, 58px); line-height: 1.05; letter-spacing: -.01em;
+}
+.letters__head h2 em { font-style: italic; color: var(--terracota); }
+.letters__hint { margin: 1.1em 0 0; font-size: 14px; color: rgba(31, 31, 31, .6); }
+
+/* ---------- Grade principal ---------- */
+.lx {
+  display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);   /* nome um pouco mais largo que o painel */
+  column-gap: clamp(32px, 5vw, 88px); align-items: center;
+  margin-top: clamp(28px, 5vh, 56px);
+}
+
+/* ---------- O nome: 6 + 3 blocos ---------- */
+.word {
+  container-type: inline-size;                 /* habilita `cqw` para dimensionar os blocos */
+  --gap: clamp(8px, 1vw, 14px);
+  --tile: calc((100cqw - 5 * var(--gap)) / 6);
+  display: grid; justify-items: center; gap: var(--gap);
+  width: 100%;
+}
+.word__row { display: flex; justify-content: center; gap: var(--gap); }
+
+.tile {
+  position: relative; display: block; flex: none;
+  width: var(--tile); aspect-ratio: 4 / 5;
+  border-radius: 6px; text-decoration: none; -webkit-tap-highlight-color: transparent;
+  transition: transform .55s cubic-bezier(.2, .7, .2, 1);
+}
+.tile:focus-visible { outline: 2px solid var(--terracota); outline-offset: 5px; }
+
+/* a "face" é o que recebe a entrada (giro) e a inclinação 3D via GSAP */
+.tile__face {
+  position: absolute; inset: 0; display: grid; place-items: center; overflow: hidden;
+  border-radius: 6px; color: var(--offwhite); background: var(--terracota);
+  box-shadow: 0 1px 2px rgba(31, 31, 31, .18), 0 10px 22px -14px rgba(31, 31, 31, .45);
+  transition: box-shadow .45s ease;
+  will-change: transform;
+}
+.tile[data-tile="terracota"] .tile__face { background: var(--terracota); }
+.tile[data-tile="salvia"]    .tile__face { background: var(--salvia); }
+.tile[data-tile="azul"]      .tile__face { background: var(--azul); }
+.tile[data-tile="grafite"]   .tile__face { background: var(--grafite); }
+.tile__face::before {                          /* moldura interna */
+  content: ""; position: absolute; inset: 7%; border: 1px solid rgba(243, 239, 236, .3); border-radius: 3px;
+  transition: inset .5s cubic-bezier(.2, .7, .2, 1), border-color .4s ease;
+}
+.tile__face::after {                           /* brilho que acompanha a inclinação */
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 30%), rgba(255, 255, 255, .28), transparent 55%);
+  transition: opacity .4s ease;
+}
+.glyph { font-family: var(--serif); font-weight: 500; font-size: calc(var(--tile) * .66); line-height: 1; transform: translateY(-3%); }
+.glyph--sym { width: calc(var(--tile) * .56); height: auto; aspect-ratio: 1996 / 1969; transform: none; }
+
+/* barra de progresso do autoplay (só aparece no bloco ativo) */
+.tile__bar { position: absolute; left: 14%; right: 14%; bottom: 10%; height: 2px; background: rgba(243, 239, 236, .22); opacity: 0; transition: opacity .3s ease; }
+.tile__bar i { display: block; height: 100%; background: var(--offwhite); transform: scaleX(0); transform-origin: left; }
+.tile.is-active .tile__bar { opacity: 1; }
+
+/* bloco ativo: sobe, ganha anel e a moldura interna "respira" */
+.tile.is-active { transform: translateY(-10px); }
+.tile.is-active .tile__face {
+  box-shadow: 0 0 0 2px var(--offwhite), 0 0 0 3.5px var(--terracota), 0 22px 30px -14px rgba(31, 31, 31, .55);
+}
+.tile.is-active .tile__face::before { inset: 5%; border-color: rgba(243, 239, 236, .6); }
+@media (hover: hover) { .tile:hover .tile__face::after { opacity: 1; } }
+
+/* ---------- Painel de pré-visualização ---------- */
+.pvbox { width: min(100%, 62vh * 1.25); justify-self: end; }
+.pvframe {
+  position: relative; aspect-ratio: 5 / 4; border-radius: 6px;
+  box-shadow: 0 30px 50px -30px rgba(31, 31, 31, .55);
+}
+.pvframe::before {                             /* contorno deslocado: "prancheta" */
+  content: ""; position: absolute; inset: 14px -14px -14px 14px; border: 1px solid var(--terracota); border-radius: 6px; opacity: .55; pointer-events: none;
+}
+.pv { position: absolute; inset: 0; margin: 0; overflow: hidden; border-radius: 6px; container-type: inline-size; visibility: hidden; }
+.pv.is-active { visibility: visible; }
+.pv__img {
+  position: absolute; inset: 0; will-change: transform;
+  background: linear-gradient(160deg, var(--c1), var(--c2));
+}
+.pv__img::before {                             /* grade sutil de prancheta (só no placeholder) */
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(243, 239, 236, .10) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(243, 239, 236, .10) 1px, transparent 1px);
+  background-size: 8cqw 8cqw;
+}
+.pv__img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.pv::after {                                   /* véu inferior para a legenda */
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(31, 31, 31, 0) 45%, rgba(31, 31, 31, .58) 100%);
+}
+.pv__cap {
+  position: absolute; z-index: 2; left: 5cqw; right: 5cqw; bottom: 4.5cqw;
+  display: grid; grid-template-columns: 1fr auto; align-items: end; row-gap: .4cqw; color: var(--offwhite);
+}
+.pv__num { grid-column: 1; font-size: 1.9cqw; letter-spacing: .24em; opacity: .85; }
+.pv__cap small { grid-column: 1; grid-row: 2; font-size: 1.6cqw; letter-spacing: .26em; text-transform: lowercase; opacity: .85; }
+.pv__cap strong { grid-column: 1; grid-row: 3; font-family: var(--serif); font-weight: 500; font-size: 5.2cqw; line-height: 1.05; }
+.pv__cta {
+  grid-column: 2; grid-row: 2 / 4; align-self: end;
+  padding: 1.3cqw 2.6cqw; border: 1px solid rgba(243, 239, 236, .7); border-radius: 999px;
+  font-size: 1.9cqw; letter-spacing: .12em; text-transform: lowercase; white-space: nowrap;
+  transition: background .3s ease, color .3s ease;
+}
+.pv__link { position: absolute; inset: 0; z-index: 3; }
+.pv:hover .pv__cta { background: var(--offwhite); color: var(--terracota); }
+
+.pvbar { display: flex; justify-content: space-between; align-items: center; margin-top: 26px; font-size: 12px; letter-spacing: .24em; color: rgba(31, 31, 31, .55); }
+.pvbar__count b { font-weight: 400; color: var(--terracota); font-variant-numeric: tabular-nums; }
+.pvbar__auto { background: none; border: 0; padding: 4px 0; cursor: pointer; font-size: 12px; letter-spacing: .2em; text-transform: lowercase; color: var(--terracota); border-bottom: 1px solid currentColor; }
+.pvbar__auto:focus-visible { outline: 2px solid var(--terracota); outline-offset: 4px; }
+
+/* ---------- CTA ---------- */
+.cta { display: grid; justify-items: center; gap: 22px; text-align: center; margin-top: clamp(40px, 7vh, 72px); }
+.cta__lead { margin: 0; font-family: var(--serif); font-style: italic; font-size: clamp(20px, 2vw, 30px); color: var(--terracota); }
+.cta__row { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+
+/* ---------- Mobile / retrato: nome em miniatura no topo, painel embaixo ---------- */
+@media (max-width: 860px), (max-aspect-ratio: 4 / 5) {
+  .letters { padding-top: 88px; }
+  .letters__head h2 { font-size: clamp(26px, 7.4vw, 40px); }
+  .lx { grid-template-columns: minmax(0, 1fr); row-gap: 34px; margin-top: 22px; }
+  .word { --gap: 6px; }
+  .tile.is-active { transform: translateY(-6px); }
+  .tile.is-active .tile__face { box-shadow: 0 0 0 1.5px var(--offwhite), 0 0 0 3px var(--terracota), 0 14px 20px -12px rgba(31, 31, 31, .55); }
+  .pvbox { width: 100%; justify-self: stretch; }
+  .pvframe::before { inset: 10px -8px -10px 8px; }
+  .pv__cap strong { font-size: 7cqw; }
+  .pv__num, .pv__cap small { font-size: 2.8cqw; }
+  .pv__cta { font-size: 2.9cqw; padding: 1.6cqw 3.4cqw; }
+}
+
+/* ---------- prefers-reduced-motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .tile, .tile__face, .tile__face::before, .tile__face::after { transition: none; }
+  .pvbar__auto { display: none; }
+}

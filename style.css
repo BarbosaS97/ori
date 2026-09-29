@@ -194,3 +194,7 @@ button { font: inherit; color: inherit; }
 .hero.reduced .endtext { opacity: 1; pointer-events: auto; }
 .hero.reduced .hint, .hero.reduced .ring, .hero.reduced .hud, .hero.reduced .skip { display: none; }
 @media (prefers-reduced-motion: reduce) { .hint i { animation: none; transform: none; } }
+
+/* utilitário: visível só para leitor de tela */
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+

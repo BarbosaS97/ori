@@ -15,7 +15,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="assets/hero-socias.webp" type="image/webp">
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="cards.css">
+  <link rel="stylesheet" href="projetos.css">
   <link rel="stylesheet" href="servicos.css">
   <link rel="stylesheet" href="sobre.css">
 </head>
@@ -49,7 +49,7 @@
           </div>
           <div class="headline" id="headline">
             <h1>Valorizamos história<br>e <em>ori</em>ginalidade.</h1>
-            <p class="headline__sub">Arquitetura e interiores · Brasília</p>
+            <p class="headline__sub">Arquitetura e interiores</p>
           </div>
           <div class="hint" id="hint" aria-hidden="true"><span>role para entrar</span><i></i></div>
         </div>
@@ -81,31 +81,171 @@
       </div>
     </section>
 
-    <!-- PROJETOS: pilha de cards que forma "STUDIO ÓRI".
-         O esqueleto é estático; cards, letras e slots são gerados por cards.js. -->
+    <!-- PROJETOS:START (gerado por tools/build_site.py — edite tools/projects_data.py) -->
+    <!-- PROJETOS: o nome "STUDIO ÓRI" já formado. Cada letra é um projeto:
+         passar o mouse / focar / tocar mostra o projeto no painel ao lado; clicar abre a página do projeto.
+         projetos.js só adiciona o comportamento. -->
     <section class="letters" id="projetos" aria-labelledby="lettersTitle">
       <header class="letters__head">
         <p class="eyebrow">projetos</p>
         <h2 id="lettersTitle">Cada projeto, uma letra<br>do nosso <em>nome</em>.</h2>
-        <p class="letters__hint" id="lettersHint">Toque para descobrir, um projeto por vez.</p>
+        <p class="letters__hint" id="lettersHint">Passe o mouse sobre uma letra para ver o projeto.</p>
       </header>
 
-      <div class="letters__stage">
-        <!-- Coluna da pilha: a pilha em si + o botão "próximo" -->
-        <div class="deckcol">
-          <div class="deck" id="deck" aria-hidden="true"></div>
-          <div class="controls" id="controls">
-            <span class="counter" aria-hidden="true"><b id="count">0</b> / 9</span>
-            <button class="btn btn--solid" id="next" type="button">Próximo projeto <span aria-hidden="true">→</span></button>
+      <div class="lx">
+        <!-- O nome: 6 letras (STUDIO) + 3 (ÓRI). O "O" de STUDIO é o símbolo das folhas. -->
+        <div class="word" id="word" role="group" aria-label="STUDIO ÓRI — um projeto por letra">
+          <div class="word__row">
+            <a class="tile is-active" href="projetos/casa-aconchego/" data-i="0" data-slug="casa-aconchego" data-tile="terracota" aria-label="Letra S: Casa Aconchego, projeto residencial. Ver projeto" aria-current="true">
+              <span class="tile__face"><span class="glyph">S</span><span class="tile__bar" aria-hidden="true"><i></i></span></span>
+            </a>
+            <a class="tile" href="projetos/apartamento-mar/" data-i="1" data-slug="apartamento-mar" data-tile="salvia" aria-label="Letra T: Apartamento Mar, projeto residencial. Ver projeto">
+              <span class="tile__face"><span class="glyph">T</span><span class="tile__bar" aria-hidden="true"><i></i></span></span>
+            </a>
+            <a class="tile" href="projetos/rancho-oc/" data-i="2" data-slug="rancho-oc" data-tile="azul" aria-label="Letra U: Rancho OC, projeto residencial. Ver projeto">
+              <span class="tile__face"><span class="glyph">U</span><span class="tile__bar" aria-hidden="true"><i></i></span></span>
+            </a>
+            <a class="tile" href="projetos/rr/" data-i="3" data-slug="rr" data-tile="grafite" aria-label="Letra D: Projeto R&amp;R, projeto residencial. Ver projeto">
+              <span class="tile__face"><span class="glyph">D</span><span class="tile__bar" aria-hidden="true"><i></i></span></span>
+            </a>
+            <a class="tile" href="projetos/jo/" data-i="4" data-slug="jo" data-tile="terracota" aria-label="Letra I: Projeto JO, projeto residencial. Ver projeto">
+              <span class="tile__face"><span class="glyph">I</span><span class="tile__bar" aria-hidden="true"><i></i></span></span>
+            </a>
+            <a class="tile" href="projetos/oliva/" data-i="5" data-slug="oliva" data-tile="salvia" aria-label="Letra O: Apartamento Oliva, projeto residencial. Ver projeto">
+              <span class="tile__face"><svg class="glyph glyph--sym" viewBox="0 0 1996 1969" aria-hidden="true"><use href="#simbolo"/></svg><span class="tile__bar" aria-hidden="true"><i></i></span></span>
+            </a>
+          </div>
+          <div class="word__row">
+            <a class="tile" href="projetos/olie/" data-i="6" data-slug="olie" data-tile="azul" aria-label="Letra Ó: Ólie Beauty Clinic, projeto comercial. Ver projeto">
+              <span class="tile__face"><span class="glyph">Ó</span><span class="tile__bar" aria-hidden="true"><i></i></span></span>
+            </a>
+            <a class="tile" href="projetos/guarita-victoria/" data-i="7" data-slug="guarita-victoria" data-tile="terracota" aria-label="Letra R: Guarita Victória, projeto institucional. Ver projeto">
+              <span class="tile__face"><span class="glyph">R</span><span class="tile__bar" aria-hidden="true"><i></i></span></span>
+            </a>
+            <a class="tile" href="projetos/quarto-ambar/" data-i="8" data-slug="quarto-ambar" data-tile="grafite" aria-label="Letra I: Quarto Âmbar, projeto residencial. Ver projeto">
+              <span class="tile__face"><span class="glyph">I</span><span class="tile__bar" aria-hidden="true"><i></i></span></span>
+            </a>
           </div>
         </div>
 
-        <!-- Onde as letras se formam: 6 slots (STUDIO) + 3 slots (ÓRI) -->
-        <div class="word" id="word" role="group" aria-label="STUDIO ÓRI — projetos"></div>
+        <!-- Painel de pré-visualização: um <figure> por projeto, empilhados; projetos.js faz a transição -->
+        <div class="pvbox">
+          <div class="pvframe" id="pvFrame">
+          <figure class="pv is-active" data-i="0" style="--c1:#C9A98A;--c2:#8A5A3A">
+            <div class="pv__img">
+              <img src="assets/projetos/casa-aconchego/01-s.webp" srcset="assets/projetos/casa-aconchego/01-s.webp 900w, assets/projetos/casa-aconchego/01.webp 1600w" sizes="(max-width: 860px) 100vw, 46vw" width="1600" height="901" alt="Render do projeto Casa Aconchego" loading="lazy" decoding="async" style="object-position:50% 55%">
+            </div>
+            <figcaption class="pv__cap">
+              <span class="pv__num">01</span>
+              <small>residencial</small>
+              <strong>Casa Aconchego</strong>
+              <span class="pv__cta">ver projeto <span aria-hidden="true">→</span></span>
+            </figcaption>
+            <a class="pv__link" href="projetos/casa-aconchego/" tabindex="-1" aria-hidden="true"></a>
+          </figure>
+          <figure class="pv" data-i="1" style="--c1:#B9C4C0;--c2:#6F8480">
+            <div class="pv__img">
+              <img src="assets/projetos/apartamento-mar/01-s.webp" srcset="assets/projetos/apartamento-mar/01-s.webp 600w, assets/projetos/apartamento-mar/01.webp 1000w" sizes="(max-width: 860px) 100vw, 46vw" width="1000" height="1500" alt="Render do projeto Apartamento Mar" loading="lazy" decoding="async" style="object-position:50% 62%">
+            </div>
+            <figcaption class="pv__cap">
+              <span class="pv__num">02</span>
+              <small>residencial</small>
+              <strong>Apartamento Mar</strong>
+              <span class="pv__cta">ver projeto <span aria-hidden="true">→</span></span>
+            </figcaption>
+            <a class="pv__link" href="projetos/apartamento-mar/" tabindex="-1" aria-hidden="true"></a>
+          </figure>
+          <figure class="pv" data-i="2" style="--c1:#B8B29A;--c2:#6E6A4F">
+            <div class="pv__img">
+              <img src="assets/projetos/rancho-oc/01-s.webp" srcset="assets/projetos/rancho-oc/01-s.webp 900w, assets/projetos/rancho-oc/01.webp 1254w" sizes="(max-width: 860px) 100vw, 46vw" width="1254" height="1254" alt="Render do projeto Rancho OC" loading="lazy" decoding="async" style="object-position:50% 50%">
+            </div>
+            <figcaption class="pv__cap">
+              <span class="pv__num">03</span>
+              <small>residencial</small>
+              <strong>Rancho OC</strong>
+              <span class="pv__cta">ver projeto <span aria-hidden="true">→</span></span>
+            </figcaption>
+            <a class="pv__link" href="projetos/rancho-oc/" tabindex="-1" aria-hidden="true"></a>
+          </figure>
+          <figure class="pv" data-i="3" style="--c1:#D8C9B8;--c2:#A98B72">
+            <div class="pv__img">
+              <img src="assets/projetos/rr/01-s.webp" srcset="assets/projetos/rr/01-s.webp 900w, assets/projetos/rr/01.webp 1800w" sizes="(max-width: 860px) 100vw, 46vw" width="1800" height="1013" alt="Render do projeto Projeto R&amp;R" loading="lazy" decoding="async" style="object-position:50% 60%">
+            </div>
+            <figcaption class="pv__cap">
+              <span class="pv__num">04</span>
+              <small>residencial</small>
+              <strong>Projeto R&amp;R</strong>
+              <span class="pv__cta">ver projeto <span aria-hidden="true">→</span></span>
+            </figcaption>
+            <a class="pv__link" href="projetos/rr/" tabindex="-1" aria-hidden="true"></a>
+          </figure>
+          <figure class="pv" data-i="4" style="--c1:#A9B39A;--c2:#6F7B5E">
+            <div class="pv__img">
+              <img src="assets/projetos/jo/01-s.webp" srcset="assets/projetos/jo/01-s.webp 900w, assets/projetos/jo/01.webp 1800w" sizes="(max-width: 860px) 100vw, 46vw" width="1800" height="1013" alt="Render do projeto Projeto JO" loading="lazy" decoding="async" style="object-position:50% 55%">
+            </div>
+            <figcaption class="pv__cap">
+              <span class="pv__num">05</span>
+              <small>residencial</small>
+              <strong>Projeto JO</strong>
+              <span class="pv__cta">ver projeto <span aria-hidden="true">→</span></span>
+            </figcaption>
+            <a class="pv__link" href="projetos/jo/" tabindex="-1" aria-hidden="true"></a>
+          </figure>
+          <figure class="pv" data-i="5" style="--c1:#C7B7A3;--c2:#8B7B6A">
+            <div class="pv__img">
+              <img src="assets/projetos/oliva/01-s.webp" srcset="assets/projetos/oliva/01-s.webp 720w, assets/projetos/oliva/01.webp 1080w" sizes="(max-width: 860px) 100vw, 46vw" width="1080" height="1350" alt="Render do projeto Apartamento Oliva" loading="lazy" decoding="async" style="object-position:50% 60%">
+            </div>
+            <figcaption class="pv__cap">
+              <span class="pv__num">06</span>
+              <small>residencial</small>
+              <strong>Apartamento Oliva</strong>
+              <span class="pv__cta">ver projeto <span aria-hidden="true">→</span></span>
+            </figcaption>
+            <a class="pv__link" href="projetos/oliva/" tabindex="-1" aria-hidden="true"></a>
+          </figure>
+          <figure class="pv" data-i="6" style="--c1:#E2CFC1;--c2:#BC9E8D">
+            <div class="pv__img">
+              <img src="assets/projetos/olie/01-s.webp" srcset="assets/projetos/olie/01-s.webp 900w, assets/projetos/olie/01.webp 1500w" sizes="(max-width: 860px) 100vw, 46vw" width="1500" height="1500" alt="Render do projeto Ólie Beauty Clinic" loading="lazy" decoding="async" style="object-position:50% 55%">
+            </div>
+            <figcaption class="pv__cap">
+              <span class="pv__num">07</span>
+              <small>comercial</small>
+              <strong>Ólie Beauty Clinic</strong>
+              <span class="pv__cta">ver projeto <span aria-hidden="true">→</span></span>
+            </figcaption>
+            <a class="pv__link" href="projetos/olie/" tabindex="-1" aria-hidden="true"></a>
+          </figure>
+          <figure class="pv" data-i="7" style="--c1:#7F8794;--c2:#3F4652">
+            <div class="pv__img">
+              <img src="assets/projetos/guarita-victoria/01-s.webp" srcset="assets/projetos/guarita-victoria/01-s.webp 900w, assets/projetos/guarita-victoria/01.webp 1675w" sizes="(max-width: 860px) 100vw, 46vw" width="1675" height="939" alt="Render do projeto Guarita Victória" loading="lazy" decoding="async" style="object-position:50% 55%">
+            </div>
+            <figcaption class="pv__cap">
+              <span class="pv__num">08</span>
+              <small>institucional</small>
+              <strong>Guarita Victória</strong>
+              <span class="pv__cta">ver projeto <span aria-hidden="true">→</span></span>
+            </figcaption>
+            <a class="pv__link" href="projetos/guarita-victoria/" tabindex="-1" aria-hidden="true"></a>
+          </figure>
+          <figure class="pv" data-i="8" style="--c1:#C9905F;--c2:#8E4F22">
+            <div class="pv__img">
+              <img src="assets/projetos/quarto-ambar/01-s.webp" srcset="assets/projetos/quarto-ambar/01-s.webp 900w, assets/projetos/quarto-ambar/01.webp 1800w" sizes="(max-width: 860px) 100vw, 46vw" width="1800" height="1013" alt="Render do projeto Quarto Âmbar" loading="lazy" decoding="async" style="object-position:50% 60%">
+            </div>
+            <figcaption class="pv__cap">
+              <span class="pv__num">09</span>
+              <small>residencial</small>
+              <strong>Quarto Âmbar</strong>
+              <span class="pv__cta">ver projeto <span aria-hidden="true">→</span></span>
+            </figcaption>
+            <a class="pv__link" href="projetos/quarto-ambar/" tabindex="-1" aria-hidden="true"></a>
+          </figure>
+          </div>
+          <div class="pvbar">
+            <span class="pvbar__count" aria-hidden="true"><b id="pvCount">01</b> / 09</span>
+            <button class="pvbar__auto" id="autoBtn" type="button" aria-pressed="false">pausar</button>
+          </div>
+        </div>
       </div>
-
-      <!-- Só para prefers-reduced-motion: os 9 projetos como grid estático -->
-      <ul class="static" id="static" hidden></ul>
 
       <div class="cta" id="cta">
         <p class="cta__lead">Cada letra, um projeto. Cada projeto, uma conversa.</p>
@@ -114,9 +254,8 @@
           <a class="btn btn--ghost" href="#contato">Quero transformar o meu espaço</a>
         </div>
       </div>
-
-      <p class="sr-only" id="live" aria-live="polite"></p>
     </section>
+    <!-- PROJETOS:END -->
 
     <!-- SERVIÇOS: acordeão numerado, um serviço aberto por vez.
          O conteúdo é HTML estático; servicos.js só adiciona abrir/fechar e a entrada. -->
@@ -247,9 +386,8 @@
 
   <script src="vendor/gsap.min.js"></script>
   <script src="vendor/ScrollTrigger.min.js"></script>
-  <script src="vendor/Flip.min.js"></script>
   <script src="hero.js"></script>
-  <script src="cards.js"></script>
+  <script src="projetos.js"></script>
   <script src="servicos.js"></script>
   <script src="sobre.js"></script>
 </body>

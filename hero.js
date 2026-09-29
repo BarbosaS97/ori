@@ -206,6 +206,14 @@
       onUpdate: () => render(state.p),
     });
 
+    // link direto (#projetos, voltar de outra página): o navegador rolou antes do pin existir; refaz a rolagem
+    if (location.hash.length > 1) {
+      try {
+        const target = document.querySelector(location.hash);
+        if (target) requestAnimationFrame(() => { ScrollTrigger.refresh(); target.scrollIntoView(); });
+      } catch (e) { /* hash não é um seletor válido: ignora */ }
+    }
+
     skip.addEventListener('click', () => {
       const st = ScrollTrigger.getById('hero');
       window.scrollTo({ top: st.end, behavior: 'smooth' });
