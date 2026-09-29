@@ -143,6 +143,8 @@
   .tile.is-active { transform: translateY(-6px); }
   .tile.is-active .tile__face { box-shadow: 0 0 0 1.5px var(--offwhite), 0 0 0 3px var(--terracota), 0 14px 20px -12px rgba(31, 31, 31, .55); }
   .pvbox { width: 100%; justify-self: stretch; }
+  .cta__row { flex-direction: column; align-items: stretch; width: 100%; max-width: 340px; }   /* botões empilhados com a mesma largura */
+  .cta__row .btn { justify-content: center; }
   .pvframe::before { inset: 10px -8px -10px 8px; }
   .pv__cap strong { font-size: 7cqw; }
   .pv__num, .pv__cap small { font-size: 2.8cqw; }
