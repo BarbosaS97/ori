@@ -199,6 +199,7 @@
         trigger: hero, start: 'top top',
         end: () => '+=' + Math.round(window.innerHeight * length),
         pin: stage, pinSpacing: true, anticipatePin: 1,
+        refreshPriority: 1,   // mede o pin do hero ANTES dos triggers das seções seguintes (que dependem do espaçamento dele)
         scrub: .6,
         invalidateOnRefresh: true,
       },
