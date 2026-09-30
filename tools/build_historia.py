@@ -3,7 +3,7 @@ Gera a página "Nossa história": historia/index.html (endereço /historia/).
 O texto fica em BLOCOS abaixo — para mudar uma frase, edite aqui e rode:  python tools/build_historia.py
 (o  python tools/build_site.py  também chama este script).
 """
-import html, os, sys
+import html, os, re, sys
 sys.path.insert(0, os.path.dirname(__file__))
 from site_config import WHATSAPP_URL, SITE_NAME
 from build_site import SYMBOL_DEF
@@ -33,12 +33,16 @@ SECOES = [
      ["É valorizar as origens e a personalidade de cada cliente, criando espaços com identidade e significado, espaços que vão além das tendências."]),
 ]
 
+def hl(s):
+    """Destaca em outra cor todo "óri"/"ori" das palavras (história, originalidade, origens, Óri...)."""
+    return re.sub(r"([óÓoO][rR][iI])", r'<span class="ori">\1</span>', s)
+
 def paras(lst):
-    return "\n".join(f"        <p>{t}</p>" for t in lst)
+    return "\n".join(f"        <p>{hl(t)}</p>" for t in lst)
 
 def page():
     secoes = "\n".join(f'''      <section class="hs__sec">
-        <h2>{h}</h2>
+        <h2>{h if "<em>" in h else hl(h)}</h2>
 {paras(ps)}
       </section>''' for h, ps in SECOES)
     return f'''<!doctype html>
@@ -71,7 +75,7 @@ def page():
   <main id="conteudo">
     <section class="hs__hero" aria-labelledby="hsTitle">
       <div class="hs__intro">
-        <p class="hs__eyebrow">nossa história</p>
+        <p class="hs__eyebrow">{hl("nossa história")}</p>
         <h1 id="hsTitle">Amigas desde os <em>12&nbsp;anos</em>.</h1>
       </div>
       <figure class="hs__media">
@@ -86,7 +90,7 @@ def page():
 {paras(ABERTURA)}
       </section>
 
-      <p class="hs__quote">{esc(DESTAQUE)}</p>
+      <p class="hs__quote">{hl(esc(DESTAQUE))}</p>
 
       <section class="hs__sec">
 {paras(CONTINUACAO)}

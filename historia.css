@@ -37,3 +37,7 @@
   .hs__hero { grid-template-columns: minmax(0, 1fr); row-gap: 40px; }
   .hs__media { justify-self: center; max-width: 400px; width: calc(100% - 6%); margin-right: 6%; }
 }
+
+/* "óri" / "ori" destacados em todas as palavras (história, originalidade, origens...) */
+.hs .ori { color: var(--terracota); }
+.hs__quote .ori, .hs__eyebrow .ori { color: var(--grafite); }      /* a frase em destaque já é terracota: aqui o "óri" inverte para grafite */
