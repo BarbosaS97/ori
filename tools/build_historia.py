@@ -63,7 +63,7 @@ def page():
   <a class="skiplink" href="#conteudo">Ir para o conteúdo</a>
 
   <header class="pjbar" id="pjbar">
-    <a class="pjbar__back" href="../"><span aria-hidden="true">←</span> <span>Início</span></a>
+    <a class="pjbar__back" href="../#sobre"><span aria-hidden="true">←</span> <span>Voltar</span></a>
     <a class="brand pjbar__brand" href="../" aria-label="Studio Óri — página inicial"><span>studio</span><b>ÓRI</b></a>
   </header>
 
@@ -95,7 +95,7 @@ def page():
     </div>
 
     <footer class="pjfoot">
-      <a class="pjfoot__back" href="../"><span aria-hidden="true">←</span> Voltar ao início</a>
+      <a class="pjfoot__back" href="../#sobre"><span aria-hidden="true">←</span> Voltar</a>
       <a class="btn btn--solid pjfoot__cta" href="{WHATSAPP_URL}" target="_blank" rel="noopener">Quero transformar o meu espaço <span aria-hidden="true">→</span><span class="sr-only"> (abre o WhatsApp em nova aba)</span></a>
     </footer>
   </main>
