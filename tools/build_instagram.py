@@ -130,7 +130,6 @@ def section():
 {cards}
           </ul>
         </div>
-        <div class="ig__progress" aria-hidden="true"><i id="igBar"></i></div>
       </div>
     </section>
     <!-- INSTAGRAM:END -->

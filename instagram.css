@@ -6,7 +6,7 @@
    COMPACTA: a seção é dimensionada para caber inteira na tela.
    • --cw (largura do card) depende da largura E da altura da tela;
    • tudo dentro do card usa cqw (% da largura do card), então o card inteiro escala junto;
-   • se os 5 cards cabem lado a lado (desktop), setas e barra de progresso somem (.is-static).
+   • se os 5 cards cabem lado a lado (desktop), setas somem (.is-static).
    ========================================================================= */
 
 .ig {
@@ -59,8 +59,8 @@
 .ig__track.is-dragging { cursor: grabbing; scroll-snap-type: none; }
 .ig__item { flex: 0 0 var(--cw); scroll-snap-align: start; }
 
-/* todos os cards cabem: sem setas, sem barra, cards centralizados */
-.ig.is-static .ig__controls, .ig.is-static .ig__progress { display: none; }
+/* todos os cards cabem: sem setas, cards centralizados */
+.ig.is-static .ig__controls { display: none; }
 .ig.is-static .ig__track { justify-content: center; cursor: default; }
 
 /* ---------- Card no estilo Instagram (medidas em cqw = % da largura do card) ---------- */
@@ -107,8 +107,6 @@
 .igcard:hover .igcard__cta span, .igcard:focus-visible .igcard__cta span { transform: translateX(6px); }
 
 /* ---------- Progresso ---------- */
-.ig__progress { height: 2px; margin: 4px var(--gutter) 0; background: rgba(243, 239, 236, .22); border-radius: 2px; overflow: hidden; }
-.ig__progress i { display: block; height: 100%; background: var(--offwhite); transform-origin: left; transform: scaleX(.25); transition: transform .3s ease; }
 
 /* ---------- Entrada em cascata (o JS marca .is-in quando a seção aparece) ---------- */
 .js .ig__item { opacity: 0; transform: translateY(30px); }
@@ -132,5 +130,5 @@
 
 @media (prefers-reduced-motion: reduce) {
   .js .ig__item { opacity: 1; transform: none; }
-  .igcard, .igcard__media img, .igcard__cta span, .ig__arrow, .ig__progress i { transition: none; }
+  .igcard, .igcard__media img, .igcard__cta span, .ig__arrow { transition: none; }
 }

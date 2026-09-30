@@ -1,7 +1,6 @@
 /* =========================================================================
    Seção INSTAGRAM — comportamento do carrossel
    • setas: rolam um card por vez (e ficam desabilitadas nas pontas); somem quando os 5 cards cabem na tela;
-   • barra de progresso acompanha a rolagem;
    • mouse: arrastar para rolar (toque já rola nativamente); um arrasto NÃO abre o Reel por engano;
    • entrada: os cards sobem em cascata quando a seção aparece (uma vez).
    O HTML é gerado por tools/build_instagram.py. Sem JS, o trilho continua rolável e os cards são links.
@@ -15,10 +14,9 @@
   const track = document.getElementById('igTrack');
   const prev = document.getElementById('igPrev');
   const next = document.getElementById('igNext');
-  const bar = document.getElementById('igBar');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- setas + progresso ---------- */
+  /* ---------- setas ---------- */
   const stepPx = () => {
     const items = track.querySelectorAll('.ig__item');
     const gap = parseFloat(getComputedStyle(track).columnGap) || 20;
@@ -30,11 +28,9 @@
     ticking = false;
     const max = track.scrollWidth - track.clientWidth;
     const x = track.scrollLeft;
-    sec.classList.toggle('is-static', max <= 2);      // tudo cabe na tela: sem setas nem barra
+    sec.classList.toggle('is-static', max <= 2);      // tudo cabe na tela: sem setas
     prev.disabled = x <= 2;
     next.disabled = x >= max - 2;
-    // a barra vai de 25% (início) a 100% (fim)
-    bar.style.transform = `scaleX(${max > 0 ? 0.25 + 0.75 * Math.min(1, x / max) : 1})`;
   }
   const schedule = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
 
