@@ -15,6 +15,17 @@
   const $ = (s, r = document) => r.querySelector(s);
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ---------- 0. De onde o visitante veio ----------
+     Vindo da página /projetos/ (?de=lista), o "voltar" leva de volta a ela, e as setas entre projetos
+     mantêm essa origem. Sem o parâmetro (vindo da Home), o "voltar" segue para a Home, como sempre. */
+  if (new URLSearchParams(location.search).get('de') === 'lista') {
+    document.querySelectorAll('.pjbar__back, .pjfoot__back:not(.pjfoot__all)').forEach((a) => { a.href = '../'; });
+    document.querySelectorAll('.pjfoot__all').forEach((a) => { a.hidden = true; });
+    document.querySelectorAll('.pjbar__pn a, .pjside, .pjnext__link').forEach((a) => {
+      a.href = a.getAttribute('href') + '?de=lista';
+    });
+  }
+
   /* ---------- 1. Barra ---------- */
   const bar = $('#pjbar');
   let ticking = false;
@@ -82,6 +93,7 @@
     show(i);
     dlg.showModal();
     document.documentElement.style.overflow = 'hidden';       // trava o scroll da página por trás
+    history.pushState({ lb: true }, '');                       // entrada de histórico só para o botão VOLTAR do celular fechar a galeria
   }
 
   items.forEach((b, i) => b.addEventListener('click', () => open(i)));
@@ -94,7 +106,10 @@
   dlg.addEventListener('close', () => {
     document.documentElement.style.overflow = '';
     if (opener) opener.focus({ preventScroll: true });          // devolve o foco à miniatura de onde veio
+    if (history.state && history.state.lb) history.back();      // fechou pela tela (X, Esc, fundo): desfaz a entrada de histórico
   });
+  // VOLTAR do celular / do navegador com a galeria aberta: só fecha a galeria (não sai da página)
+  addEventListener('popstate', () => { if (dlg.open) dlg.close(); });
 
   // teclado
   dlg.addEventListener('keydown', (e) => {

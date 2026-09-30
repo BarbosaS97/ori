@@ -59,6 +59,28 @@ for pg in pages:
         if b-a>1: issues[pg].append(f'salto de heading h{a}->h{b}')
     if '<html lang=' not in h: issues[pg].append('sem lang')
     if 'name="viewport"' not in h: issues[pg].append('sem viewport')
+
+# ---- URLs e compartilhamento --------------------------------------------------------------------------------
+from importlib.machinery import SourceFileLoader
+_cfg = SourceFileLoader('site_config', os.path.join(os.path.dirname(os.path.abspath(__file__)), 'site_config.py')).load_module()
+for pg in pages:
+    h = open(pg, encoding='utf-8').read()
+    m = re.search(r'rel="canonical" href="([^"]+)"', h)
+    if not m: issues[pg].append('sem <link rel="canonical">')
+    elif not m.group(1).startswith(_cfg.SITE_URL): issues[pg].append(f'canonical fora do SITE_URL: {m.group(1)}')
+    o = re.search(r'property="og:image" content="([^"]+)"', h)
+    if not o: issues[pg].append('sem og:image (pré-visualização ao compartilhar)')
+    else:
+        rel = o.group(1)[len(_cfg.SITE_URL):] if o.group(1).startswith(_cfg.SITE_URL) else None
+        if rel is None: issues[pg].append(f'og:image fora do SITE_URL: {o.group(1)}')
+        elif not exists_cs(rel): issues[pg].append(f'og:image inexistente: {rel}')
+    if re.search(r'<title>[^<]*(Protótipo|Prototipo)', h): issues[pg].append('título ainda diz "Protótipo"')
+    want = 'index, follow' if _cfg.INDEXAR else 'noindex, nofollow'
+    r = re.findall(r'<meta name="robots" content="([^"]+)"', h)
+    if r != [want]: issues[pg].append(f'robots esperado ["{want}"], achei {r}')
+    if len(re.findall(r'<title>', h)) != 1 or len(re.findall(r'<meta name="description"', h)) != 1: issues[pg].append('title/description duplicados ou ausentes')
+for f in ('404.html', 'robots.txt', 'sitemap.xml', '.nojekyll') + tuple(a + '/index.html' for a in _cfg.ALIASES):
+    if not exists_cs(f): issues['(raiz)'].append(f'arquivo esperado ausente: {f}  (rode python tools/build_site.py)')
 print('páginas:',len(pages),'| referências locais checadas:',total_refs)
 agg=collections.Counter()
 for pg,l in issues.items():

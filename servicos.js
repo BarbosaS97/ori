@@ -25,8 +25,28 @@
     item.querySelector('.svc__btn').setAttribute('aria-expanded', String(open));
   }
 
+  /* Ao abrir um serviço, o que estava aberto acima dele fecha e a página inteira "sobe": o título clicado
+     podia sair da tela (bug no celular). Enquanto os painéis animam, mantemos o título no mesmo lugar da tela. */
+  let holdRaf = 0;
+  function holdPosition(btn, ms) {
+    cancelAnimationFrame(holdRaf);
+    const startTop = btn.getBoundingClientRect().top;
+    const t0 = performance.now();
+    const stop = () => cancelAnimationFrame(holdRaf);
+    // se a pessoa rolar com o dedo/roda durante a animação, para de corrigir (ela manda)
+    ['wheel', 'touchstart', 'keydown'].forEach((ev) => addEventListener(ev, stop, { once: true, passive: true }));
+    const step = () => {
+      const dy = btn.getBoundingClientRect().top - startTop;
+      if (Math.abs(dy) > 0.5) window.scrollBy(0, dy);
+      if (performance.now() - t0 < ms) holdRaf = requestAnimationFrame(step);
+    };
+    holdRaf = requestAnimationFrame(step);
+  }
+
   function toggle(item) {
     const willOpen = !item.classList.contains('is-open');
+    const btn = item.querySelector('.svc__btn');
+    if (!reduce) holdPosition(btn, 800);                       // 800 ms > duração da animação de altura (600 ms)
     // um aberto por vez: fecha todos os outros
     items.forEach((other) => { if (other !== item) setOpen(other, false); });
     setOpen(item, willOpen);

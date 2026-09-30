@@ -3,7 +3,8 @@ Gera a seção "Siga o @ori.arqui" (carrossel de Reels em cards no estilo Instag
 entre <!-- INSTAGRAM:START --> e <!-- INSTAGRAM:END -->.
 
 COMO ATUALIZAR AS CAPAS
-  1. Coloque as imagens em  instagram/  com os nomes  reel-01.jpg … reel-05.jpg  (jpg, jpeg, png ou webp).
+  1. Coloque as imagens em  ../_material-original/instagram/  (fora da pasta do site) com os nomes
+     reel-01.jpg … reel-05.jpg  (jpg, jpeg, png ou webp).
      Ideal: 1080×1920 (9:16) ou 1080×1440 (3:4).
   2. Rode:  python tools/build_site.py      (ou só:  python tools/build_instagram.py)
   Capas que ainda não existem aparecem como cartões provisórios (degradê + símbolo).
@@ -12,6 +13,8 @@ COMO ATUALIZAR AS CAPAS
 import glob, html, os, re, sys
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.dirname(__file__))
+from site_config import COVERS_DIR      # ../_material-original/instagram/  (as capas originais não sobem para o GitHub)
 esc = html.escape
 
 HANDLE = "ori.arqui"
@@ -52,7 +55,7 @@ def leaf(cls):
 # ---------------------------------------------------------------------------
 def find_cover(n):
     for ext in ("jpg", "jpeg", "png", "webp"):
-        p = os.path.join(HERE, "instagram", f"reel-{n:02d}.{ext}")
+        p = os.path.join(COVERS_DIR, f"reel-{n:02d}.{ext}")
         if os.path.isfile(p):
             return p
     return None
@@ -147,7 +150,7 @@ def patch_home():
 def run():
     patch_home()
     found = [n for n in range(1, len(REELS) + 1) if find_cover(n)]
-    print(f"seção do Instagram gerada: {len(found)} de {len(REELS)} capas encontradas em instagram/ (as demais ficam provisórias).")
+    print(f"seção do Instagram gerada: {len(found)} de {len(REELS)} capas encontradas em _material-original/instagram/ (as demais ficam provisórias).")
 
 if __name__ == "__main__":
     run()

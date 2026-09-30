@@ -30,13 +30,15 @@
 .pjbar.is-solid::before { opacity: 0; }
 
 .pjbar__back {
+  min-height: 44px;
   justify-self: start; display: inline-flex; align-items: center; gap: .6em;
   padding: 10px 18px 10px 14px; border: 1px solid currentColor; border-radius: 999px;
   font-size: 13px; letter-spacing: .1em; text-transform: lowercase; white-space: nowrap;
   transition: background .3s ease, color .3s ease, border-color .3s ease, gap .3s ease;
 }
 .pjbar__back:hover, .pjbar__back:focus-visible { background: var(--accent); border-color: var(--accent); color: var(--on-accent); gap: .9em; }
-.pjbar__brand { justify-self: center; }
+.pjbar__brand { position: relative; justify-self: center; }
+.pjbar__brand::after { content: ""; position: absolute; inset: -10px -6px; }   /* área de toque de 44px sem mexer no layout */
 .pjbar__pn { justify-self: end; display: flex; align-items: center; gap: 10px; }
 .pjbar__count { min-width: 5.4em; text-align: center; font-size: 12px; letter-spacing: .2em; font-variant-numeric: tabular-nums; }
 
@@ -136,13 +138,15 @@ a.pjarrow:hover, a.pjarrow:focus-visible { background: var(--accent); border-col
 
 /* ---------- Rodapé da página ---------- */
 .pjfoot { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; justify-content: space-between; max-width: 1400px; margin: 0 auto; padding: 36px var(--gutter) 56px; }
-.pjfoot__back { padding-bottom: 3px; border-bottom: 1px solid currentColor; font-size: 13px; letter-spacing: .14em; text-transform: lowercase; color: var(--ink); }
+.pjfoot__back { position: relative; padding-bottom: 3px; border-bottom: 1px solid currentColor; font-size: 13px; letter-spacing: .14em; text-transform: lowercase; color: var(--ink); }
 .pjfoot__back:hover { color: var(--grafite); }
+.pjfoot__back::after { content: ""; position: absolute; inset: -14px -6px; }   /* área de toque de 44px sem mexer no layout */
 .pjfoot__cta { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
 .pjfoot__cta:hover, .pjfoot__cta:focus-visible { background: var(--grafite); border-color: var(--grafite); color: var(--offwhite); }
 
 /* ---------- Visualização ampliada (lightbox) ---------- */
 .lb {
+  overscroll-behavior: contain;                     /* a rolagem não vaza para a página por trás */
   position: fixed; inset: 0; margin: 0; padding: 0; width: 100vw; height: 100vh; height: 100dvh; max-width: none; max-height: none;
   border: 0; overflow: hidden; background: rgba(20, 18, 16, .95); color: var(--offwhite);
 }
@@ -182,3 +186,4 @@ a.pjarrow:hover, a.pjarrow:focus-visible { background: var(--accent); border-col
   .pjgal__item img, .pjnext__bg img, .pjarrow, .pjside__name, .pjbar { transition: none !important; }
   .lb[open] { animation: none; }
 }
+.pjfoot__all[hidden] { display: none; }

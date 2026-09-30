@@ -11,6 +11,7 @@ import html, json, os, re, sys
 sys.path.insert(0, os.path.dirname(__file__))
 from projects_data import PROJECTS, TILE
 from site_config import WHATSAPP_URL
+import seo
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MANIFEST = json.load(open(os.path.join(HERE, "tools", "manifest.json")))
@@ -80,7 +81,8 @@ def page(i):
   <title>{name} — Studio Óri</title>
   <meta name="description" content="{esc(p["lead"])}">
   <meta name="theme-color" content="{t["hex"]}">
-  <meta name="robots" content="noindex, nofollow">
+  <meta name="color-scheme" content="light">
+  {seo.head_tags(f"projetos/{p['slug']}/", f"{p['name']} — Studio Óri", p["lead"], f"assets/og/{p['slug']}.jpg")}
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%23974315'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -155,6 +157,7 @@ def page(i):
 
     <footer class="pjfoot">
       <a class="pjfoot__back" href="{back}"><span aria-hidden="true">←</span> Voltar aos projetos</a>
+      <a class="pjfoot__back pjfoot__all" href="../"><span>Todos os projetos</span> <span aria-hidden="true">→</span></a>
       <a class="btn btn--solid pjfoot__cta" href="{WHATSAPP_URL}" target="_blank" rel="noopener">Quero transformar o meu espaço <span aria-hidden="true">→</span><span class="sr-only"> (abre o WhatsApp em nova aba)</span></a>
     </footer>
   </main>
@@ -244,7 +247,7 @@ def home_block():
 
       <div class="cta" id="cta">
         <div class="cta__row">
-          <a class="btn btn--solid" href="#projetos-todos">Conheça todos os projetos <span aria-hidden="true">→</span></a>
+          <a class="btn btn--solid" href="projetos/">Conheça os projetos <span aria-hidden="true">→</span></a>
           <a class="btn btn--ghost" href="{WHATSAPP_URL}" target="_blank" rel="noopener">Quero transformar o meu espaço<span class="sr-only"> (abre o WhatsApp em nova aba)</span></a>
         </div>
       </div>
@@ -270,5 +273,8 @@ if __name__ == "__main__":
         open(os.path.join(d, "index.html"), "w", encoding="utf-8").write(page(i))
     patch_home()
     print(f"{N} páginas em projetos/ e bloco da Home atualizado.")
-    import build_instagram; build_instagram.run()   # seção do Instagram (capas em instagram/)
+    import build_historia; build_historia.run()     # página /historia/ (nossa história)
+    import build_projetos; build_projetos.run()     # página /projetos/ (todos os projetos, com filtro)
+    import build_instagram; build_instagram.run()   # seção do Instagram (capas em _material-original/instagram/)
+    import build_seo; build_seo.run()               # título/canônico/compartilhamento da Home, 404, endereços curtos, robots, sitemap
     import version_assets; version_assets.run()      # cache busting: style.css?v=hash ...

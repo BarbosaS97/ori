@@ -30,10 +30,12 @@
 
 /* link discreto de volta ao site (quem chega pelo "Contato" do menu precisa de saída) */
 .lk__back {
+  z-index: 3;
   position: absolute; top: clamp(14px, 3vh, 26px); left: 22px; padding: 6px 0;
   font-size: 12px; letter-spacing: .2em; text-transform: lowercase; text-decoration: none; color: rgba(31, 31, 31, .72);
   border-bottom: 1px solid transparent; transition: color .3s ease, border-color .3s ease;
 }
+.lk__back::after { content: ""; position: absolute; inset: -12px -10px; }   /* área de toque de 44px sem mexer no layout */
 .lk__back:hover, .lk__back:focus-visible { color: var(--terracota); border-color: currentColor; }
 .lk__back:focus-visible { outline: 2px solid var(--terracota); outline-offset: 4px; }
 

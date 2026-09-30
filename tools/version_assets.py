@@ -12,7 +12,7 @@ import glob, hashlib, os, re
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 EXT = ('.css', '.js', '.webp', '.jpg', '.jpeg', '.png', '.svg')
-PAGES = ['index.html'] + sorted(glob.glob(os.path.join('projetos', '*', 'index.html'))) + [os.path.join('links', 'index.html')]
+PAGES = ['index.html', os.path.join('historia', 'index.html'), os.path.join('projetos', 'index.html')] + sorted(glob.glob(os.path.join('projetos', '*', 'index.html'))) + [os.path.join('links', 'index.html'), '404.html']
 
 def file_hash(path):
     return hashlib.md5(open(path, 'rb').read()).hexdigest()[:8]

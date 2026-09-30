@@ -72,10 +72,12 @@
 .svc__ideal { margin: 1.3em 0 0; font-size: 15px; line-height: 1.6; color: rgba(243, 239, 236, .9); }
 .svc__ideal strong { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 1.15em; color: var(--offwhite); }
 .svc__link {
+  position: relative;
   display: inline-flex; gap: .6em; align-items: center; margin-top: 1.6em; padding-bottom: 3px;
   font-size: 13px; letter-spacing: .16em; text-transform: lowercase;
   border-bottom: 1px solid rgba(243, 239, 236, .55); transition: border-color .3s ease, gap .3s ease;
 }
+.svc__link::after { content: ""; position: absolute; inset: -12px -10px; }   /* área de toque de 44px sem mexer no layout */
 .svc__link:hover, .svc__link:focus-visible { border-color: var(--offwhite); gap: 1em; }
 .svc__link:focus-visible { outline: 2px solid var(--offwhite); outline-offset: 4px; }
 

@@ -9,13 +9,13 @@
   --sans: "Jost", "Helvetica Neue", Arial, sans-serif;
   --serif: "Cormorant Garamond", Georgia, serif;
 
-  --gutter: clamp(16px, 4vw, 56px);
+  --gutter: max(clamp(16px, 4vw, 56px), env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));   /* celular deitado com notch: conteúdo não fica sob o recorte */
   --ox: 74%;   /* ponto para onde a câmera avança (definido também no JS) */
   --oy: 58%;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; background: var(--offwhite); touch-action: manipulation; }   /* sem atraso/zoom de toque duplo; cor certa no "puxão" (overscroll) */
 body {
   margin: 0;
   background: var(--offwhite);
@@ -184,7 +184,7 @@ button { font: inherit; color: inherit; }
   .nav { padding: 16px var(--gutter); }
   .nav__links { display: none; }
   .brand b { font-size: 26px; }
-  .pill { padding: 9px 16px 9px 12px; }
+  .pill { padding: 9px 16px 9px 12px; min-height: 44px; }
   .pill__long { display: none; }
   .pill__short { display: inline; }
   .photo img { object-position: 12% 50%; }   /* enquadra as duas sócias */
@@ -211,7 +211,7 @@ button { font: inherit; color: inherit; }
 
 
 /* ---------- Menu do celular ---------- */
-.nav__burger { -webkit-appearance: none; appearance: none; display: none; width: 44px; height: 44px; margin-left: 8px; padding: 0; background: none; border: 0; color: inherit; cursor: pointer; place-items: center; align-content: center; gap: 7px; -webkit-tap-highlight-color: transparent; }
+.nav__burger { -webkit-appearance: none; appearance: none; display: none; flex: none; min-width: 44px; width: 44px; height: 44px; margin-left: 8px; padding: 0; background: none; border: 0; color: inherit; cursor: pointer; place-items: center; align-content: center; gap: 7px; -webkit-tap-highlight-color: transparent; }
 .nav__burger i { display: block; width: 24px; height: 1.5px; background: currentColor; transition: transform .45s cubic-bezier(.2, .7, .2, 1); }
 .nav__burger:focus-visible { outline: 2px solid var(--terracota); outline-offset: 2px; border-radius: 6px; }
 .menu-open .nav__burger i:first-child { transform: translateY(4.25px) rotate(45deg); }
@@ -243,3 +243,28 @@ button { font: inherit; color: inherit; }
 @media (max-width: 860px) { .nav__burger { display: grid; } }
 @media (min-width: 861px) { .navpanel { display: none !important; } }
 @media (prefers-reduced-motion: reduce) { .navpanel, .navpanel nav a, .nav__burger i { transition: none; } }
+
+/* ---------- Revisão de usabilidade (celular) ---------- */
+/* logo do menu: área de toque de 44px de altura */
+.nav .brand { position: relative; }
+.nav .brand::after { content: ""; position: absolute; inset: -10px -6px; }   /* área de toque de 44px sem mexer no layout */
+
+/* pular para o conteúdo (teclado / leitor de tela) */
+.skiplink { position: fixed; z-index: 200; left: 12px; top: -64px; padding: 10px 16px; border-radius: 999px; background: var(--offwhite); color: var(--grafite); font-size: 14px; transition: top .2s ease; }
+.skiplink:focus { top: 12px; }
+
+/* telas estreitas (360px): o menu não estoura e o botão hambúrguer mantém 44px */
+@media (max-width: 400px) {
+  .nav { gap: 8px; }
+  .brand span { letter-spacing: .22em; }
+  .brand b { font-size: 24px; }
+  .pill { padding: 9px 12px 9px 10px; font-size: 12.5px; min-height: 44px; }
+  .nav__burger { margin-left: 0; }
+}
+
+/* painel do menu: rola se não couber (celular deitado) e não "vaza" a rolagem para a página */
+.navpanel { overflow-y: auto; overscroll-behavior: contain; }
+@media (max-height: 560px) {
+  .navpanel { padding-top: 84px; padding-bottom: 20px; }
+  .navpanel nav a { padding: 10px 0; font-size: clamp(26px, 6vw, 34px); }
+}

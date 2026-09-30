@@ -9,7 +9,8 @@ O botão com primary=True ganha destaque (preenchido). Não há JavaScript: a an
 import glob, html, os, re, sys
 
 sys.path.insert(0, os.path.dirname(__file__))
-from site_config import WHATSAPP_URL      # o mesmo link de WhatsApp de todos os botões de conversão do site
+from site_config import WHATSAPP_URL, COVERS_DIR      # o mesmo link de WhatsApp de todos os botões de conversão do site
+import seo
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 esc = html.escape
@@ -58,11 +59,11 @@ def item(i, l):
           </a>
         </li>'''
 
-# Foto do topo: a capa original do Reel 1 (instagram/reel-01.*). As versões otimizadas ficam em assets/ e vão para o
+# Foto do topo: a capa original do Reel 1 (_material-original/instagram/reel-01.*). As versões otimizadas ficam em assets/ e vão para o
 # GitHub; o original (pesado) não. Se o original não estiver na máquina, usa as versões já geradas.
 PHOTO = {"w": 1080, "h": 1920}
 def prepare_photo():
-    src = next((p for ext in ("png", "jpg", "jpeg", "webp") for p in glob.glob(os.path.join(HERE, "instagram", f"reel-01.{ext}"))), None)
+    src = next((p for ext in ("png", "jpg", "jpeg", "webp") for p in glob.glob(os.path.join(COVERS_DIR, f"reel-01.{ext}"))), None)
     if not src:
         return
     from PIL import Image, ImageOps
@@ -84,7 +85,8 @@ def build():
   <title>Studio Óri — Links</title>
   <meta name="description" content="Studio Óri · Arquitetura e Interiores. Portfólio, orçamentos, WhatsApp e redes sociais.">
   <meta name="theme-color" content="#F3EFEC">
-  <meta name="robots" content="noindex, nofollow">
+  <meta name="color-scheme" content="light">
+  {seo.head_tags("links/", "Studio Óri — Links", "Studio Óri · Arquitetura e Interiores. Portfólio, orçamentos, WhatsApp e redes sociais.", "assets/og/home.jpg")}
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%23974315'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

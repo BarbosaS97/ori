@@ -72,7 +72,7 @@ Está com `noindex` (como o resto do protótipo). Sem estatísticas de clique (o
 ## Seção "Siga o @ori.arqui" (Instagram)
 
 Carrossel de Reels em cards no estilo Instagram (avatar com o símbolo, nome, ícones), sobre o azul-marinho da marca. Rolagem horizontal por toque, arrastar com o mouse e setas; cada card abre o Reel no Instagram (nova aba).
-A seção é compacta: o tamanho dos cards (`--cw` em `instagram.css`) depende da largura e da altura da tela para ela caber inteira; no computador os 5 cards aparecem juntos (sem setas), no celular deslizam. Sem API: as capas são arquivos locais. Coloque `reel-01.jpg` … `reel-05.jpg` em `instagram/` (ver `instagram/LEIAME.txt`) e rode `python tools/build_site.py`. Links e ordem dos Reels: lista `REELS` em `tools/build_instagram.py`.
+A seção é compacta: o tamanho dos cards (`--cw` em `instagram.css`) depende da largura e da altura da tela para ela caber inteira; no computador os 5 cards aparecem juntos (sem setas), no celular deslizam. Sem API: as capas são arquivos locais. Coloque `reel-01.jpg` … `reel-05.jpg` em `../_material-original/instagram/` (fora do site; ver o LEIAME.txt de lá) e rode `python tools/build_site.py`. Links e ordem dos Reels: lista `REELS` em `tools/build_instagram.py`.
 
 ### Testes
 Ative "reduzir movimento" no sistema operacional para testar o modo sem animação.

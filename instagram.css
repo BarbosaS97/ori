@@ -65,6 +65,7 @@
 
 /* ---------- Card no estilo Instagram (medidas em cqw = % da largura do card) ---------- */
 .igcard {
+  -webkit-touch-callout: none;                     /* iOS: sem o menu de "pressionar e segurar" */
   container-type: inline-size;
   display: grid; overflow: hidden; height: 100%;
   border-radius: clamp(10px, 6.4cqw, 16px); background: #fff; color: var(--grafite); text-decoration: none;
@@ -85,7 +86,7 @@
 .igcard__avatarleaf { width: 52%; height: auto; aspect-ratio: 1996 / 1969; }
 .igcard__who { display: grid; line-height: 1.2; min-width: 0; margin-left: 1cqw; }
 .igcard__who b { font-size: clamp(11.5px, 5.2cqw, 14px); font-weight: 500; }
-.igcard__who small { font-size: clamp(10px, 4.2cqw, 12px); color: rgba(31, 31, 31, .68); }
+.igcard__who small { font-size: clamp(11px, 4.2cqw, 12px); color: rgba(31, 31, 31, .68); }
 .igcard__dots { margin-left: auto; width: clamp(16px, 8cqw, 22px); height: auto; color: rgba(31, 31, 31, .7); }
 
 .igcard__media { position: relative; display: block; aspect-ratio: 3 / 4; overflow: hidden; background: #ece7e2; }
@@ -96,12 +97,12 @@
 /* cartão provisório (enquanto a capa real não chega) */
 .igcard__ph { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 5cqw; background: linear-gradient(160deg, var(--c1), var(--c2)); color: rgba(243, 239, 236, .95); }
 .igcard__phleaf { width: 34%; height: auto; aspect-ratio: 1996 / 1969; opacity: .92; }
-.igcard__ph span { font-size: clamp(10px, 4.4cqw, 12px); letter-spacing: .3em; text-transform: lowercase; opacity: .9; }
+.igcard__ph span { font-size: clamp(11px, 4.4cqw, 12px); letter-spacing: .3em; text-transform: lowercase; opacity: .9; }
 
 .igcard__actions { display: flex; align-items: center; gap: 4.6cqw; padding: 4cqw 5cqw 1cqw; color: var(--grafite); }
 .igcard__actions svg { width: clamp(18px, 8.4cqw, 24px); height: auto; }
 .igcard__actions i { flex: 1; }
-.igcard__cta { display: flex; align-items: center; gap: .6em; padding: 1cqw 5cqw 5cqw; font-size: clamp(10px, 4.6cqw, 12px); letter-spacing: .14em; text-transform: lowercase; color: var(--terracota); white-space: nowrap; }
+.igcard__cta { display: flex; align-items: center; gap: .6em; padding: 1cqw 5cqw 5cqw; font-size: clamp(11px, 4.6cqw, 12px); letter-spacing: .12em; text-transform: lowercase; color: var(--terracota); white-space: nowrap; }
 .igcard__cta span { display: inline-block; transition: transform .4s cubic-bezier(.2, .7, .2, 1); }
 .igcard:hover .igcard__cta span, .igcard:focus-visible .igcard__cta span { transform: translateX(6px); }
 

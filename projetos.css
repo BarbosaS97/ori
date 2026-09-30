@@ -37,6 +37,7 @@
 .word__row { display: flex; justify-content: center; gap: var(--gap); }
 
 .tile {
+  -webkit-touch-callout: none;                     /* iOS: sem o menu de "pressionar e segurar" no bloco */
   position: relative; display: block; flex: none;
   width: var(--tile); aspect-ratio: 4 / 5;
   border-radius: 6px; text-decoration: none; -webkit-tap-highlight-color: transparent;
@@ -112,13 +113,13 @@
   position: absolute; z-index: 2; left: 5cqw; right: 5cqw; bottom: 4.5cqw;
   display: grid; grid-template-columns: 1fr auto; align-items: end; row-gap: .4cqw; color: var(--offwhite);
 }
-.pv__num { grid-column: 1; font-size: 1.9cqw; letter-spacing: .24em; opacity: .85; }
-.pv__cap small { grid-column: 1; grid-row: 2; font-size: 1.6cqw; letter-spacing: .26em; text-transform: lowercase; opacity: .85; }
+.pv__num { grid-column: 1; font-size: clamp(11px, 1.9cqw, 15px); letter-spacing: .24em; opacity: .85; }
+.pv__cap small { grid-column: 1; grid-row: 2; font-size: clamp(11px, 1.6cqw, 14px); letter-spacing: .26em; text-transform: lowercase; opacity: .85; }
 .pv__cap strong { grid-column: 1; grid-row: 3; font-family: var(--serif); font-weight: 500; font-size: 5.2cqw; line-height: 1.05; }
 .pv__cta {
   grid-column: 2; grid-row: 2 / 4; align-self: end;
   padding: 1.3cqw 2.6cqw; border: 1px solid rgba(243, 239, 236, .7); border-radius: 999px;
-  font-size: 1.9cqw; letter-spacing: .12em; text-transform: lowercase; white-space: nowrap;
+  font-size: clamp(11.5px, 1.9cqw, 15px); letter-spacing: .12em; text-transform: lowercase; white-space: nowrap;
   transition: background .3s ease, color .3s ease;
 }
 .pv__link { position: absolute; inset: 0; z-index: 3; }
@@ -126,7 +127,7 @@
 
 .pvbar { display: flex; justify-content: space-between; align-items: center; margin-top: 26px; font-size: 12px; letter-spacing: .24em; color: rgba(31, 31, 31, .72); }
 .pvbar__count b { font-weight: 400; color: var(--terracota); font-variant-numeric: tabular-nums; }
-.pvbar__auto { background: none; border: 0; padding: 4px 0; cursor: pointer; font-size: 12px; letter-spacing: .2em; text-transform: lowercase; color: var(--terracota); border-bottom: 1px solid currentColor; }
+.pvbar__auto { background: none; border: 0; min-height: 44px; padding: 4px 2px; display: inline-flex; align-items: center; cursor: pointer; font-size: 12px; letter-spacing: .2em; text-transform: lowercase; color: var(--terracota); border-bottom: 1px solid currentColor; }
 .pvbar__auto:focus-visible { outline: 2px solid var(--terracota); outline-offset: 4px; }
 
 /* ---------- CTA ---------- */
@@ -171,8 +172,8 @@
   .cta__row .btn { justify-content: center; }
   .pvframe::before { inset: 10px -8px -10px 8px; }
   .pv__cap strong { font-size: 7cqw; }
-  .pv__num, .pv__cap small { font-size: 2.8cqw; }
-  .pv__cta { font-size: 2.9cqw; padding: 1.6cqw 3.4cqw; }
+  .pv__num, .pv__cap small { font-size: clamp(11px, 2.8cqw, 14px); }
+  .pv__cta { font-size: clamp(11.5px, 2.9cqw, 15px); padding: 1.6cqw 3.4cqw; }
 }
 
 /* ---------- prefers-reduced-motion ---------- */

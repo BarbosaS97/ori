@@ -1,6 +1,6 @@
-﻿import cv2,glob,os
+import cv2,glob,os
 from PIL import Image
-root=r'C:\Users\df91103ps\Documents\Ori'; out=os.path.join(root,'prototipo-hero','assets')
+HERE=os.path.dirname(os.path.dirname(os.path.abspath(__file__))); root=os.path.join(os.path.dirname(HERE),'_material-original'); out=os.path.join(HERE,'assets')   # vídeo de origem em ../_material-original/
 f=glob.glob(os.path.join(root,'Camera_advancing*.mp4'))[0]
 c=cv2.VideoCapture(f); N=201
 tot=[0,0]

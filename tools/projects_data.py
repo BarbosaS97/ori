@@ -7,8 +7,11 @@ em ordem natural: 1.jpg, 2.jpg, 10.jpg...). A PRIMEIRA foto de `picks` é a capa
 Para editar textos: `lead` (rascunho baseado só no que se vê nas imagens — a cliente deve revisar).
 """
 
-# pasta com as fotos originais (fora do repositório)
-SOURCE_ROOT = r"C:\Users\df91103ps\Documents\Ori"
+# pasta com as fotos originais (fora do repositório): ../_material-original/  (ver site_config.MATERIAL_DIR)
+import os, sys
+sys.path.insert(0, os.path.dirname(__file__))
+from site_config import MATERIAL_DIR
+SOURCE_ROOT = MATERIAL_DIR
 
 # Cores dos blocos da marca. `on` = cor do texto sobre o bloco (contraste)
 TILE = {

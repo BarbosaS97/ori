@@ -1,0 +1,76 @@
+/* =========================================================================
+   Página "todos os projetos" (projetos/index.html, gerada por tools/build_projetos.py)
+   Reaproveita a barra e o rodapé de projeto.css; tokens e .btn/.brand vêm de style.css.
+   ========================================================================= */
+
+.pl { --accent: var(--terracota); --on-accent: var(--offwhite); --ink: var(--terracota); }
+.pl .pjbar { background: rgba(243, 239, 236, .92); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); color: var(--grafite); box-shadow: 0 1px 0 rgba(31, 31, 31, .08); }
+.pl .pjbar::before { display: none; }
+.pl .pjbar__count { justify-self: end; min-width: 0; }
+.pl .pjbar a:focus-visible { outline-color: var(--terracota); }
+
+/* ---------- Cabeçalho ---------- */
+.plhead { max-width: 1400px; margin: 0 auto; padding: clamp(110px, 17vh, 168px) var(--gutter) clamp(24px, 4vh, 40px); }
+.plhead__eyebrow { margin: 0 0 14px; font-size: 12px; letter-spacing: .28em; text-transform: uppercase; color: var(--terracota); }
+.plhead h1 { margin: 0; font-family: var(--serif); font-weight: 500; font-size: clamp(40px, 6.4vw, 92px); line-height: 1.02; letter-spacing: -.01em; }
+.plhead h1 em { color: var(--terracota); }
+.plhead__lead { margin: 18px 0 0; max-width: 34rem; color: rgba(31, 31, 31, .78); }
+
+/* ---------- Filtro ---------- */
+.pfilter { display: flex; flex-wrap: wrap; gap: 10px; margin-top: clamp(24px, 4vh, 36px); }
+.pfilter__btn {
+  min-height: 44px; padding: 10px 20px; border: 1px solid rgba(31, 31, 31, .35); border-radius: 999px;
+  background: transparent; color: var(--grafite); font: inherit; font-size: 14px; letter-spacing: .06em; cursor: pointer;
+  transition: background .3s ease, color .3s ease, border-color .3s ease;
+}
+.pfilter__btn:hover { border-color: var(--terracota); color: var(--terracota); }
+.pfilter__btn[aria-pressed="true"] { background: var(--terracota); border-color: var(--terracota); color: var(--offwhite); }
+.pfilter__btn:focus-visible { outline: 2px solid var(--terracota); outline-offset: 3px; }
+
+/* ---------- Grade ---------- */
+.plgrid { max-width: 1400px; margin: 0 auto; padding: 8px var(--gutter) clamp(40px, 7vh, 80px); }
+.plgrid__list { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(18px, 2.4vw, 32px); grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.pcard[hidden] { display: none; }
+.pcard__link { display: block; color: inherit; text-decoration: none; }
+.pcard__media {
+  position: relative; display: block; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 4px;
+  background: linear-gradient(160deg, var(--c1), var(--c2));
+}
+.pcard__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .9s cubic-bezier(.2, .7, .2, 1); }
+.pcard__letter {
+  position: absolute; left: 14px; bottom: 14px; width: clamp(48px, 5vw, 64px); aspect-ratio: 4 / 5; display: grid; place-items: center;
+  background: var(--accent); color: var(--on-accent); border-radius: 2px;
+}
+.pcard__letter .glyph { font-family: var(--serif); font-weight: 500; font-size: clamp(30px, 3.2vw, 42px); line-height: 1; transform: translateY(-3%); }
+.pcard__letter .glyph--sym { width: 56%; height: auto; aspect-ratio: 1996 / 1969; transform: none; }
+.pcard__body { display: grid; gap: 4px; padding: 14px 2px 0; }
+.pcard__type { font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: rgba(31, 31, 31, .72); }
+.pcard__name { font-family: var(--serif); font-weight: 500; font-size: clamp(24px, 2.2vw, 32px); line-height: 1.1; }
+.pcard__go { font-size: 13px; letter-spacing: .06em; color: var(--terracota); opacity: 0; transform: translateX(-6px); transition: opacity .3s ease, transform .3s ease; }
+.pcard__link:hover .pcard__img, .pcard__link:focus-visible .pcard__img { transform: scale(1.04); }
+.pcard__link:hover .pcard__go, .pcard__link:focus-visible .pcard__go { opacity: 1; transform: none; }
+.pcard__link:focus-visible { outline: 2px solid var(--terracota); outline-offset: 6px; }
+@media (hover: none) { .pcard__go { opacity: 1; transform: none; } }
+
+/* ---------- Entrada: só quando o JS está ativo ---------- */
+.js .pcard { opacity: 0; transform: translateY(22px); }
+.js .pcard.is-in { opacity: 1; transform: none; transition: opacity .7s ease, transform .8s cubic-bezier(.2, .7, .2, 1); }
+
+@media (max-width: 1000px) { .plgrid__list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) {
+  .plgrid__list { gap: 16px 12px; }
+  .pcard__media { aspect-ratio: 1 / 1.08; }
+  .pcard__letter { left: 8px; bottom: 8px; width: 40px; }
+  .pcard__letter .glyph { font-size: 26px; }
+  .pcard__name { font-size: 21px; }
+  .pcard__type { font-size: 10px; letter-spacing: .18em; }
+  .pcard__go { display: none; }
+  .pfilter { flex-wrap: nowrap; overflow-x: auto; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); scrollbar-width: none; }
+  .pfilter::-webkit-scrollbar { display: none; }
+  .pfilter__btn { flex: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .pcard, .js .pcard.is-in { opacity: 1; transform: none; transition: none; }
+  .pcard__img, .pcard__go, .pfilter__btn { transition: none; }
+}
