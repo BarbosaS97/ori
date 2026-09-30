@@ -97,7 +97,7 @@ def page404():
 </head>
 <body>
   <main class="nf">
-    <a class="brand brand--lg" href="./" aria-label="Studio Óri — início"><span>studio</span><b>ÓRI</b></a>
+    <a class="brand brand--lg" href="./" aria-label="Studio Óri — início"><span>studio</span><b class="wm" role="img" aria-label="Óri"></b></a>
     <h1>Essa página <em>não existe</em>.</h1>
     <p>O endereço pode ter mudado ou estar digitado diferente. Vamos começar de novo?</p>
     <div class="nf__row">

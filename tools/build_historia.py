@@ -65,7 +65,7 @@ def page():
 
   <header class="pjbar" id="pjbar">
     <a class="pjbar__back" href="../#sobre"><span aria-hidden="true">←</span> <span>Voltar</span></a>
-    <a class="brand brand--mark pjbar__brand" href="../" aria-label="Studio Óri — página inicial"><svg class="brand__leaf" viewBox="0 0 1996 1969" aria-hidden="true" focusable="false"><use href="#simbolo"/></svg><b>ÓRI</b></a>
+    <a class="brand brand--mark pjbar__brand" href="../" aria-label="Studio Óri — página inicial"><svg class="brand__leaf" viewBox="0 0 1996 1969" aria-hidden="true" focusable="false"><use href="#simbolo"/></svg><b class="wm" role="img" aria-label="Óri"></b></a>
   </header>
 
   <main id="conteudo">

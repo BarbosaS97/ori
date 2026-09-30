@@ -42,6 +42,11 @@ button { font: inherit; color: inherit; }
 .brand { display: inline-flex; align-items: baseline; gap: .7em; line-height: 1; }
 .brand span { font-size: 13px; letter-spacing: .32em; font-weight: 400; }
 .brand b { font-family: var(--serif); font-weight: 500; font-size: 30px; letter-spacing: .02em; }
+/* Logotipo "ÓRI" da marca (extraído do PDF de logotipo): máscara de uma cor, herda a cor do texto.
+   O tamanho vem do font-size do <b> (altura = .86em), então cada contexto só ajusta o font-size. */
+.wm { display: inline-block; flex: none; height: .86em; aspect-ratio: 1000 / 509; background: currentColor;
+      -webkit-mask: url("assets/ori-wordmark.png") center / contain no-repeat; mask: url("assets/ori-wordmark.png") center / contain no-repeat; }
+.brand--mark .wm, .lockup .wm { height: 1.12em; }   /* ao lado do símbolo, o logotipo acompanha a altura das folhas */
 .brand--mark { align-items: center; gap: .42em; }
 .brand__leaf { width: 34px; height: auto; aspect-ratio: 1996 / 1969; flex: none; }
 .brand--lg span { font-size: 15px; }

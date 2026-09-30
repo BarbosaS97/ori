@@ -97,7 +97,7 @@ def page(i):
   <!-- Barra: voltar, marca e setas entre projetos -->
   <header class="pjbar" id="pjbar">
     <a class="pjbar__back" href="{back}"><span aria-hidden="true">←</span> <span>Projetos</span></a>
-    <a class="brand brand--mark pjbar__brand" href="../../" aria-label="Studio Óri — página inicial"><svg class="brand__leaf" viewBox="0 0 1996 1969" aria-hidden="true" focusable="false"><use href="#simbolo"/></svg><b>ÓRI</b></a>
+    <a class="brand brand--mark pjbar__brand" href="../../" aria-label="Studio Óri — página inicial"><svg class="brand__leaf" viewBox="0 0 1996 1969" aria-hidden="true" focusable="false"><use href="#simbolo"/></svg><b class="wm" role="img" aria-label="Óri"></b></a>
     <nav class="pjbar__pn" aria-label="Navegar entre projetos">
       <a class="pjarrow" rel="prev" href="../{prev["slug"]}/" aria-label="Projeto anterior: {esc(prev["name"])}">{ARROW_L}</a>
       <span class="pjbar__count" aria-label="Projeto {i + 1} de {N}">{i + 1:02d} / {N:02d}</span>
@@ -203,7 +203,7 @@ def home_block():
             </figcaption>
             <a class="pv__link" href="projetos/{p["slug"]}/" tabindex="-1" aria-hidden="true"></a>
             <!-- carregamento (mesma linguagem do loader do site): some quando a foto do projeto termina de carregar -->
-            <div class="pv__loader" aria-hidden="true"><span class="brand brand--lg"><span>studio</span><b>ÓRI</b></span><i></i></div>
+            <div class="pv__loader" aria-hidden="true"><span class="brand brand--lg"><span>studio</span><b class="wm" role="img" aria-label="Óri"></b></span><i></i></div>
           </figure>'''
     row1 = "\n".join(tile(i, PROJECTS[i]) for i in range(6))
     row2 = "\n".join(tile(i, PROJECTS[i]) for i in range(6, 9))

@@ -113,7 +113,7 @@ def build():
 
       <!-- logotipo: "studio" pequeno + ÓRI grande, com o símbolo acima -->
       {leaf("lk__mark")}
-      <p class="lk__brand" aria-hidden="true"><span>studio</span><b>ÓRI</b></p>
+      <p class="lk__brand" aria-hidden="true"><span>studio</span><b class="wm" role="img" aria-label="Óri"></b></p>
       <p class="lk__role">arquitetura e interiores</p>
       <p class="lk__slogan">Valorizamos história e <em>ori</em>ginalidade.</p>
     </header>
