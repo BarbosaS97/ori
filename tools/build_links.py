@@ -6,7 +6,10 @@ Os links vêm do Linktree da Studio Óri (linktr.ee/ori.arqui). Para mudar/adici
 
 O botão com primary=True ganha destaque (preenchido). Não há JavaScript: a animação é só CSS.
 """
-import html, os, re, sys
+import glob, html, os, re, sys
+
+sys.path.insert(0, os.path.dirname(__file__))
+from site_config import WHATSAPP_URL      # o mesmo link de WhatsApp de todos os botões de conversão do site
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 esc = html.escape
@@ -20,7 +23,7 @@ LINKS = [
     dict(icon="list", title="Orçamentos", sub="conte sobre o seu projeto",
          url="https://zsdp96qk.forms.app/studioori"),
     dict(icon="whatsapp", title="Fale conosco", sub="WhatsApp · (61) 98236-7700",
-         url="https://wa.me/5561982367700", primary=True),
+         url=WHATSAPP_URL, primary=True),
     dict(icon="instagram", title="Instagram", sub="@ori.arqui",
          url="https://www.instagram.com/ori.arqui"),
     dict(icon="facebook", title="Facebook", sub="Studio Óri",
@@ -55,6 +58,22 @@ def item(i, l):
           </a>
         </li>'''
 
+# Foto do topo: a capa original do Reel 1 (instagram/reel-01.*). As versões otimizadas ficam em assets/ e vão para o
+# GitHub; o original (pesado) não. Se o original não estiver na máquina, usa as versões já geradas.
+PHOTO = {"w": 1080, "h": 1920}
+def prepare_photo():
+    src = next((p for ext in ("png", "jpg", "jpeg", "webp") for p in glob.glob(os.path.join(HERE, "instagram", f"reel-01.{ext}"))), None)
+    if not src:
+        return
+    from PIL import Image, ImageOps
+    im = ImageOps.exif_transpose(Image.open(src)).convert("RGB")
+    for name, w, q in (("links-foto.webp", 1080, 80), ("links-foto-s.webp", 640, 76)):
+        w = min(w, im.width)
+        out = im.resize((w, round(im.height * w / im.width)), Image.LANCZOS)
+        out.save(os.path.join(HERE, "assets", name), "WEBP", quality=q, method=6)
+        if name == "links-foto.webp":
+            PHOTO["w"], PHOTO["h"] = out.size
+
 def build():
     items = "\n".join(item(i, l) for i, l in enumerate(LINKS))
     return f'''<!doctype html>
@@ -79,14 +98,15 @@ def build():
   <div class="lk__bg" aria-hidden="true">{leaf("lk__bgleaf")}</div>
 
   <main class="lk__wrap">
+    <a class="lk__back" href="../">← voltar ao site</a>
     <header class="lk__head">
       <h1 class="sr-only">Studio Óri — Arquitetura e Interiores</h1>
 
       <!-- foto das arquitetas em moldura de arco -->
       <figure class="lk__arch">
-        <img src="../assets/sobre-nos-s.webp" srcset="../assets/sobre-nos-s.webp 900w, ../assets/sobre-nos.webp 1600w"
-             sizes="200px" width="1600" height="2400" fetchpriority="high" decoding="async"
-             alt="Malu e Laura, arquitetas do Studio Óri, sentadas no chão com amostras de materiais">
+        <img src="../assets/links-foto-s.webp" srcset="../assets/links-foto-s.webp 640w, ../assets/links-foto.webp 1080w"
+             sizes="200px" width="{PHOTO["w"]}" height="{PHOTO["h"]}" fetchpriority="high" decoding="async"
+             alt="Malu e Laura, arquitetas do Studio Óri, em retrato com a marca ÓRI ao fundo">
       </figure>
 
       <!-- logotipo: "studio" pequeno + ÓRI grande, com o símbolo acima -->
@@ -114,6 +134,7 @@ def build():
 '''
 
 if __name__ == "__main__":
+    prepare_photo()
     d = os.path.join(HERE, "links"); os.makedirs(d, exist_ok=True)
     open(os.path.join(d, "index.html"), "w", encoding="utf-8").write(build())
     sys.path.insert(0, os.path.dirname(__file__))

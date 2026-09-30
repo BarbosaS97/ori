@@ -58,7 +58,7 @@ Cada letra da Home leva a uma página própria, gerada por script (não edite os
 - **Hero (frames):** cada frame é baixado como Blob e decodificado com `createImageBitmap`, fora da thread principal (o trace do navegador mostrou ~7 ms de decodificação por troca de frame na thread principal, que travava o scroll). O canvas usa a resolução nativa dos frames. O loader sai assim que a foto do hero chega; os 201 frames baixam em seguida (1 a cada 4 com "economia de dados"). Frames verticais só em tela estreita em pé; celular deitado e tablet usam os horizontais.
 - **Menu do celular:** `nav.js` (botão hambúrguer + painel), abaixo de 860 px.
 - **Acessibilidade:** auditado com axe-core (WCAG 2.2 AA + boas práticas) na Home e nas páginas de projeto, sem violações. Contraste de texto pequeno corrigido.
-- **Checagem estática:** `python tools/audit_static.py` confere links, recursos (com diferenciação de maiúsculas, como no GitHub Pages), ids duplicados, `alt`, dimensões de imagem e hierarquia de títulos. Os únicos avisos são os links ainda sem página (`#contato`, `#sobre-completo`, `#servico-*`, `#projetos-todos`).
+- **Checagem estática:** `python tools/audit_static.py` confere links, recursos (com diferenciação de maiúsculas, como no GitHub Pages), ids duplicados, `alt`, dimensões de imagem e hierarquia de títulos. Confere também que não sobrou `#contato` e que todo link de WhatsApp é o de `tools/site_config.py`. Os únicos avisos são os links ainda sem página (`#servico-*`, `#projetos-todos`).
 
 ## Página de links (`/links/`)
 
@@ -69,5 +69,16 @@ Foto em arco das arquitetas, logotipo, slogan e 5 botões (Site & Portfólio, Or
 
 Está com `noindex` (como o resto do protótipo). Sem estatísticas de clique (o Linktree tinha): se precisar, dá para adicionar analytics depois.
 
+## Seção "Siga o @ori.arqui" (Instagram)
+
+Carrossel de Reels em cards no estilo Instagram (avatar com o símbolo, nome, ícones), sobre o azul-marinho da marca. Rolagem horizontal por toque, arrastar com o mouse e setas; cada card abre o Reel no Instagram (nova aba).
+Sem API: as capas são arquivos locais. Coloque `reel-01.jpg` … `reel-05.jpg` em `instagram/` (ver `instagram/LEIAME.txt`) e rode `python tools/build_site.py`. Links e ordem dos Reels: lista `REELS` em `tools/build_instagram.py`.
+
 ### Testes
 Ative "reduzir movimento" no sistema operacional para testar o modo sem animação.
+
+## Conversão (WhatsApp) e contato
+
+- **"Contato" do menu** (desktop e celular) leva à página de links (`links/`).
+- **Todos os botões de conversão** ("Quero transformar o meu espaço", "Fale conosco": topo, fim do hero, seção Projetos e rodapé de cada página de projeto) abrem o **WhatsApp** em nova aba, com o mesmo link do Linktree delas.
+- O link fica em `tools/site_config.py` (`WHATSAPP_URL`). Para mudar (ou pôr uma mensagem inicial), edite lá e rode `python tools/build_site.py && python tools/build_links.py`; no `index.html` (menu, topo, hero) a troca é manual e o `audit_static.py` avisa se ficar diferente.

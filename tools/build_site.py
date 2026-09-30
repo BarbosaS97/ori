@@ -10,6 +10,7 @@ import html, json, os, re, sys
 
 sys.path.insert(0, os.path.dirname(__file__))
 from projects_data import PROJECTS, TILE
+from site_config import WHATSAPP_URL
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MANIFEST = json.load(open(os.path.join(HERE, "tools", "manifest.json")))
@@ -154,7 +155,7 @@ def page(i):
 
     <footer class="pjfoot">
       <a class="pjfoot__back" href="{back}"><span aria-hidden="true">←</span> Voltar aos projetos</a>
-      <a class="btn btn--solid pjfoot__cta" href="../../#contato">Quero transformar o meu espaço <span aria-hidden="true">→</span></a>
+      <a class="btn btn--solid pjfoot__cta" href="{WHATSAPP_URL}" target="_blank" rel="noopener">Quero transformar o meu espaço <span aria-hidden="true">→</span><span class="sr-only"> (abre o WhatsApp em nova aba)</span></a>
     </footer>
   </main>
 
@@ -244,7 +245,7 @@ def home_block():
       <div class="cta" id="cta">
         <div class="cta__row">
           <a class="btn btn--solid" href="#projetos-todos">Conheça todos os projetos <span aria-hidden="true">→</span></a>
-          <a class="btn btn--ghost" href="#contato">Quero transformar o meu espaço</a>
+          <a class="btn btn--ghost" href="{WHATSAPP_URL}" target="_blank" rel="noopener">Quero transformar o meu espaço<span class="sr-only"> (abre o WhatsApp em nova aba)</span></a>
         </div>
       </div>
     </section>
@@ -269,4 +270,5 @@ if __name__ == "__main__":
         open(os.path.join(d, "index.html"), "w", encoding="utf-8").write(page(i))
     patch_home()
     print(f"{N} páginas em projetos/ e bloco da Home atualizado.")
+    import build_instagram; build_instagram.run()   # seção do Instagram (capas em instagram/)
     import version_assets; version_assets.run()      # cache busting: style.css?v=hash ...

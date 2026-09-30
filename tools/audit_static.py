@@ -45,6 +45,13 @@ for pg in pages:
         t2=os.path.join(base,clean)
         if os.path.isfile(t2) and hashlib.md5(open(t2,'rb').read()).hexdigest()[:8]!=ver:
             issues[pg].append(f'versão de cache DESATUALIZADA (rode python tools/build_site.py): {clean}')
+    # conversão: nenhum #contato sobrando e todo link de WhatsApp igual ao de site_config.py
+    import sys as _s; _s.path.insert(0, os.path.dirname(__file__)) if False else None
+    from importlib.machinery import SourceFileLoader
+    WA = SourceFileLoader('site_config', os.path.join(os.path.dirname(os.path.abspath(__file__)), 'site_config.py')).load_module().WHATSAPP_URL
+    if re.search(r'href="[^"]*#contato"', h): issues[pg].append('ainda existe link para #contato')
+    for w in set(re.findall(r'href="(https?://(?:wa\.me|api\.whatsapp\.com)[^"]*)"', h)):
+        if w != WA: issues[pg].append(f'WhatsApp diferente do site_config.py: {w}')
     # cabeçalhos
     hs=[int(x) for x in re.findall(r'<h([1-6])\b',h)]
     if hs.count(1)!=1: issues[pg].append(f'h1 count={hs.count(1)}')

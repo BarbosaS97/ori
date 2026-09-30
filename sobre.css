@@ -46,21 +46,6 @@
 .about__text .eyebrow { margin-bottom: 1.1em; color: var(--terracota); }   /* vence o estilo genérico dos parágrafos */
 .about__hello { font-family: var(--serif); font-style: italic; font-size: clamp(22px, 1.9vw, 28px) !important; line-height: 1.25 !important; color: var(--grafite) !important; margin-bottom: .7em !important; }
 
-/* Botão "Conheça nossa história": pílula com o texto dentro. As letras "óri" de "história"
-   ficam em terracota (mesma ideia do "ori" de "originalidade" no slogan da marca). */
-.about__link {
-  display: inline-flex; align-items: center; gap: .8em; margin-top: 1.6em;
-  padding: 15px 28px; border: 1px solid var(--terracota); border-radius: 999px;
-  font-size: 14px; letter-spacing: .04em; color: var(--grafite);
-  transition: background .3s ease, border-color .3s ease;
-}
-.about__link .ori { color: var(--terracota); font-weight: 500; }
-.about__link-arrow { display: inline-block; transition: transform .4s cubic-bezier(.2, .7, .2, 1); }
-.about__link:hover, .about__link:focus-visible { background: rgba(151, 67, 21, .08); }
-.about__link:hover .about__link-arrow, .about__link:focus-visible .about__link-arrow { transform: translateX(6px); }
-.about__link:focus-visible { outline: 2px solid var(--terracota); outline-offset: 4px; }
-@media (prefers-reduced-motion: reduce) { .about__link, .about__link-arrow { transition: none; } }
-
 /* ---------- Mobile / retrato: foto em cima, texto embaixo ---------- */
 @media (max-width: 860px) {
   .about__inner { grid-template-columns: minmax(0, 1fr); row-gap: 56px; }

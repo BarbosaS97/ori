@@ -2,3 +2,11 @@
 Thumbs.db
 __pycache__/
 node_modules/
+
+# não fazem parte do site (ferramentas locais)
+video-skills/
+seu-projeto/
+.claude/
+
+# capas originais dos Reels (pesadas, ~11 MB): o site usa as versões otimizadas em assets/instagram/
+instagram/reel-*
