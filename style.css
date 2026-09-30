@@ -210,12 +210,16 @@ button { font: inherit; color: inherit; }
   .pill__long { display: none; }
   .pill__short { display: inline; }
   .photo img { object-position: 12% 50%; }   /* enquadra as duas sócias */
-  .headline { left: var(--gutter); right: var(--gutter); top: 14%; width: auto; }
-  .headline h1 { font-size: clamp(30px, 8.6vw, 48px); }
-  .lockup { margin-bottom: 18px; gap: 12px; }
-  .lockup__leaf { width: 44px; }
+  /* celular: assinatura centralizada no topo; a frase desce para a parte baixa, com um halo off-white bem leve atrás das letras */
+  .headline { left: var(--gutter); right: var(--gutter); top: 0; bottom: 0; width: auto; }
+  .lockup { position: absolute; left: 0; right: 0; top: 14%; margin: 0; justify-content: center; gap: 14px; }
+  .lockup__leaf { width: 46px; }
   .lockup b { font-size: 40px; }
   .lockup__studio { font-size: 10px; letter-spacing: .42em; }
+  .headline h1 {
+    position: absolute; left: 0; right: 0; top: 60%; text-align: center; font-size: clamp(30px, 8.6vw, 48px);
+    text-shadow: 0 0 14px rgba(243, 239, 236, .75), 0 0 30px rgba(243, 239, 236, .55);
+  }
   .headline__sub { display: none; }
   .hud { bottom: 20px; }
   .skip { bottom: 44px; }
