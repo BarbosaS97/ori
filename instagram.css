@@ -2,23 +2,34 @@
    Seção INSTAGRAM — "Siga o @ori.arqui": carrossel de Reels em cards no estilo Instagram
    Fundo azul-marinho da marca (#313D65); cards brancos, como nos posts do manual de marca.
    Tokens (--azul, --offwhite, --terracota, --serif) vêm de style.css. Gerada por tools/build_instagram.py.
+
+   COMPACTA: a seção é dimensionada para caber inteira na tela.
+   • --cw (largura do card) depende da largura E da altura da tela;
+   • tudo dentro do card usa cqw (% da largura do card), então o card inteiro escala junto;
+   • se os 5 cards cabem lado a lado (desktop), setas e barra de progresso somem (.is-static).
    ========================================================================= */
 
 .ig {
+  --gap: clamp(12px, 1.4vw, 18px);
+  /* desktop: 5 cards ocupam a largura toda, limitados pela altura da tela (sobra espaço para o cabeçalho) */
+  --cw: clamp(176px, min(calc((100vw - 2 * var(--gutter) - 4 * var(--gap)) / 5), calc((100svh - 462px) * .74)), 250px);
+
   position: relative; overflow: hidden;
-  padding: clamp(80px, 13vh, 150px) 0 clamp(64px, 10vh, 120px);
+  padding: clamp(60px, 9vh, 104px) 0 clamp(34px, 6vh, 70px);
   background: var(--azul); color: var(--offwhite);
 }
 .ig__bgleaf { position: absolute; right: -14vw; top: -6vw; width: clamp(340px, 44vw, 680px); height: auto; color: var(--offwhite); opacity: .05; pointer-events: none; }
 .ig__inner { position: relative; max-width: 1500px; margin: 0 auto; }
 
-/* ---------- Cabeçalho ---------- */
-.ig__head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; padding: 0 var(--gutter); margin-bottom: clamp(28px, 5vh, 52px); }
-.ig .eyebrow { color: rgba(243, 239, 236, .92); }
-.ig h2 { margin: 0; font-family: var(--serif); font-weight: 500; font-size: clamp(40px, 5.4vw, 80px); line-height: 1.02; letter-spacing: -.01em; }
+/* ---------- Cabeçalho: texto à esquerda, botão (e setas) à direita ---------- */
+.ig__head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; padding: 0 var(--gutter); margin-bottom: clamp(18px, 3vh, 30px); }
+.ig .eyebrow { margin-bottom: .6em; color: rgba(243, 239, 236, .92); }
+.ig h2 { margin: 0; font-family: var(--serif); font-weight: 500; font-size: clamp(32px, 4.2vw, 60px); line-height: 1.02; letter-spacing: -.01em; }
 .ig h2 em { font-style: italic; }
 .ig h2 .ori { color: #F0A07A; }      /* o "ori" em terracota claro (o terracota puro quase some sobre o azul: 1,6:1; este dá 5:1) */
-.ig__lead { margin: 1.1em 0 1.7em; max-width: 30rem; font-size: clamp(15px, 1.25vw, 18px); color: rgba(243, 239, 236, .92); }
+.ig__lead { margin: .7em 0 0; max-width: 30rem; font-size: clamp(14px, 1.1vw, 16px); color: rgba(243, 239, 236, .92); }
+
+.ig__side { display: flex; align-items: center; gap: 18px; flex: none; }
 
 /* botão claro sobre o azul (o símbolo herda a cor do texto) */
 .btn--light { background: var(--offwhite); border-color: var(--offwhite); color: var(--azul); }
@@ -27,7 +38,7 @@
 .ig__controls { display: flex; gap: 10px; flex: none; }
 .ig__arrow {
   -webkit-appearance: none; appearance: none;
-  width: 52px; height: 52px; display: grid; place-items: center; padding: 0; cursor: pointer;
+  width: 48px; height: 48px; display: grid; place-items: center; padding: 0; cursor: pointer;
   border: 1px solid rgba(243, 239, 236, .65); border-radius: 50%; background: transparent; color: var(--offwhite);
   transition: background .3s ease, color .3s ease, border-color .3s ease, opacity .3s ease, transform .3s ease;
 }
@@ -39,68 +50,83 @@
 /* ---------- Trilho de cards (rolagem horizontal com "snap") ---------- */
 .ig__viewport { position: relative; }
 .ig__track {
-  display: flex; gap: clamp(14px, 1.6vw, 22px); margin: 0; padding: 8px var(--gutter) 26px; list-style: none;
+  display: flex; gap: var(--gap); margin: 0; padding: 6px var(--gutter) 14px; list-style: none;
   overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter);
   scrollbar-width: none; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain;
   cursor: grab;
 }
 .ig__track::-webkit-scrollbar { display: none; }
 .ig__track.is-dragging { cursor: grabbing; scroll-snap-type: none; }
-.ig__item { flex: 0 0 clamp(244px, 74vw, 320px); scroll-snap-align: start; }
+.ig__item { flex: 0 0 var(--cw); scroll-snap-align: start; }
 
-/* ---------- Card no estilo Instagram ---------- */
+/* todos os cards cabem: sem setas, sem barra, cards centralizados */
+.ig.is-static .ig__controls, .ig.is-static .ig__progress { display: none; }
+.ig.is-static .ig__track { justify-content: center; cursor: default; }
+
+/* ---------- Card no estilo Instagram (medidas em cqw = % da largura do card) ---------- */
 .igcard {
+  container-type: inline-size;
   display: grid; overflow: hidden; height: 100%;
-  border-radius: 16px; background: #fff; color: var(--grafite); text-decoration: none;
-  box-shadow: 0 30px 46px -28px rgba(0, 0, 0, .65);
+  border-radius: clamp(10px, 6.4cqw, 16px); background: #fff; color: var(--grafite); text-decoration: none;
+  box-shadow: 0 26px 40px -26px rgba(0, 0, 0, .65);
   transition: transform .55s cubic-bezier(.2, .7, .2, 1), box-shadow .55s ease;
   -webkit-user-drag: none; user-select: none; -webkit-tap-highlight-color: transparent;
 }
 .igcard img { -webkit-user-drag: none; }
-.igcard:hover, .igcard:focus-visible { transform: translateY(-8px); box-shadow: 0 40px 56px -28px rgba(0, 0, 0, .75); }
+.igcard:hover, .igcard:focus-visible { transform: translateY(-6px); box-shadow: 0 36px 50px -26px rgba(0, 0, 0, .75); }
 .igcard:focus-visible { outline: 2px solid var(--offwhite); outline-offset: 4px; }
 
-.igcard__head { display: flex; align-items: center; gap: 10px; padding: 12px 14px; }
+.igcard__head { display: flex; align-items: center; gap: 4cqw; padding: 4.4cqw 5cqw; }
 .igcard__avatar {                                  /* círculo terracota com o símbolo + anel, como o perfil do manual de marca */
-  flex: none; width: 36px; height: 36px; display: grid; place-items: center; border-radius: 50%;
-  background: var(--terracota); color: var(--offwhite); box-shadow: 0 0 0 2px #fff, 0 0 0 3.5px var(--terracota);
+  flex: none; width: clamp(24px, 12cqw, 34px); height: clamp(24px, 12cqw, 34px); display: grid; place-items: center; border-radius: 50%;
+  background: var(--terracota); color: var(--offwhite); box-shadow: 0 0 0 1.5px #fff, 0 0 0 3px var(--terracota);
   margin: 2px;
 }
-.igcard__avatarleaf { width: 18px; height: auto; aspect-ratio: 1996 / 1969; }
-.igcard__who { display: grid; line-height: 1.2; min-width: 0; margin-left: 4px; }
-.igcard__who b { font-size: 14px; font-weight: 500; }
-.igcard__who small { font-size: 12px; color: rgba(31, 31, 31, .68); }
-.igcard__dots { margin-left: auto; color: rgba(31, 31, 31, .7); }
+.igcard__avatarleaf { width: 52%; height: auto; aspect-ratio: 1996 / 1969; }
+.igcard__who { display: grid; line-height: 1.2; min-width: 0; margin-left: 1cqw; }
+.igcard__who b { font-size: clamp(11.5px, 5.2cqw, 14px); font-weight: 500; }
+.igcard__who small { font-size: clamp(10px, 4.2cqw, 12px); color: rgba(31, 31, 31, .68); }
+.igcard__dots { margin-left: auto; width: clamp(16px, 8cqw, 22px); height: auto; color: rgba(31, 31, 31, .7); }
 
 .igcard__media { position: relative; display: block; aspect-ratio: 3 / 4; overflow: hidden; background: #ece7e2; }
 .igcard__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; transition: transform 1s cubic-bezier(.2, .7, .2, 1); }
 .igcard:hover .igcard__media img { transform: scale(1.05); }
-.igcard__reel { position: absolute; top: 12px; right: 12px; color: #fff; filter: drop-shadow(0 1px 5px rgba(0, 0, 0, .5)); }
+.igcard__reel { position: absolute; top: 4.4cqw; right: 4.4cqw; width: clamp(18px, 8cqw, 22px); height: auto; color: #fff; filter: drop-shadow(0 1px 5px rgba(0, 0, 0, .5)); }
 
 /* cartão provisório (enquanto a capa real não chega) */
-.igcard__ph { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 14px; background: linear-gradient(160deg, var(--c1), var(--c2)); color: rgba(243, 239, 236, .95); }
+.igcard__ph { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 5cqw; background: linear-gradient(160deg, var(--c1), var(--c2)); color: rgba(243, 239, 236, .95); }
 .igcard__phleaf { width: 34%; height: auto; aspect-ratio: 1996 / 1969; opacity: .92; }
-.igcard__ph span { font-size: 12px; letter-spacing: .3em; text-transform: lowercase; opacity: .9; }
+.igcard__ph span { font-size: clamp(10px, 4.4cqw, 12px); letter-spacing: .3em; text-transform: lowercase; opacity: .9; }
 
-.igcard__actions { display: flex; align-items: center; gap: 14px; padding: 12px 14px 4px; color: var(--grafite); }
+.igcard__actions { display: flex; align-items: center; gap: 4.6cqw; padding: 4cqw 5cqw 1cqw; color: var(--grafite); }
+.igcard__actions svg { width: clamp(18px, 8.4cqw, 24px); height: auto; }
 .igcard__actions i { flex: 1; }
-.igcard__cta { display: flex; align-items: center; gap: .6em; padding: 4px 14px 16px; font-size: 12px; letter-spacing: .16em; text-transform: lowercase; color: var(--terracota); }
+.igcard__cta { display: flex; align-items: center; gap: .6em; padding: 1cqw 5cqw 5cqw; font-size: clamp(10px, 4.6cqw, 12px); letter-spacing: .14em; text-transform: lowercase; color: var(--terracota); white-space: nowrap; }
 .igcard__cta span { display: inline-block; transition: transform .4s cubic-bezier(.2, .7, .2, 1); }
 .igcard:hover .igcard__cta span, .igcard:focus-visible .igcard__cta span { transform: translateX(6px); }
 
 /* ---------- Progresso ---------- */
-.ig__progress { height: 2px; margin: 10px var(--gutter) 0; background: rgba(243, 239, 236, .22); border-radius: 2px; overflow: hidden; }
+.ig__progress { height: 2px; margin: 4px var(--gutter) 0; background: rgba(243, 239, 236, .22); border-radius: 2px; overflow: hidden; }
 .ig__progress i { display: block; height: 100%; background: var(--offwhite); transform-origin: left; transform: scaleX(.25); transition: transform .3s ease; }
 
 /* ---------- Entrada em cascata (o JS marca .is-in quando a seção aparece) ---------- */
-.js .ig__item { opacity: 0; transform: translateY(36px); }
+.js .ig__item { opacity: 0; transform: translateY(30px); }
 .js .ig.is-in .ig__item { opacity: 1; transform: none; transition: opacity .8s ease, transform .95s cubic-bezier(.2, .7, .2, 1); transition-delay: calc(var(--i) * 90ms + 100ms); }
 
-/* ---------- Mobile ---------- */
+/* ---------- Mobile: cabeçalho empilhado (botão + setas na mesma linha) e cards menores ---------- */
 @media (max-width: 860px) {
-  .ig__head { flex-direction: column; align-items: flex-start; gap: 22px; }
-  .ig__controls { align-self: flex-end; margin-top: -8px; }
-  .ig__arrow { width: 46px; height: 46px; }
+  .ig {
+    --gap: 12px;
+    --cw: clamp(136px, min(45vw, calc((100svh - 500px) * .62)), 210px);
+    padding: 76px 0 30px;
+  }
+  .ig__head { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+  .ig__side { width: 100%; justify-content: space-between; }
+  .ig__arrow { width: 44px; height: 44px; }
+  .ig h2 { font-size: clamp(30px, 8.4vw, 44px); }
+  .ig__lead { margin-top: .5em; }
+  .ig .btn { padding: 12px 18px; font-size: 13px; white-space: nowrap; }     /* uma linha só: sem quebrar "Seguir no Instagram" */
+  .igcard:hover, .igcard:focus-visible { transform: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

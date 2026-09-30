@@ -112,11 +112,13 @@ def section():
             <p class="eyebrow">instagram</p>
             <h2 id="igTitle">Siga o <em>@<span class="ori">ori</span>.arqui</em></h2>
             <p class="ig__lead">Acompanhe os projetos e o dia a dia do studio.</p>
-            <a class="btn btn--light" href="{PROFILE_URL}" target="_blank" rel="noopener">Seguir no Instagram <span class="sr-only">(abre em nova aba)</span><span aria-hidden="true">→</span></a>
           </div>
-          <div class="ig__controls" aria-label="Navegar pelos Reels">
-            <button class="ig__arrow" id="igPrev" type="button" aria-label="Reels anteriores">{ARROW_L}</button>
-            <button class="ig__arrow" id="igNext" type="button" aria-label="Próximos Reels">{ARROW_R}</button>
+          <div class="ig__side">
+            <a class="btn btn--light" href="{PROFILE_URL}" target="_blank" rel="noopener">Seguir no Instagram <span class="sr-only">(abre em nova aba)</span><span aria-hidden="true">→</span></a>
+            <div class="ig__controls" aria-label="Navegar pelos Reels">
+              <button class="ig__arrow" id="igPrev" type="button" aria-label="Reels anteriores">{ARROW_L}</button>
+              <button class="ig__arrow" id="igNext" type="button" aria-label="Próximos Reels">{ARROW_R}</button>
+            </div>
           </div>
         </header>
 

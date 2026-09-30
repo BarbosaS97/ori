@@ -1,6 +1,6 @@
 /* =========================================================================
    Seção INSTAGRAM — comportamento do carrossel
-   • setas: rolam um card por vez (e ficam desabilitadas nas pontas);
+   • setas: rolam um card por vez (e ficam desabilitadas nas pontas); somem quando os 5 cards cabem na tela;
    • barra de progresso acompanha a rolagem;
    • mouse: arrastar para rolar (toque já rola nativamente); um arrasto NÃO abre o Reel por engano;
    • entrada: os cards sobem em cascata quando a seção aparece (uma vez).
@@ -30,6 +30,7 @@
     ticking = false;
     const max = track.scrollWidth - track.clientWidth;
     const x = track.scrollLeft;
+    sec.classList.toggle('is-static', max <= 2);      // tudo cabe na tela: sem setas nem barra
     prev.disabled = x <= 2;
     next.disabled = x >= max - 2;
     // a barra vai de 25% (início) a 100% (fim)
