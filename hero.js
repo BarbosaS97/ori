@@ -25,7 +25,7 @@
   const photo = $('photo'), sceneA = $('sceneA'), headline = $('headline'), hint = $('hint');
   const portal = $('portal'), filmwrap = $('filmwrap'), canvas = $('film');
   const veil = $('veil'), endtext = $('endtext'), ring = $('ring');
-  const nav = $('nav'), label = $('label'), tag = $('tag'), skip = $('skip');
+  const nav = $('nav'), tag = $('tag'), skip = $('skip');
   const loader = $('loader'), loaderBar = $('loaderBar');
   const hud = document.querySelector('.hud');
 
@@ -178,7 +178,6 @@
      0.80–0.92  véu off-white
      0.87–0.96  texto final                                            */
   let cur = -1;
-  let labelText = '';
 
   function render(p) {
     if (!W) measure();
@@ -224,8 +223,6 @@
     put(skip, 'pointerEvents', p > .93 ? 'none' : 'auto');
     put(tag, 'opacity', String(+(seg(p, .46, .52) * (1 - seg(p, .88, .92))).toFixed(3)));
 
-    const next = p < .32 ? '01 · escuta' : p < .78 ? '02 · projeto' : '03 · desenho';
-    if (next !== labelText) { label.textContent = next; labelText = next; }
     cur = p;
   }
 
@@ -258,7 +255,7 @@
         target = N - 1; paint();
       } catch (e) { /* mantém o fundo */ }
       finishLoader();
-      document.dispatchEvent(new Event('hero-ready'));
+      signalReady();
       return;
     }
 
@@ -281,7 +278,7 @@
       hero.style.height = '100vh';
       skip.hidden = true;
       startBackgroundLoad();
-      document.dispatchEvent(new Event('hero-ready'));
+      signalReady();
       return;
     }
     startBackgroundLoad();
@@ -315,7 +312,7 @@
       } catch (e) { /* hash não é um seletor válido: ignora */ }
     }
 
-    document.dispatchEvent(new Event('hero-ready'));   // o pin já existe: as seções abaixo sabem onde realmente estão
+    signalReady();   // o pin já existe: as seções abaixo sabem onde realmente estão
 
     skip.addEventListener('click', () => {
       const st = ScrollTrigger.getById('hero');
@@ -328,6 +325,13 @@
       raf = requestAnimationFrame(swapSet);                       // canvas e medidas são refeitos no refresh do ScrollTrigger
     });
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => ScrollTrigger.refresh());
+  }
+
+  // Avisa as seções abaixo que o hero já criou o espaço do scroll. Guarda também um FLAG: o evento pode disparar
+  // antes de o projetos.js carregar (foto em cache), e quem chegar depois consulta window.heroReady.
+  function signalReady() {
+    window.heroReady = true;
+    document.dispatchEvent(new Event('hero-ready'));
   }
 
   function finishLoader() { requestAnimationFrame(() => loader.classList.add('is-done')); }

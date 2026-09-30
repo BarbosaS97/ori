@@ -131,7 +131,6 @@
 
 /* ---------- CTA ---------- */
 .cta { display: grid; justify-items: center; gap: 22px; text-align: center; margin-top: clamp(40px, 7vh, 72px); }
-.cta__lead { margin: 0; font-family: var(--serif); font-style: italic; font-size: clamp(20px, 2vw, 30px); color: var(--terracota); }
 .cta__row { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
 
 /* ---------- Carregamento da prévia: logo + barra, como o loader do site ---------- */

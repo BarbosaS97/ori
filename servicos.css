@@ -79,6 +79,27 @@
 .svc__link:hover, .svc__link:focus-visible { border-color: var(--offwhite); gap: 1em; }
 .svc__link:focus-visible { outline: 2px solid var(--offwhite); outline-offset: 4px; }
 
+/* ---------- Etapas: timeline vertical numerada ---------- */
+.svc__steps { margin: 1.9em 0 0; }
+.svc__steps-title { margin: 0 0 1.1em; font-size: 12px; letter-spacing: .28em; text-transform: lowercase; color: rgba(243, 239, 236, .92); }
+.svc__steps-list { list-style: none; margin: 0; padding: 0; counter-reset: etapa; }
+.svc__steps-list li {
+  position: relative; counter-increment: etapa;
+  padding: 3px 0 18px 46px; font-size: 15.5px; line-height: 1.4; color: rgba(243, 239, 236, .95);
+}
+.svc__steps-list li:last-child { padding-bottom: 0; }
+.svc__steps-list li::before {                       /* número dentro do círculo */
+  content: counter(etapa); position: absolute; left: 0; top: 0; z-index: 1;
+  width: 28px; height: 28px; display: grid; place-items: center; box-sizing: border-box;
+  border: 1px solid rgba(243, 239, 236, .7); border-radius: 50%; background: var(--terracota);
+  font-family: var(--serif); font-style: italic; font-size: 16px; line-height: 1;
+}
+.svc__steps-list li::after {                        /* linha que liga uma etapa à próxima */
+  content: ""; position: absolute; left: 14px; top: 28px; bottom: 0; width: 1px; background: rgba(243, 239, 236, .45);
+  transform-origin: top;
+}
+.svc__steps-list li:last-child::after { display: none; }
+
 /* Com JS: painel recolhido usa a técnica de grid (0fr → 1fr) — anima altura "auto" só com CSS.
    `visibility` esconde o conteúdo recolhido do teclado e de leitores de tela. */
 .js .svc__panel {
@@ -88,12 +109,17 @@
 .js .svc.is-open .svc__panel { grid-template-rows: 1fr; visibility: visible; transition-delay: 0s; }
 .js .svc__body { overflow: hidden; min-height: 0; }
 
-/* o conteúdo entra em cascata depois que a altura abre */
+/* o conteúdo entra em cascata depois que a altura abre; as etapas surgem uma a uma e a linha "desce" */
 .js .svc__body > * { opacity: 0; transform: translateY(10px); transition: opacity .4s ease, transform .5s cubic-bezier(.2, .7, .2, 1); }
 .js .svc.is-open .svc__body > * { opacity: 1; transform: none; }
 .js .svc.is-open .svc__body > :nth-child(1) { transition-delay: .12s; }
 .js .svc.is-open .svc__body > :nth-child(2) { transition-delay: .2s; }
 .js .svc.is-open .svc__body > :nth-child(3) { transition-delay: .28s; }
+.js .svc.is-open .svc__body > :nth-child(4) { transition-delay: .75s; }
+.js .svc__steps-list li { opacity: 0; transform: translateX(-10px); transition: opacity .45s ease, transform .55s cubic-bezier(.2, .7, .2, 1); }
+.js .svc__steps-list li::after { transform: scaleY(0); transition: transform .5s ease; }
+.js .svc.is-open .svc__steps-list li { opacity: 1; transform: none; transition-delay: calc(.4s + var(--k) * .07s); }
+.js .svc.is-open .svc__steps-list li::after { transform: scaleY(1); transition-delay: calc(.5s + var(--k) * .07s); }
 
 /* ---------- Mobile / retrato ---------- */
 @media (max-width: 860px) {
@@ -102,11 +128,12 @@
   .services__intro h2 { font-size: clamp(28px, 7.6vw, 40px); }
   .services__leaf { right: -30vw; bottom: -20vw; width: 90vw; }
   .svc__body { padding-left: 0; }
+  .svc__steps-list li { font-size: 15px; }
   .svc__btn { grid-template-columns: auto 1fr auto; gap: 14px; }
   .svc__title { font-size: clamp(24px, 6.6vw, 32px); }
 }
 
 /* ---------- prefers-reduced-motion: sem transições ---------- */
 @media (prefers-reduced-motion: reduce) {
-  .js .svc__panel, .js .svc__body > *, .svc__icon::before, .svc__icon::after, .svc__title, .svc__leaf { transition: none !important; }
+  .js .svc__panel, .js .svc__body > *, .js .svc__steps-list li, .js .svc__steps-list li::after, .svc__icon::before, .svc__icon::after, .svc__title, .svc__leaf { transition: none !important; }
 }

@@ -211,7 +211,7 @@ def home_block():
     <section class="letters" id="projetos" aria-labelledby="lettersTitle">
       <header class="letters__head">
         <p class="eyebrow">projetos</p>
-        <h2 id="lettersTitle">Cada projeto, uma letra<br>do nosso <em>nome</em>.</h2>
+        <h2 id="lettersTitle">Cada letra, um projeto.<br>Cada projeto, uma <em>conversa</em>.</h2>
         <p class="letters__hint" id="lettersHint">Passe o mouse sobre uma letra para ver o projeto.</p>
       </header>
 
@@ -242,7 +242,6 @@ def home_block():
       </div>
 
       <div class="cta" id="cta">
-        <p class="cta__lead">Cada letra, um projeto. Cada projeto, uma conversa.</p>
         <div class="cta__row">
           <a class="btn btn--solid" href="#projetos-todos">Conheça todos os projetos <span aria-hidden="true">→</span></a>
           <a class="btn btn--ghost" href="#contato">Quero transformar o meu espaço</a>

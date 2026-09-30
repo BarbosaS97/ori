@@ -30,6 +30,7 @@ O nome **STUDIO ÓRI** já aparece formado: 9 blocos coloridos, cada um é um pr
 - **Desktop:** passar o mouse (ou focar com o teclado) ativa o projeto: o bloco sobe e o painel à direita troca a imagem com uma cortina. Clicar no bloco ou no painel abre o projeto. O bloco sob o cursor inclina em 3D.
 - **Toque:** o 1º toque seleciona, o 2º abre. No celular há **setas laterais** na prévia (anterior/próximo, dando a volta) e swipe horizontal, que mudam a letra ativa.
 - **Carregamento da prévia:** cada painel mostra a logo + barra (como o loader do site) até a foto chegar. As capas só começam a baixar perto da seção ou ao avançar até elas (`loadPv` em `projetos.js`), para não competir com o hero.
+- **Entrada das letras:** roda do zero **a cada vez** que a seção fica visível e volta ao estado inicial quando ela sai da tela (`IntersectionObserver` em `projetos.js`, sem depender de posição de scroll). Só começa depois que o hero criou o espaço do scroll.
 - **Autoplay:** até o primeiro gesto, os projetos trocam sozinhos (barra de progresso no bloco). Botão "pausar/retomar".
 - **prefers-reduced-motion:** sem entrada, sem autoplay, sem inclinação; troca instantânea.
 

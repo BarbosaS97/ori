@@ -164,7 +164,7 @@ button { font: inherit; color: inherit; }
 
 .hud {
   position: absolute; z-index: 4; left: var(--gutter); right: var(--gutter); bottom: 26px;
-  display: flex; justify-content: space-between; align-items: flex-end; gap: 16px;
+  display: flex; justify-content: flex-end; align-items: flex-end; gap: 16px;
   font-size: 11px; letter-spacing: .24em; text-transform: lowercase; pointer-events: none;
   color: rgba(31, 31, 31, .72); transition: color .5s ease;
 }

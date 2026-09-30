@@ -5,7 +5,8 @@
    • Cada bloco (.tile) é um LINK para o projeto. Passar o mouse, focar com o teclado
      ou tocar (1º toque) ATIVA o projeto: o bloco sobe e o painel ao lado troca a imagem
      com uma cortina (clip-path). Clicar num bloco já ativo — ou no painel — abre o projeto.
-   • Entrada: ao rolar até a seção, os blocos "viram" em cascata (rotationY).
+   • Entrada: a cada vez que a seção fica visível, os blocos "viram" em cascata (rotationY); quando ela sai
+     da tela, tudo volta ao estado inicial e a entrada roda de novo na próxima vez (ver "ENTRADA" abaixo).
    • Autoplay: até o primeiro gesto do usuário, o projeto ativo troca sozinho a cada ~4,6 s,
      com uma barrinha de progresso no bloco. Há botão "pausar" (acessibilidade).
    • Desktop com mouse: o bloco sob o cursor se inclina em 3D e ganha um brilho.
@@ -33,34 +34,39 @@
 
   if (!canHover) hint.textContent = 'Toque numa letra ou use as setas para ver os projetos; toque de novo para abrir.';
 
-  /* ---------- menu ganha fundo sólido quando a seção alcança o topo ---------- */
-  if (window.ScrollTrigger) {
-    gsap.registerPlugin(ScrollTrigger);
-    ScrollTrigger.create({
-      trigger: section, start: 'top top+=70',
-      onEnter: () => nav.classList.add('is-solid'),
-      onLeaveBack: () => nav.classList.remove('is-solid'),
-    });
-  }
+  /* ---------- menu ganha fundo sólido quando a seção alcança o topo ----------
+     Sem ScrollTrigger: só olha onde a seção está AGORA (não depende de eventos anteriores). */
+  let navTick = false;
+  const updateNav = () => { navTick = false; nav.classList.toggle('is-solid', section.getBoundingClientRect().top <= 70); };
+  addEventListener('scroll', () => { if (!navTick) { navTick = true; requestAnimationFrame(updateNav); } }, { passive: true });
+  addEventListener('resize', updateNav);
+  document.addEventListener('hero-ready', updateNav);
+  updateNav();
 
   /* ---------- estado ---------- */
   let cur = 0;                              // índice do projeto ativo
-  let autoOn = !reduce;                     // autoplay ligado?
   let inView = false;
   let barTween = null;
 
-  // Voltando de uma página de projeto (?ativo=slug): abre o painel nesse projeto, sem autoplay
+  // Estado "de fábrica": o que vale na 1ª entrada e volta a valer a cada reset.
+  // Voltando de uma página de projeto (?ativo=slug), o painel abre nesse projeto, sem autoplay.
   const wanted = new URLSearchParams(location.search).get('ativo');
   const wantedIdx = tiles.findIndex((t) => t.dataset.slug === wanted);
-  if (wantedIdx >= 0) {
-    cur = wantedIdx; autoOn = false;
+  const initialIdx = wantedIdx >= 0 ? wantedIdx : 0;
+  const initialAuto = !reduce && wantedIdx < 0;
+  let autoOn = initialAuto;                 // autoplay ligado?
+
+  // troca o projeto ativo SEM animação (estado inicial e reset)
+  function setActive(i) {
+    cur = i;
     tiles.forEach((t, k) => {
-      t.classList.toggle('is-active', k === cur);
-      k === cur ? t.setAttribute('aria-current', 'true') : t.removeAttribute('aria-current');
+      t.classList.toggle('is-active', k === i);
+      k === i ? t.setAttribute('aria-current', 'true') : t.removeAttribute('aria-current');
     });
-    pvs.forEach((p, k) => p.classList.toggle('is-active', k === cur));
-    countEl.textContent = String(cur + 1).padStart(2, '0');
+    pvs.forEach((p, k) => p.classList.toggle('is-active', k === i));
+    countEl.textContent = String(i + 1).padStart(2, '0');
   }
+  setActive(initialIdx);
 
   /* ---------- CARREGAMENTO da prévia ----------
      As fotos só começam a baixar quando precisam (loadPv): perto da seção ou ao avançar até o projeto.
@@ -91,7 +97,7 @@
     }, { rootMargin: '900px 0px' });
     io.observe(section);
   }
-  document.addEventListener('hero-ready', watchSection, { once: true });
+  if (window.heroReady) watchSection(); else document.addEventListener('hero-ready', watchSection, { once: true });
   setTimeout(watchSection, 5000);                              // rede de segurança (ex.: hero sem JS)
 
   /* ---------- ATIVAR um projeto ---------- */
@@ -201,31 +207,88 @@
     }
   });
 
-  /* ---------- Entrada + estado de visibilidade ---------- */
-  if (reduce || !window.gsap || !window.ScrollTrigger) { setBtn(); watchSection(); loadAll(); return; }
+  /* ---------- ENTRADA: máquina de estados dirigida pela VISIBILIDADE REAL da seção ----------
+     Antes a entrada rodava uma única vez, quando o ScrollTrigger cruzava um ponto de scroll. Ela podia rodar
+     escondida (atrás do loader, ao voltar de uma página de projeto com #projetos) ou nunca mais rodar.
+     Agora:  seção visível  →  a entrada roda do zero (letras entram uma a uma);
+             seção fora da tela  →  tudo volta ao estado inicial, pronto para rodar de novo.
+     Só depende de "a seção está na tela agora?" — não de posição de scroll nem de estado acumulado. */
+  if (reduce || !window.gsap) { setBtn(); watchSection(); loadAll(); return; }
 
-  // blocos e painel começam escondidos; a entrada roda uma vez quando a seção aparece
   const faces = tiles.map((t) => t.querySelector('.tile__face'));
-  gsap.set(faces, { autoAlpha: 0 });
-  gsap.set('#pvFrame', { autoAlpha: 0 });
+  const frameEl = document.getElementById('pvFrame');
+  let visible = false;      // a seção está suficientemente visível (IntersectionObserver)
+  let shown = false;        // a entrada já rodou desde o último reset
+  let canPlay = false;      // hero pronto (espaço do scroll criado, loader saindo): antes disso o layout ainda muda
+  let entryTl = null;
 
-  function enter() {
-    gsap.fromTo(faces,
-      { rotationY: -90, y: 46, autoAlpha: 0, transformPerspective: 700 },
-      { rotationY: 0, y: 0, autoAlpha: 1, duration: 1, ease: 'back.out(1.5)', stagger: 0.07 });
-    gsap.fromTo('#pvFrame', { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.9, ease: 'power3.out', delay: 0.5 });
-    gsap.fromTo(pvs[cur].querySelector('.pv__img'), { scale: 1.16 }, { scale: 1, duration: 1.5, ease: 'power3.out', delay: 0.5 });
-    loadAll();                                         // as capas dos outros projetos vão chegando (evita "pop-in" ao passar o mouse)
-    gsap.delayedCall(1.4, startAuto);
+  const hideAll = () => {
+    gsap.set(faces, { autoAlpha: 0, rotationY: -90, y: 46, transformPerspective: 700 });
+    gsap.set(frameEl, { autoAlpha: 0, y: 30 });
+  };
+  hideAll();                // letras e painel começam escondidos
+
+  function reset() {
+    shown = false; inView = false;
+    if (entryTl) { entryTl.kill(); entryTl = null; }
+    killBar();
+    // interrompe qualquer troca de projeto em andamento e limpa o que ela deixou nos elementos
+    gsap.killTweensOf([...faces, frameEl]);
+    pvs.forEach((p) => {
+      const img = p.querySelector('.pv__img'), caps = p.querySelectorAll('.pv__cap > *');
+      gsap.killTweensOf([p, img, ...caps]);
+      gsap.set(p, { clearProps: 'clipPath,zIndex' });
+      gsap.set(img, { clearProps: 'transform' });
+      gsap.set(caps, { clearProps: 'all' });
+    });
+    hideAll();
+    setActive(initialIdx);
+    autoOn = initialAuto; setBtn();
   }
 
-  let entered = false;
-  ScrollTrigger.create({
-    trigger: section, start: 'top 65%', end: 'bottom 15%',
-    onEnter: () => { if (!entered) { entered = true; enter(); } },
-    onToggle: (self) => { inView = self.isActive; if (entered) (inView ? startAuto() : killBar()); },
-  });
-  if (section.getBoundingClientRect().top < innerHeight * 0.65) { inView = true; entered = true; enter(); }   // link direto #projetos
+  function play() {
+    shown = true; inView = true;
+    hideAll();
+    entryTl = gsap.timeline();
+    entryTl
+      .fromTo(faces, { rotationY: -90, y: 46, autoAlpha: 0, transformPerspective: 700 },
+        { rotationY: 0, y: 0, autoAlpha: 1, duration: 1, ease: 'back.out(1.5)', stagger: 0.07 }, 0)
+      .fromTo(frameEl, { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.9, ease: 'power3.out' }, 0.5)
+      .fromTo(pvs[cur].querySelector('.pv__img'), { scale: 1.16 }, { scale: 1, duration: 1.5, ease: 'power3.out' }, 0.5)
+      .call(startAuto, null, 1.6);            // o autoplay só começa depois que as letras entraram
+    loadAll();                                // as capas vão chegando (evita "pop-in" ao passar o mouse)
+  }
+
+  function sync() {
+    if (visible && canPlay && !shown) play();
+    else if (!visible && shown) reset();
+  }
+
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      const e = entries[entries.length - 1];
+      // Histerese: entra com >= 15% visível e só reseta quando sobra < 3%. (Saltar por âncora para a seção vizinha
+      // deixa um fiapo de < 1 px na tela: a razão é ~0,0004, não 0 exato, e isIntersecting continua true.)
+      if (e.intersectionRatio >= 0.15) visible = true;
+      else if (e.intersectionRatio < 0.03) visible = false;
+      sync();
+    }, { threshold: [0, 0.03, 0.15] });
+    io.observe(section);
+
+    // voltar pelo botão "voltar" do navegador (cache de página inteira): recomeça limpo
+    addEventListener('pageshow', (e) => {
+      if (!e.persisted) return;
+      reset(); visible = false; io.unobserve(section); io.observe(section);
+    });
+  } else {
+    visible = true;                                         // navegador antigo: mostra e pronto
+  }
+
+  // libera a entrada só depois que o hero criou o espaço do scroll (antes o layout ainda vai mudar)
+  const allow = () => { if (canPlay) return; canPlay = true; sync(); };
+  if (window.heroReady) setTimeout(allow, 600);
+  else document.addEventListener('hero-ready', () => setTimeout(allow, 600), { once: true });
+  setTimeout(allow, 6000);                                  // rede de segurança
 
   setBtn();
 })();
