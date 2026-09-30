@@ -45,7 +45,11 @@
 .about__text strong { font-weight: 400; color: var(--terracota); }      /* destaques do texto original, sem pesar */
 .about__text .eyebrow { margin-bottom: 1.1em; color: var(--terracota); }   /* vence o estilo genérico dos parágrafos */
 .about__btn { margin-top: .6em; }
-.about__btn em { font-family: var(--serif); font-style: italic; font-size: 1.12em; line-height: 1; color: var(--grafite); transition: color .3s ease; }   /* "óri" em destaque: grafite sobre o botão vazado */
+.about__btn { color: var(--grafite); }                       /* texto grafite; "óri" terracota, como no PDF de alterações */
+.about__btn::before { background: var(--terracota); transition: transform .7s cubic-bezier(.2, .7, .2, 1), background .3s ease; }
+.about__btn em { font-style: normal; color: var(--terracota); transition: color .3s ease; }
+.about__btn:hover, .about__btn:focus-visible { color: var(--offwhite); }
+.about__btn:hover::before, .about__btn:focus-visible::before { background: var(--offwhite); }
 .about__btn:hover em, .about__btn:focus-visible em { color: #F4D3B8; }   /* claro quando o botão enche de terracota */
 .about__hello { font-family: var(--serif); font-style: italic; font-size: clamp(22px, 1.9vw, 28px) !important; line-height: 1.25 !important; color: var(--grafite) !important; margin-bottom: .7em !important; }
 

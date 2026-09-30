@@ -42,6 +42,8 @@ button { font: inherit; color: inherit; }
 .brand { display: inline-flex; align-items: baseline; gap: .7em; line-height: 1; }
 .brand span { font-size: 13px; letter-spacing: .32em; font-weight: 400; }
 .brand b { font-family: var(--serif); font-weight: 500; font-size: 30px; letter-spacing: .02em; }
+.brand--mark { align-items: center; gap: .42em; }
+.brand__leaf { width: 34px; height: auto; aspect-ratio: 1996 / 1969; flex: none; }
 .brand--lg span { font-size: 15px; }
 .brand--lg b { font-size: 46px; }
 
@@ -97,6 +99,20 @@ button { font: inherit; color: inherit; }
   width: min(44vw, 620px);
   will-change: transform, opacity;
 }
+/* assinatura acima da frase: símbolo · fio · "studio" sobre "ÓRI" */
+.lockup { display: flex; align-items: center; gap: clamp(14px, 1.5vw, 22px); margin: 0 0 clamp(22px, 3.4vh, 36px); color: var(--terracota); line-height: 1; }
+.lockup__leaf { width: clamp(52px, 5vw, 76px); height: auto; aspect-ratio: 1996 / 1969; flex: none; }
+.lockup__rule { align-self: stretch; width: 1px; background: currentColor; opacity: .35; }
+.lockup__name { display: grid; gap: .5em; }
+.lockup__studio { font-size: clamp(11px, .95vw, 14px); letter-spacing: .5em; text-transform: lowercase; padding-left: .15em; }
+.lockup b { font-family: var(--serif); font-weight: 500; font-size: clamp(46px, 5.2vw, 84px); letter-spacing: .03em; line-height: .9; }
+@media (prefers-reduced-motion: no-preference) {
+  .lockup > * { animation: lockIn 1.1s cubic-bezier(.2, .7, .2, 1) both; }
+  .lockup__rule { animation-delay: .15s; transform-origin: top; animation-name: lockRule; }
+  .lockup__name { animation-delay: .25s; }
+}
+@keyframes lockIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes lockRule { from { transform: scaleY(0); } to { transform: none; } }
 .headline h1 {
   margin: 0; font-weight: 300; font-size: clamp(34px, 4.2vw, 68px); line-height: 1.1; letter-spacing: -.01em;
 }
@@ -184,12 +200,17 @@ button { font: inherit; color: inherit; }
   .nav { padding: 16px var(--gutter); }
   .nav__links { display: none; }
   .brand b { font-size: 26px; }
+  .brand__leaf { width: 30px; }
   .pill { padding: 9px 16px 9px 12px; min-height: 44px; }
   .pill__long { display: none; }
   .pill__short { display: inline; }
   .photo img { object-position: 12% 50%; }   /* enquadra as duas sócias */
-  .headline { left: var(--gutter); right: var(--gutter); top: 11%; width: auto; }
+  .headline { left: var(--gutter); right: var(--gutter); top: 14%; width: auto; }
   .headline h1 { font-size: clamp(30px, 8.6vw, 48px); }
+  .lockup { margin-bottom: 18px; gap: 12px; }
+  .lockup__leaf { width: 44px; }
+  .lockup b { font-size: 40px; }
+  .lockup__studio { font-size: 10px; letter-spacing: .42em; }
   .headline__sub { display: none; }
   .hud { bottom: 20px; }
   .skip { bottom: 44px; }
@@ -247,6 +268,9 @@ button { font: inherit; color: inherit; }
 /* ---------- Revisão de usabilidade (celular) ---------- */
 /* logo do menu: área de toque de 44px de altura */
 .nav .brand { position: relative; }
+.nav .brand--mark { color: var(--terracota); transition: color .4s ease; }   /* logo terracota, como no PDF; claro sobre seções escuras */
+.nav.on-dark .brand--mark { color: var(--offwhite); }
+.menu-open .nav .brand--mark { color: var(--terracota); }
 .nav .brand::after { content: ""; position: absolute; inset: -10px -6px; }   /* área de toque de 44px sem mexer no layout */
 
 /* pular para o conteúdo (teclado / leitor de tela) */

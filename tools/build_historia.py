@@ -6,6 +6,7 @@ O texto fica em BLOCOS abaixo — para mudar uma frase, edite aqui e rode:  pyth
 import html, os, sys
 sys.path.insert(0, os.path.dirname(__file__))
 from site_config import WHATSAPP_URL, SITE_NAME
+from build_site import SYMBOL_DEF
 import seo
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -64,7 +65,7 @@ def page():
 
   <header class="pjbar" id="pjbar">
     <a class="pjbar__back" href="../#sobre"><span aria-hidden="true">←</span> <span>Voltar</span></a>
-    <a class="brand pjbar__brand" href="../" aria-label="Studio Óri — página inicial"><span>studio</span><b>ÓRI</b></a>
+    <a class="brand brand--mark pjbar__brand" href="../" aria-label="Studio Óri — página inicial"><svg class="brand__leaf" viewBox="0 0 1996 1969" aria-hidden="true" focusable="false"><use href="#simbolo"/></svg><b>ÓRI</b></a>
   </header>
 
   <main id="conteudo">
@@ -99,6 +100,8 @@ def page():
       <a class="btn btn--solid pjfoot__cta" href="{WHATSAPP_URL}" target="_blank" rel="noopener">Quero transformar o meu espaço <span aria-hidden="true">→</span><span class="sr-only"> (abre o WhatsApp em nova aba)</span></a>
     </footer>
   </main>
+
+  {SYMBOL_DEF}
 </body>
 </html>
 '''

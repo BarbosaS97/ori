@@ -97,7 +97,7 @@ def page(i):
   <!-- Barra: voltar, marca e setas entre projetos -->
   <header class="pjbar" id="pjbar">
     <a class="pjbar__back" href="{back}"><span aria-hidden="true">←</span> <span>Projetos</span></a>
-    <a class="brand pjbar__brand" href="../../" aria-label="Studio Óri — página inicial"><span>studio</span><b>ÓRI</b></a>
+    <a class="brand brand--mark pjbar__brand" href="../../" aria-label="Studio Óri — página inicial"><svg class="brand__leaf" viewBox="0 0 1996 1969" aria-hidden="true" focusable="false"><use href="#simbolo"/></svg><b>ÓRI</b></a>
     <nav class="pjbar__pn" aria-label="Navegar entre projetos">
       <a class="pjarrow" rel="prev" href="../{prev["slug"]}/" aria-label="Projeto anterior: {esc(prev["name"])}">{ARROW_L}</a>
       <span class="pjbar__count" aria-label="Projeto {i + 1} de {N}">{i + 1:02d} / {N:02d}</span>
