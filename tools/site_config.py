@@ -18,6 +18,10 @@ Obs.: o menu, o topo e o hero ficam no index.html (feito à mão) — o audit_st
 import os
 
 WHATSAPP_URL = "https://wa.me/5561982367700"
+import urllib.parse
+def whatsapp_com_texto(msg):
+    """Mesmo WhatsApp, com uma mensagem inicial pronta (ex.: botões "Saiba mais" dos serviços)."""
+    return WHATSAPP_URL + "?text=" + urllib.parse.quote(msg)
 LINKS_PAGE = "links/"
 
 SITE_URL = "https://barbosas97.github.io/ori/"

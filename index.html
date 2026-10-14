@@ -2,8 +2,9 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
-  <script>document.documentElement.classList.add('js')</script>
-  <noscript><style>.loader{display:none}</style></noscript>
+  <script>document.documentElement.classList.add('js');
+  /* teste de estilos da seção Projetos: ?projetos=1 (padrão, letras) | 2 (galeria editorial). Lembra na sessão. */
+  (function(){var v='1';try{var q=new URLSearchParams(location.search).get('projetos');if(q&&/^[1-4]$/.test(q))sessionStorage.setItem('ori-projetos',q);v=sessionStorage.getItem('ori-projetos')||'1'}catch(e){}document.documentElement.dataset.projetos=v})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <!-- SEO:START (gerado por tools/build_seo.py — edite site_config.py) -->
   <title>Studio Óri — Arquitetura e Interiores</title>
@@ -28,20 +29,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="assets/hero-socias.webp?v=1f391e0a" type="image/webp">
-  <link rel="stylesheet" href="style.css?v=72e47aa2">
-  <link rel="stylesheet" href="projetos.css?v=73b13771">
+  <link rel="stylesheet" href="style.css?v=b885333e">
+  <link rel="stylesheet" href="projetos2.css?v=46813924">
+  <link rel="stylesheet" href="projetos.css?v=69766107">
   <link rel="stylesheet" href="servicos.css?v=26872383">
   <link rel="stylesheet" href="sobre.css?v=80d26841">
-  <link rel="stylesheet" href="instagram.css?v=0d3f947a">
+  <link rel="stylesheet" href="instagram.css?v=ee4f8421">
   <link rel="stylesheet" href="fecho.css?v=a2907cd1">
 </head>
 <body>
   <a class="skiplink" href="#conteudo">Ir para o conteúdo</a>
-
-  <div class="loader" id="loader" aria-hidden="true">
-    <div class="brand brand--lg"><span>studio</span><b class="wm" role="img" aria-label="Óri"></b></div>
-    <div class="loader__bar"><i id="loaderBar"></i></div>
-  </div>
 
   <header class="nav" id="nav">
     <a class="brand brand--mark" href="#" aria-label="Studio Óri — início"><svg class="brand__leaf" viewBox="0 0 1996 1969" aria-hidden="true" focusable="false"><use href="#simbolo"/></svg><b class="wm" role="img" aria-label="Óri"></b></a>
@@ -52,7 +49,11 @@
       <a href="#servicos">Serviços</a>
       <a href="links/">Contato</a>
     </nav>
-    <a class="pill" href="https://wa.me/5561982367700" target="_blank" rel="noopener"><span class="pill__long">Quero transformar o meu espaço</span><span class="pill__short">Fale conosco</span><span class="sr-only"> (abre o WhatsApp em nova aba)</span></a>
+    <div class="nav__social" role="group" aria-label="Redes sociais">
+      <a href="https://wa.me/5561982367700" target="_blank" rel="noopener" aria-label="WhatsApp (abre em nova aba)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"/></svg></a>
+      <a href="https://www.instagram.com/ori.arqui" target="_blank" rel="noopener" aria-label="Instagram (abre em nova aba)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="12" cy="12" r="3"/><path d="M16.5 7.5v.01"/></svg></a>
+      <a href="https://www.facebook.com/people/Studio-%C3%93ri/61573346091668/" target="_blank" rel="noopener" aria-label="Facebook (abre em nova aba)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 10v4h3v7h4v-7h3l1-4h-4V8a1 1 0 0 1 1-1h3V3h-3a5 5 0 0 0-5 5v2z"/></svg></a>
+    </div>
     <!-- Menu do celular (telas estreitas): botão hambúrguer + painel em tela cheia (nav.js) -->
     <button class="nav__burger" id="navBurger" type="button" aria-expanded="false" aria-controls="navPanel" aria-label="Abrir menu"><i></i><i></i></button>
   </header>
@@ -65,48 +66,23 @@
       <a href="#servicos">Serviços</a>
       <a href="links/">Contato</a>
     </nav>
+    <div class="navpanel__social" role="group" aria-label="Redes sociais">
+      <a href="https://wa.me/5561982367700" target="_blank" rel="noopener" aria-label="WhatsApp (abre em nova aba)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"/></svg></a>
+      <a href="https://www.instagram.com/ori.arqui" target="_blank" rel="noopener" aria-label="Instagram (abre em nova aba)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="12" cy="12" r="3"/><path d="M16.5 7.5v.01"/></svg></a>
+      <a href="https://www.facebook.com/people/Studio-%C3%93ri/61573346091668/" target="_blank" rel="noopener" aria-label="Facebook (abre em nova aba)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 10v4h3v7h4v-7h3l1-4h-4V8a1 1 0 0 1 1-1h3V3h-3a5 5 0 0 0-5 5v2z"/></svg></a>
+    </div>
     <p class="navpanel__foot"><span>Valorizamos hist<em>óri</em>a e <em>ori</em>ginalidade.</span> <a href="https://www.instagram.com/ori.arqui" rel="noopener" target="_blank">@ori.arqui</a></p>
   </div>
 
   <main id="conteudo">
     <section class="hero" id="hero" aria-label="Apresentação">
-      <div class="stage" id="stage">
-
-        <!-- CENA 1–2: as sócias (fixas) e a câmera avançando pela parede off-white -->
-        <div class="sceneA" id="sceneA">
-          <div class="photo" id="photo">
-            <img src="assets/hero-socias.webp?v=1f391e0a" width="1641" height="1082" alt="Malu e Laura caminhando em um ambiente off-white" fetchpriority="high" decoding="async">
-          </div>
-          <div class="headline" id="headline">
-            <p class="lockup"><svg class="lockup__leaf" viewBox="0 0 1996 1969" aria-hidden="true" focusable="false"><use href="#simbolo"/></svg><span class="lockup__rule" aria-hidden="true"></span><span class="lockup__name"><span class="lockup__studio">studio</span><b class="wm" role="img" aria-label="Óri"></b></span></p>
-            <h1>Valorizamos hist<em>óri</em>a<br>e <em>ori</em>ginalidade.</h1>
-            <p class="headline__sub">Arquitetura e interiores</p>
-          </div>
-          <div class="hint" id="hint" aria-hidden="true"><span>role para entrar</span><i></i></div>
-        </div>
-
-        <!-- CENA 3–5: portal → ambiente → desenho técnico -->
-        <div class="portal" id="portal">
-          <div class="filmwrap" id="filmwrap">
-            <canvas id="film" aria-hidden="true"></canvas>
-          </div>
-          <div class="veil" id="veil"></div>
-          <div class="endtext" id="endtext">
-            <h2>Projetos começam<br>na conversa.</h2>
-            <p class="endtext__p">Arquitetura baseada na escuta, no entendimento do que faz sentido para quem vai viver o espaço.</p>
-            <div class="endtext__cta">
-              <a class="btn btn--solid" href="https://wa.me/5561982367700" target="_blank" rel="noopener">Quero transformar o meu espaço <span aria-hidden="true">→</span><span class="sr-only"> (abre o WhatsApp em nova aba)</span></a>
-              <a class="btn btn--ghost" href="#projetos">Ver projetos <span aria-hidden="true">↓</span></a>
-            </div>
-          </div>
-        </div>
-
-        <div class="ring" id="ring" aria-hidden="true"></div>
-
-        <div class="hud" aria-hidden="true">
-          <span class="hud__tag" id="tag">ilustração conceitual</span>
-        </div>
-        <button class="skip" id="skip" type="button">pular introdução <span aria-hidden="true">↓</span></button>
+      <div class="photo" id="photo">
+        <img src="assets/hero-socias.webp?v=1f391e0a" width="1641" height="1082" alt="Malu e Laura caminhando em um ambiente off-white" fetchpriority="high" decoding="async">
+      </div>
+      <div class="headline" id="headline">
+        <p class="lockup"><b class="wm lockup__wm" role="img" aria-label="Óri"></b><span class="lockup__tag">arquitetura<br>e interiores</span></p>
+        <h1>Valorizamos hist<em>óri</em>a<br>e <em>ori</em>ginalidade.</h1>
+        <a class="btn btn--white hero__cta" href="https://wa.me/5561982367700" target="_blank" rel="noopener">Quero transformar o meu espaço <span aria-hidden="true">→</span><span class="sr-only"> (abre o WhatsApp em nova aba)</span></a>
       </div>
     </section>
 
@@ -116,8 +92,8 @@
          projetos.js só adiciona o comportamento. -->
     <section class="letters" id="projetos" aria-labelledby="lettersTitle">
       <header class="letters__head">
-        <p class="eyebrow">projetos</p>
-        <h2 id="lettersTitle">Cada letra, um projeto.<br>Cada projeto, uma <em>conversa</em>.</h2>
+        <p class="eyebrow">portfólio</p>
+        <h2 id="lettersTitle"><span class="h-v1">Cada letra, um <em>projeto</em>.</span><span class="h-v2">Nossos <em>projetos</em>.</span></h2>
         <p class="letters__hint" id="lettersHint">Passe o mouse sobre uma letra para ver o projeto.</p>
       </header>
 
@@ -146,13 +122,13 @@
           </div>
           <div class="word__row">
             <a class="tile" href="projetos/olie/" data-i="6" data-slug="olie" data-tile="azul" aria-label="Letra Ó: Ólie Beauty Clinic, projeto comercial. Ver projeto">
-              <span class="tile__face"><span class="glyph">Ó</span><span class="tile__bar" aria-hidden="true"><i></i></span></span>
+              <span class="tile__face"><span class="glyph glyph--o" role="img" aria-label="Ó"></span><span class="tile__bar" aria-hidden="true"><i></i></span></span>
             </a>
-            <a class="tile" href="projetos/guarita-victoria/" data-i="7" data-slug="guarita-victoria" data-tile="terracota" aria-label="Letra R: Guarita Victória, projeto institucional. Ver projeto">
-              <span class="tile__face"><span class="glyph">R</span><span class="tile__bar" aria-hidden="true"><i></i></span></span>
+            <a class="tile" href="projetos/guarita-victoria/" data-i="7" data-slug="guarita-victoria" data-tile="terracota" aria-label="Letra R: Guarita Residencial Victória, projeto institucional. Ver projeto">
+              <span class="tile__face"><span class="glyph glyph--r" role="img" aria-label="R"></span><span class="tile__bar" aria-hidden="true"><i></i></span></span>
             </a>
             <a class="tile" href="projetos/quarto-ambar/" data-i="8" data-slug="quarto-ambar" data-tile="grafite" aria-label="Letra I: Quarto Âmbar, projeto residencial. Ver projeto">
-              <span class="tile__face"><span class="glyph">I</span><span class="tile__bar" aria-hidden="true"><i></i></span></span>
+              <span class="tile__face"><span class="glyph glyph--i" role="img" aria-label="I"></span><span class="tile__bar" aria-hidden="true"><i></i></span></span>
             </a>
           </div>
         </div>
@@ -260,12 +236,12 @@
           </figure>
           <figure class="pv" data-i="7" style="--c1:#7F8794;--c2:#3F4652">
             <div class="pv__img">
-              <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="assets/projetos/guarita-victoria/01-s.webp?v=a18910b5" data-srcset="assets/projetos/guarita-victoria/01-s.webp?v=a18910b5 900w, assets/projetos/guarita-victoria/01.webp?v=802ba208 1675w" sizes="(max-width: 860px) 100vw, 46vw" width="1675" height="939" alt="Render do projeto Guarita Victória" decoding="async" style="object-position:50% 55%">
+              <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="assets/projetos/guarita-victoria/01-s.webp?v=ce41af21" data-srcset="assets/projetos/guarita-victoria/01-s.webp?v=ce41af21 900w, assets/projetos/guarita-victoria/01.webp?v=c0c9e88f 1712w" sizes="(max-width: 860px) 100vw, 46vw" width="1712" height="919" alt="Render do projeto Guarita Residencial Victória" decoding="async" style="object-position:40% 50%">
             </div>
             <figcaption class="pv__cap">
               <span class="pv__num">08</span>
               <small>institucional</small>
-              <strong>Guarita Victória</strong>
+              <strong>Guarita Residencial Victória</strong>
               <span class="pv__cta">ver projeto <span aria-hidden="true">→</span></span>
             </figcaption>
             <a class="pv__link" href="projetos/guarita-victoria/" tabindex="-1" aria-hidden="true"></a>
@@ -294,6 +270,360 @@
             <span class="pvbar__count" aria-hidden="true"><b id="pvCount">01</b> / 09</span>
             <button class="pvbar__auto" id="autoBtn" type="button" aria-pressed="false">pausar</button>
           </div>
+        </div>
+      </div>
+
+      <!-- VARIANTE 2 (?projetos=2): galeria editorial. A variante 1 (letras) é o padrão. -->
+      <div class="v2" id="v2">
+        <ul class="v2__track" id="v2Track" tabindex="0" aria-label="Projetos do Studio Óri">
+          <li class="v2__slide is-active" data-i="0" style="--c1:#C9A98A;--c2:#8A5A3A">
+            <a class="v2__link" href="projetos/casa-aconchego/">
+              <span class="v2__media"><img src="assets/projetos/casa-aconchego/01-s.webp?v=ec2da7bc" srcset="assets/projetos/casa-aconchego/01-s.webp?v=ec2da7bc 900w, assets/projetos/casa-aconchego/01.webp?v=4bc8640c 1600w" sizes="(max-width: 860px) 88vw, 860px" width="1600" height="901" alt="Render do projeto Casa Aconchego" loading="lazy" decoding="async" style="object-position:50% 55%"></span>
+              <span class="v2__cap">
+                <span class="v2__meta">01 <i aria-hidden="true"></i> residencial</span>
+                <span class="v2__name">Casa Aconchego</span>
+                <span class="v2__go">ver projeto <span aria-hidden="true">→</span></span>
+              </span>
+            </a>
+          </li>
+          <li class="v2__slide" data-i="1" style="--c1:#B9C4C0;--c2:#6F8480">
+            <a class="v2__link" href="projetos/apartamento-mar/">
+              <span class="v2__media"><img src="assets/projetos/apartamento-mar/01-s.webp?v=146baf73" srcset="assets/projetos/apartamento-mar/01-s.webp?v=146baf73 600w, assets/projetos/apartamento-mar/01.webp?v=223da71f 1000w" sizes="(max-width: 860px) 88vw, 860px" width="1000" height="1500" alt="Render do projeto Apartamento Mar" loading="lazy" decoding="async" style="object-position:50% 62%"></span>
+              <span class="v2__cap">
+                <span class="v2__meta">02 <i aria-hidden="true"></i> residencial</span>
+                <span class="v2__name">Apartamento Mar</span>
+                <span class="v2__go">ver projeto <span aria-hidden="true">→</span></span>
+              </span>
+            </a>
+          </li>
+          <li class="v2__slide" data-i="2" style="--c1:#B8B29A;--c2:#6E6A4F">
+            <a class="v2__link" href="projetos/rancho-oc/">
+              <span class="v2__media"><img src="assets/projetos/rancho-oc/01-s.webp?v=fe469c63" srcset="assets/projetos/rancho-oc/01-s.webp?v=fe469c63 900w, assets/projetos/rancho-oc/01.webp?v=0bb6e6bb 1254w" sizes="(max-width: 860px) 88vw, 860px" width="1254" height="1254" alt="Render do projeto Rancho OC" loading="lazy" decoding="async" style="object-position:50% 50%"></span>
+              <span class="v2__cap">
+                <span class="v2__meta">03 <i aria-hidden="true"></i> residencial</span>
+                <span class="v2__name">Rancho OC</span>
+                <span class="v2__go">ver projeto <span aria-hidden="true">→</span></span>
+              </span>
+            </a>
+          </li>
+          <li class="v2__slide" data-i="3" style="--c1:#D8C9B8;--c2:#A98B72">
+            <a class="v2__link" href="projetos/rr/">
+              <span class="v2__media"><img src="assets/projetos/rr/01-s.webp?v=d6b1d015" srcset="assets/projetos/rr/01-s.webp?v=d6b1d015 900w, assets/projetos/rr/01.webp?v=bed70ad8 1800w" sizes="(max-width: 860px) 88vw, 860px" width="1800" height="1013" alt="Render do projeto Projeto R&amp;R" loading="lazy" decoding="async" style="object-position:50% 60%"></span>
+              <span class="v2__cap">
+                <span class="v2__meta">04 <i aria-hidden="true"></i> residencial</span>
+                <span class="v2__name">Projeto R&amp;R</span>
+                <span class="v2__go">ver projeto <span aria-hidden="true">→</span></span>
+              </span>
+            </a>
+          </li>
+          <li class="v2__slide" data-i="4" style="--c1:#A9B39A;--c2:#6F7B5E">
+            <a class="v2__link" href="projetos/jo/">
+              <span class="v2__media"><img src="assets/projetos/jo/01-s.webp?v=00b9721b" srcset="assets/projetos/jo/01-s.webp?v=00b9721b 900w, assets/projetos/jo/01.webp?v=92110daf 1800w" sizes="(max-width: 860px) 88vw, 860px" width="1800" height="1013" alt="Render do projeto Projeto JO" loading="lazy" decoding="async" style="object-position:50% 55%"></span>
+              <span class="v2__cap">
+                <span class="v2__meta">05 <i aria-hidden="true"></i> residencial</span>
+                <span class="v2__name">Projeto JO</span>
+                <span class="v2__go">ver projeto <span aria-hidden="true">→</span></span>
+              </span>
+            </a>
+          </li>
+          <li class="v2__slide" data-i="5" style="--c1:#C7B7A3;--c2:#8B7B6A">
+            <a class="v2__link" href="projetos/oliva/">
+              <span class="v2__media"><img src="assets/projetos/oliva/01-s.webp?v=2341a643" srcset="assets/projetos/oliva/01-s.webp?v=2341a643 720w, assets/projetos/oliva/01.webp?v=cd458def 1080w" sizes="(max-width: 860px) 88vw, 860px" width="1080" height="1350" alt="Render do projeto Apartamento Oliva" loading="lazy" decoding="async" style="object-position:50% 60%"></span>
+              <span class="v2__cap">
+                <span class="v2__meta">06 <i aria-hidden="true"></i> residencial</span>
+                <span class="v2__name">Apartamento Oliva</span>
+                <span class="v2__go">ver projeto <span aria-hidden="true">→</span></span>
+              </span>
+            </a>
+          </li>
+          <li class="v2__slide" data-i="6" style="--c1:#E2CFC1;--c2:#BC9E8D">
+            <a class="v2__link" href="projetos/olie/">
+              <span class="v2__media"><img src="assets/projetos/olie/01-s.webp?v=31923a6a" srcset="assets/projetos/olie/01-s.webp?v=31923a6a 900w, assets/projetos/olie/01.webp?v=36da3f0f 1500w" sizes="(max-width: 860px) 88vw, 860px" width="1500" height="1500" alt="Render do projeto Ólie Beauty Clinic" loading="lazy" decoding="async" style="object-position:50% 55%"></span>
+              <span class="v2__cap">
+                <span class="v2__meta">07 <i aria-hidden="true"></i> comercial</span>
+                <span class="v2__name">Ólie Beauty Clinic</span>
+                <span class="v2__go">ver projeto <span aria-hidden="true">→</span></span>
+              </span>
+            </a>
+          </li>
+          <li class="v2__slide" data-i="7" style="--c1:#7F8794;--c2:#3F4652">
+            <a class="v2__link" href="projetos/guarita-victoria/">
+              <span class="v2__media"><img src="assets/projetos/guarita-victoria/01-s.webp?v=ce41af21" srcset="assets/projetos/guarita-victoria/01-s.webp?v=ce41af21 900w, assets/projetos/guarita-victoria/01.webp?v=c0c9e88f 1712w" sizes="(max-width: 860px) 88vw, 860px" width="1712" height="919" alt="Render do projeto Guarita Residencial Victória" loading="lazy" decoding="async" style="object-position:40% 50%"></span>
+              <span class="v2__cap">
+                <span class="v2__meta">08 <i aria-hidden="true"></i> institucional</span>
+                <span class="v2__name">Guarita Residencial Victória</span>
+                <span class="v2__go">ver projeto <span aria-hidden="true">→</span></span>
+              </span>
+            </a>
+          </li>
+          <li class="v2__slide" data-i="8" style="--c1:#C9905F;--c2:#8E4F22">
+            <a class="v2__link" href="projetos/quarto-ambar/">
+              <span class="v2__media"><img src="assets/projetos/quarto-ambar/01-s.webp?v=e4d291bb" srcset="assets/projetos/quarto-ambar/01-s.webp?v=e4d291bb 900w, assets/projetos/quarto-ambar/01.webp?v=2002550c 1800w" sizes="(max-width: 860px) 88vw, 860px" width="1800" height="1013" alt="Render do projeto Quarto Âmbar" loading="lazy" decoding="async" style="object-position:50% 60%"></span>
+              <span class="v2__cap">
+                <span class="v2__meta">09 <i aria-hidden="true"></i> residencial</span>
+                <span class="v2__name">Quarto Âmbar</span>
+                <span class="v2__go">ver projeto <span aria-hidden="true">→</span></span>
+              </span>
+            </a>
+          </li>
+        </ul>
+        <div class="v2__bar">
+          <div class="v2__nums" role="group" aria-label="Escolher projeto">
+          <button class="v2__n is-active" type="button" data-i="0" aria-label="Projeto 1: Casa Aconchego"><span>01</span></button>
+          <button class="v2__n" type="button" data-i="1" aria-label="Projeto 2: Apartamento Mar"><span>02</span></button>
+          <button class="v2__n" type="button" data-i="2" aria-label="Projeto 3: Rancho OC"><span>03</span></button>
+          <button class="v2__n" type="button" data-i="3" aria-label="Projeto 4: Projeto R&amp;R"><span>04</span></button>
+          <button class="v2__n" type="button" data-i="4" aria-label="Projeto 5: Projeto JO"><span>05</span></button>
+          <button class="v2__n" type="button" data-i="5" aria-label="Projeto 6: Apartamento Oliva"><span>06</span></button>
+          <button class="v2__n" type="button" data-i="6" aria-label="Projeto 7: Ólie Beauty Clinic"><span>07</span></button>
+          <button class="v2__n" type="button" data-i="7" aria-label="Projeto 8: Guarita Residencial Victória"><span>08</span></button>
+          <button class="v2__n" type="button" data-i="8" aria-label="Projeto 9: Quarto Âmbar"><span>09</span></button>
+          </div>
+          <div class="v2__arrows">
+            <button class="v2__arrow" id="v2Prev" type="button" aria-label="Projeto anterior"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button class="v2__arrow" id="v2Next" type="button" aria-label="Próximo projeto"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- VARIANTE 3 (?projetos=3): lista tipográfica; a foto aparece ao lado quando o nome é apontado. -->
+      <div class="v3" id="v3">
+        <span class="v3__band" id="v3Band" aria-hidden="true"></span>
+        <ul class="v3__list" id="v3List" aria-label="Projetos do Studio Óri">
+          <li class="v3__row is-active" data-i="0">
+            <a class="v3__link" href="projetos/casa-aconchego/">
+              <svg class="v3__leaf" viewBox="0 0 1996 1969" aria-hidden="true" focusable="false"><use href="#simbolo"/></svg>
+              <span class="v3__thumb" aria-hidden="true"><img src="assets/projetos/casa-aconchego/01-s.webp?v=ec2da7bc" srcset="assets/projetos/casa-aconchego/01-s.webp?v=ec2da7bc 900w, assets/projetos/casa-aconchego/01.webp?v=4bc8640c 1600w" sizes="96px" width="1600" height="901" alt="" loading="lazy" decoding="async" style="object-position:50% 55%"></span>
+              <span class="v3__name">Casa Aconchego</span>
+              <span class="v3__type">residencial</span>
+              <span class="v3__go" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="v3__row" data-i="1">
+            <a class="v3__link" href="projetos/apartamento-mar/">
+              <svg class="v3__leaf" viewBox="0 0 1996 1969" aria-hidden="true" focusable="false"><use href="#simbolo"/></svg>
+              <span class="v3__thumb" aria-hidden="true"><img src="assets/projetos/apartamento-mar/01-s.webp?v=146baf73" srcset="assets/projetos/apartamento-mar/01-s.webp?v=146baf73 600w, assets/projetos/apartamento-mar/01.webp?v=223da71f 1000w" sizes="96px" width="1000" height="1500" alt="" loading="lazy" decoding="async" style="object-position:50% 62%"></span>
+              <span class="v3__name">Apartamento Mar</span>
+              <span class="v3__type">residencial</span>
+              <span class="v3__go" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="v3__row" data-i="2">
+            <a class="v3__link" href="projetos/rancho-oc/">
+              <svg class="v3__leaf" viewBox="0 0 1996 1969" aria-hidden="true" focusable="false"><use href="#simbolo"/></svg>
+              <span class="v3__thumb" aria-hidden="true"><img src="assets/projetos/rancho-oc/01-s.webp?v=fe469c63" srcset="assets/projetos/rancho-oc/01-s.webp?v=fe469c63 900w, assets/projetos/rancho-oc/01.webp?v=0bb6e6bb 1254w" sizes="96px" width="1254" height="1254" alt="" loading="lazy" decoding="async" style="object-position:50% 50%"></span>
+              <span class="v3__name">Rancho OC</span>
+              <span class="v3__type">residencial</span>
+              <span class="v3__go" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="v3__row" data-i="3">
+            <a class="v3__link" href="projetos/rr/">
+              <svg class="v3__leaf" viewBox="0 0 1996 1969" aria-hidden="true" focusable="false"><use href="#simbolo"/></svg>
+              <span class="v3__thumb" aria-hidden="true"><img src="assets/projetos/rr/01-s.webp?v=d6b1d015" srcset="assets/projetos/rr/01-s.webp?v=d6b1d015 900w, assets/projetos/rr/01.webp?v=bed70ad8 1800w" sizes="96px" width="1800" height="1013" alt="" loading="lazy" decoding="async" style="object-position:50% 60%"></span>
+              <span class="v3__name">Projeto R&amp;R</span>
+              <span class="v3__type">residencial</span>
+              <span class="v3__go" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="v3__row" data-i="4">
+            <a class="v3__link" href="projetos/jo/">
+              <svg class="v3__leaf" viewBox="0 0 1996 1969" aria-hidden="true" focusable="false"><use href="#simbolo"/></svg>
+              <span class="v3__thumb" aria-hidden="true"><img src="assets/projetos/jo/01-s.webp?v=00b9721b" srcset="assets/projetos/jo/01-s.webp?v=00b9721b 900w, assets/projetos/jo/01.webp?v=92110daf 1800w" sizes="96px" width="1800" height="1013" alt="" loading="lazy" decoding="async" style="object-position:50% 55%"></span>
+              <span class="v3__name">Projeto JO</span>
+              <span class="v3__type">residencial</span>
+              <span class="v3__go" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="v3__row" data-i="5">
+            <a class="v3__link" href="projetos/oliva/">
+              <svg class="v3__leaf" viewBox="0 0 1996 1969" aria-hidden="true" focusable="false"><use href="#simbolo"/></svg>
+              <span class="v3__thumb" aria-hidden="true"><img src="assets/projetos/oliva/01-s.webp?v=2341a643" srcset="assets/projetos/oliva/01-s.webp?v=2341a643 720w, assets/projetos/oliva/01.webp?v=cd458def 1080w" sizes="96px" width="1080" height="1350" alt="" loading="lazy" decoding="async" style="object-position:50% 60%"></span>
+              <span class="v3__name">Apartamento Oliva</span>
+              <span class="v3__type">residencial</span>
+              <span class="v3__go" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="v3__row" data-i="6">
+            <a class="v3__link" href="projetos/olie/">
+              <svg class="v3__leaf" viewBox="0 0 1996 1969" aria-hidden="true" focusable="false"><use href="#simbolo"/></svg>
+              <span class="v3__thumb" aria-hidden="true"><img src="assets/projetos/olie/01-s.webp?v=31923a6a" srcset="assets/projetos/olie/01-s.webp?v=31923a6a 900w, assets/projetos/olie/01.webp?v=36da3f0f 1500w" sizes="96px" width="1500" height="1500" alt="" loading="lazy" decoding="async" style="object-position:50% 55%"></span>
+              <span class="v3__name">Ólie Beauty Clinic</span>
+              <span class="v3__type">comercial</span>
+              <span class="v3__go" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="v3__row" data-i="7">
+            <a class="v3__link" href="projetos/guarita-victoria/">
+              <svg class="v3__leaf" viewBox="0 0 1996 1969" aria-hidden="true" focusable="false"><use href="#simbolo"/></svg>
+              <span class="v3__thumb" aria-hidden="true"><img src="assets/projetos/guarita-victoria/01-s.webp?v=ce41af21" srcset="assets/projetos/guarita-victoria/01-s.webp?v=ce41af21 900w, assets/projetos/guarita-victoria/01.webp?v=c0c9e88f 1712w" sizes="96px" width="1712" height="919" alt="" loading="lazy" decoding="async" style="object-position:40% 50%"></span>
+              <span class="v3__name">Guarita Residencial Victória</span>
+              <span class="v3__type">institucional</span>
+              <span class="v3__go" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="v3__row" data-i="8">
+            <a class="v3__link" href="projetos/quarto-ambar/">
+              <svg class="v3__leaf" viewBox="0 0 1996 1969" aria-hidden="true" focusable="false"><use href="#simbolo"/></svg>
+              <span class="v3__thumb" aria-hidden="true"><img src="assets/projetos/quarto-ambar/01-s.webp?v=e4d291bb" srcset="assets/projetos/quarto-ambar/01-s.webp?v=e4d291bb 900w, assets/projetos/quarto-ambar/01.webp?v=2002550c 1800w" sizes="96px" width="1800" height="1013" alt="" loading="lazy" decoding="async" style="object-position:50% 60%"></span>
+              <span class="v3__name">Quarto Âmbar</span>
+              <span class="v3__type">residencial</span>
+              <span class="v3__go" aria-hidden="true">→</span>
+            </a>
+          </li>
+        </ul>
+        <div class="v3__preview">
+          <span class="v3__img is-active" data-i="0" aria-hidden="true" style="--c1:#C9A98A;--c2:#8A5A3A"><img src="assets/projetos/casa-aconchego/01-s.webp?v=ec2da7bc" srcset="assets/projetos/casa-aconchego/01-s.webp?v=ec2da7bc 900w, assets/projetos/casa-aconchego/01.webp?v=4bc8640c 1600w" sizes="(max-width: 860px) 1px, 560px" width="1600" height="901" alt="" loading="lazy" decoding="async" style="object-position:50% 55%"></span>
+          <span class="v3__img" data-i="1" aria-hidden="true" style="--c1:#B9C4C0;--c2:#6F8480"><img src="assets/projetos/apartamento-mar/01-s.webp?v=146baf73" srcset="assets/projetos/apartamento-mar/01-s.webp?v=146baf73 600w, assets/projetos/apartamento-mar/01.webp?v=223da71f 1000w" sizes="(max-width: 860px) 1px, 560px" width="1000" height="1500" alt="" loading="lazy" decoding="async" style="object-position:50% 62%"></span>
+          <span class="v3__img" data-i="2" aria-hidden="true" style="--c1:#B8B29A;--c2:#6E6A4F"><img src="assets/projetos/rancho-oc/01-s.webp?v=fe469c63" srcset="assets/projetos/rancho-oc/01-s.webp?v=fe469c63 900w, assets/projetos/rancho-oc/01.webp?v=0bb6e6bb 1254w" sizes="(max-width: 860px) 1px, 560px" width="1254" height="1254" alt="" loading="lazy" decoding="async" style="object-position:50% 50%"></span>
+          <span class="v3__img" data-i="3" aria-hidden="true" style="--c1:#D8C9B8;--c2:#A98B72"><img src="assets/projetos/rr/01-s.webp?v=d6b1d015" srcset="assets/projetos/rr/01-s.webp?v=d6b1d015 900w, assets/projetos/rr/01.webp?v=bed70ad8 1800w" sizes="(max-width: 860px) 1px, 560px" width="1800" height="1013" alt="" loading="lazy" decoding="async" style="object-position:50% 60%"></span>
+          <span class="v3__img" data-i="4" aria-hidden="true" style="--c1:#A9B39A;--c2:#6F7B5E"><img src="assets/projetos/jo/01-s.webp?v=00b9721b" srcset="assets/projetos/jo/01-s.webp?v=00b9721b 900w, assets/projetos/jo/01.webp?v=92110daf 1800w" sizes="(max-width: 860px) 1px, 560px" width="1800" height="1013" alt="" loading="lazy" decoding="async" style="object-position:50% 55%"></span>
+          <span class="v3__img" data-i="5" aria-hidden="true" style="--c1:#C7B7A3;--c2:#8B7B6A"><img src="assets/projetos/oliva/01-s.webp?v=2341a643" srcset="assets/projetos/oliva/01-s.webp?v=2341a643 720w, assets/projetos/oliva/01.webp?v=cd458def 1080w" sizes="(max-width: 860px) 1px, 560px" width="1080" height="1350" alt="" loading="lazy" decoding="async" style="object-position:50% 60%"></span>
+          <span class="v3__img" data-i="6" aria-hidden="true" style="--c1:#E2CFC1;--c2:#BC9E8D"><img src="assets/projetos/olie/01-s.webp?v=31923a6a" srcset="assets/projetos/olie/01-s.webp?v=31923a6a 900w, assets/projetos/olie/01.webp?v=36da3f0f 1500w" sizes="(max-width: 860px) 1px, 560px" width="1500" height="1500" alt="" loading="lazy" decoding="async" style="object-position:50% 55%"></span>
+          <span class="v3__img" data-i="7" aria-hidden="true" style="--c1:#7F8794;--c2:#3F4652"><img src="assets/projetos/guarita-victoria/01-s.webp?v=ce41af21" srcset="assets/projetos/guarita-victoria/01-s.webp?v=ce41af21 900w, assets/projetos/guarita-victoria/01.webp?v=c0c9e88f 1712w" sizes="(max-width: 860px) 1px, 560px" width="1712" height="919" alt="" loading="lazy" decoding="async" style="object-position:40% 50%"></span>
+          <span class="v3__img" data-i="8" aria-hidden="true" style="--c1:#C9905F;--c2:#8E4F22"><img src="assets/projetos/quarto-ambar/01-s.webp?v=e4d291bb" srcset="assets/projetos/quarto-ambar/01-s.webp?v=e4d291bb 900w, assets/projetos/quarto-ambar/01.webp?v=2002550c 1800w" sizes="(max-width: 860px) 1px, 560px" width="1800" height="1013" alt="" loading="lazy" decoding="async" style="object-position:50% 60%"></span>
+          <span class="v3__veil" aria-hidden="true"></span>
+          <span class="v3__title" id="v3Title" aria-hidden="true">Casa Aconchego</span>
+          <a class="v3__cta" id="v3Cta" href="projetos/casa-aconchego/">ver projeto <span aria-hidden="true">→</span><span class="sr-only"> Casa Aconchego</span></a>
+        </div>
+      </div>
+
+      <!-- VARIANTE 4 (?projetos=4): faixa horizontal de capas altas. -->
+      <div class="v4" id="v4">
+        <div class="v4__stage">
+          <button class="v4__arrow v4__arrow--prev" id="v4Prev" type="button" aria-label="Projetos anteriores"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <ul class="v4__track" id="v4Track" tabindex="0" aria-label="Projetos do Studio Óri">
+          <li class="v4__card" data-i="0" style="--c1:#C9A98A;--c2:#8A5A3A">
+            <a class="v4__link" href="projetos/casa-aconchego/">
+              <span class="v4__stack">
+                <span class="v4__layer v4__layer--3" aria-hidden="true"><img src="assets/projetos/casa-aconchego/03-s.webp?v=c708330e" srcset="assets/projetos/casa-aconchego/03-s.webp?v=c708330e 900w, assets/projetos/casa-aconchego/03.webp?v=57acbbd0 1600w" sizes="320px" width="1600" height="900" alt="" loading="lazy" decoding="async"></span>
+                <span class="v4__layer v4__layer--2" aria-hidden="true"><img src="assets/projetos/casa-aconchego/02-s.webp?v=8eb9488f" srcset="assets/projetos/casa-aconchego/02-s.webp?v=8eb9488f 900w, assets/projetos/casa-aconchego/02.webp?v=db9859ff 1200w" sizes="320px" width="1200" height="1200" alt="" loading="lazy" decoding="async"></span>
+                <span class="v4__media"><img src="assets/projetos/casa-aconchego/01-s.webp?v=ec2da7bc" srcset="assets/projetos/casa-aconchego/01-s.webp?v=ec2da7bc 900w, assets/projetos/casa-aconchego/01.webp?v=4bc8640c 1600w" sizes="(max-width: 860px) 160vw, 680px" width="1600" height="901" alt="Render do projeto Casa Aconchego" loading="lazy" decoding="async" style="object-position:50% 55%"></span>
+              </span>
+              <span class="v4__cap">
+                <span class="v4__meta">01 <i aria-hidden="true"></i> residencial</span>
+                <span class="v4__name">Casa Aconchego</span>
+                <span class="v4__go">ver projeto <span aria-hidden="true">→</span></span>
+              </span>
+            </a>
+          </li>
+          <li class="v4__card" data-i="1" style="--c1:#B9C4C0;--c2:#6F8480">
+            <a class="v4__link" href="projetos/apartamento-mar/">
+              <span class="v4__stack">
+                <span class="v4__layer v4__layer--3" aria-hidden="true"><img src="assets/projetos/apartamento-mar/03-s.webp?v=3c6c8f4d" srcset="assets/projetos/apartamento-mar/03-s.webp?v=3c6c8f4d 600w, assets/projetos/apartamento-mar/03.webp?v=30f06cba 1000w" sizes="320px" width="1000" height="1500" alt="" loading="lazy" decoding="async"></span>
+                <span class="v4__layer v4__layer--2" aria-hidden="true"><img src="assets/projetos/apartamento-mar/02-s.webp?v=4fd1136e" srcset="assets/projetos/apartamento-mar/02-s.webp?v=4fd1136e 600w, assets/projetos/apartamento-mar/02.webp?v=f38c8121 1200w" sizes="320px" width="1200" height="1800" alt="" loading="lazy" decoding="async"></span>
+                <span class="v4__media"><img src="assets/projetos/apartamento-mar/01-s.webp?v=146baf73" srcset="assets/projetos/apartamento-mar/01-s.webp?v=146baf73 600w, assets/projetos/apartamento-mar/01.webp?v=223da71f 1000w" sizes="(max-width: 860px) 160vw, 680px" width="1000" height="1500" alt="Render do projeto Apartamento Mar" loading="lazy" decoding="async" style="object-position:50% 62%"></span>
+              </span>
+              <span class="v4__cap">
+                <span class="v4__meta">02 <i aria-hidden="true"></i> residencial</span>
+                <span class="v4__name">Apartamento Mar</span>
+                <span class="v4__go">ver projeto <span aria-hidden="true">→</span></span>
+              </span>
+            </a>
+          </li>
+          <li class="v4__card" data-i="2" style="--c1:#B8B29A;--c2:#6E6A4F">
+            <a class="v4__link" href="projetos/rancho-oc/">
+              <span class="v4__stack">
+                <span class="v4__layer v4__layer--3" aria-hidden="true"><img src="assets/projetos/rancho-oc/03-s.webp?v=1ca2683a" srcset="assets/projetos/rancho-oc/03-s.webp?v=1ca2683a 900w, assets/projetos/rancho-oc/03.webp?v=0749a637 1254w" sizes="320px" width="1254" height="1254" alt="" loading="lazy" decoding="async"></span>
+                <span class="v4__layer v4__layer--2" aria-hidden="true"><img src="assets/projetos/rancho-oc/02-s.webp?v=53949bf1" srcset="assets/projetos/rancho-oc/02-s.webp?v=53949bf1 900w, assets/projetos/rancho-oc/02.webp?v=7c02c033 1254w" sizes="320px" width="1254" height="1254" alt="" loading="lazy" decoding="async"></span>
+                <span class="v4__media"><img src="assets/projetos/rancho-oc/01-s.webp?v=fe469c63" srcset="assets/projetos/rancho-oc/01-s.webp?v=fe469c63 900w, assets/projetos/rancho-oc/01.webp?v=0bb6e6bb 1254w" sizes="(max-width: 860px) 160vw, 680px" width="1254" height="1254" alt="Render do projeto Rancho OC" loading="lazy" decoding="async" style="object-position:50% 50%"></span>
+              </span>
+              <span class="v4__cap">
+                <span class="v4__meta">03 <i aria-hidden="true"></i> residencial</span>
+                <span class="v4__name">Rancho OC</span>
+                <span class="v4__go">ver projeto <span aria-hidden="true">→</span></span>
+              </span>
+            </a>
+          </li>
+          <li class="v4__card" data-i="3" style="--c1:#D8C9B8;--c2:#A98B72">
+            <a class="v4__link" href="projetos/rr/">
+              <span class="v4__stack">
+                <span class="v4__layer v4__layer--3" aria-hidden="true"><img src="assets/projetos/rr/03-s.webp?v=7bfc66d1" srcset="assets/projetos/rr/03-s.webp?v=7bfc66d1 900w, assets/projetos/rr/03.webp?v=6042afe7 1800w" sizes="320px" width="1800" height="1013" alt="" loading="lazy" decoding="async"></span>
+                <span class="v4__layer v4__layer--2" aria-hidden="true"><img src="assets/projetos/rr/02-s.webp?v=e0e6851b" srcset="assets/projetos/rr/02-s.webp?v=e0e6851b 900w, assets/projetos/rr/02.webp?v=202f67f4 1800w" sizes="320px" width="1800" height="1013" alt="" loading="lazy" decoding="async"></span>
+                <span class="v4__media"><img src="assets/projetos/rr/01-s.webp?v=d6b1d015" srcset="assets/projetos/rr/01-s.webp?v=d6b1d015 900w, assets/projetos/rr/01.webp?v=bed70ad8 1800w" sizes="(max-width: 860px) 160vw, 680px" width="1800" height="1013" alt="Render do projeto Projeto R&amp;R" loading="lazy" decoding="async" style="object-position:50% 60%"></span>
+              </span>
+              <span class="v4__cap">
+                <span class="v4__meta">04 <i aria-hidden="true"></i> residencial</span>
+                <span class="v4__name">Projeto R&amp;R</span>
+                <span class="v4__go">ver projeto <span aria-hidden="true">→</span></span>
+              </span>
+            </a>
+          </li>
+          <li class="v4__card" data-i="4" style="--c1:#A9B39A;--c2:#6F7B5E">
+            <a class="v4__link" href="projetos/jo/">
+              <span class="v4__stack">
+                <span class="v4__layer v4__layer--3" aria-hidden="true"><img src="assets/projetos/jo/03-s.webp?v=9193648e" srcset="assets/projetos/jo/03-s.webp?v=9193648e 900w, assets/projetos/jo/03.webp?v=42d5f26a 1800w" sizes="320px" width="1800" height="1013" alt="" loading="lazy" decoding="async"></span>
+                <span class="v4__layer v4__layer--2" aria-hidden="true"><img src="assets/projetos/jo/02-s.webp?v=94404aad" srcset="assets/projetos/jo/02-s.webp?v=94404aad 900w, assets/projetos/jo/02.webp?v=41ac52bd 1800w" sizes="320px" width="1800" height="1013" alt="" loading="lazy" decoding="async"></span>
+                <span class="v4__media"><img src="assets/projetos/jo/01-s.webp?v=00b9721b" srcset="assets/projetos/jo/01-s.webp?v=00b9721b 900w, assets/projetos/jo/01.webp?v=92110daf 1800w" sizes="(max-width: 860px) 160vw, 680px" width="1800" height="1013" alt="Render do projeto Projeto JO" loading="lazy" decoding="async" style="object-position:50% 55%"></span>
+              </span>
+              <span class="v4__cap">
+                <span class="v4__meta">05 <i aria-hidden="true"></i> residencial</span>
+                <span class="v4__name">Projeto JO</span>
+                <span class="v4__go">ver projeto <span aria-hidden="true">→</span></span>
+              </span>
+            </a>
+          </li>
+          <li class="v4__card" data-i="5" style="--c1:#C7B7A3;--c2:#8B7B6A">
+            <a class="v4__link" href="projetos/oliva/">
+              <span class="v4__stack">
+                <span class="v4__layer v4__layer--3" aria-hidden="true"><img src="assets/projetos/oliva/03-s.webp?v=160b7c3e" srcset="assets/projetos/oliva/03-s.webp?v=160b7c3e 720w, assets/projetos/oliva/03.webp?v=b13b37e6 1080w" sizes="320px" width="1080" height="1350" alt="" loading="lazy" decoding="async"></span>
+                <span class="v4__layer v4__layer--2" aria-hidden="true"><img src="assets/projetos/oliva/02-s.webp?v=334d97d6" srcset="assets/projetos/oliva/02-s.webp?v=334d97d6 720w, assets/projetos/oliva/02.webp?v=3f27056f 1080w" sizes="320px" width="1080" height="1350" alt="" loading="lazy" decoding="async"></span>
+                <span class="v4__media"><img src="assets/projetos/oliva/01-s.webp?v=2341a643" srcset="assets/projetos/oliva/01-s.webp?v=2341a643 720w, assets/projetos/oliva/01.webp?v=cd458def 1080w" sizes="(max-width: 860px) 160vw, 680px" width="1080" height="1350" alt="Render do projeto Apartamento Oliva" loading="lazy" decoding="async" style="object-position:50% 60%"></span>
+              </span>
+              <span class="v4__cap">
+                <span class="v4__meta">06 <i aria-hidden="true"></i> residencial</span>
+                <span class="v4__name">Apartamento Oliva</span>
+                <span class="v4__go">ver projeto <span aria-hidden="true">→</span></span>
+              </span>
+            </a>
+          </li>
+          <li class="v4__card" data-i="6" style="--c1:#E2CFC1;--c2:#BC9E8D">
+            <a class="v4__link" href="projetos/olie/">
+              <span class="v4__stack">
+                <span class="v4__layer v4__layer--3" aria-hidden="true"><img src="assets/projetos/olie/03-s.webp?v=390451f6" srcset="assets/projetos/olie/03-s.webp?v=390451f6 900w, assets/projetos/olie/03.webp?v=7f9fc1e0 1500w" sizes="320px" width="1500" height="1500" alt="" loading="lazy" decoding="async"></span>
+                <span class="v4__layer v4__layer--2" aria-hidden="true"><img src="assets/projetos/olie/02-s.webp?v=e9f33ace" srcset="assets/projetos/olie/02-s.webp?v=e9f33ace 900w, assets/projetos/olie/02.webp?v=038357f9 1500w" sizes="320px" width="1500" height="1500" alt="" loading="lazy" decoding="async"></span>
+                <span class="v4__media"><img src="assets/projetos/olie/01-s.webp?v=31923a6a" srcset="assets/projetos/olie/01-s.webp?v=31923a6a 900w, assets/projetos/olie/01.webp?v=36da3f0f 1500w" sizes="(max-width: 860px) 160vw, 680px" width="1500" height="1500" alt="Render do projeto Ólie Beauty Clinic" loading="lazy" decoding="async" style="object-position:50% 55%"></span>
+              </span>
+              <span class="v4__cap">
+                <span class="v4__meta">07 <i aria-hidden="true"></i> comercial</span>
+                <span class="v4__name">Ólie Beauty Clinic</span>
+                <span class="v4__go">ver projeto <span aria-hidden="true">→</span></span>
+              </span>
+            </a>
+          </li>
+          <li class="v4__card" data-i="7" style="--c1:#7F8794;--c2:#3F4652">
+            <a class="v4__link" href="projetos/guarita-victoria/">
+              <span class="v4__stack">
+                <span class="v4__layer v4__layer--3" aria-hidden="true"><img src="assets/projetos/guarita-victoria/03-s.webp?v=eedf7bfa" srcset="assets/projetos/guarita-victoria/03-s.webp?v=eedf7bfa 900w, assets/projetos/guarita-victoria/03.webp?v=c57f3689 1675w" sizes="320px" width="1675" height="939" alt="" loading="lazy" decoding="async"></span>
+                <span class="v4__layer v4__layer--2" aria-hidden="true"><img src="assets/projetos/guarita-victoria/02-s.webp?v=4ef60f88" srcset="assets/projetos/guarita-victoria/02-s.webp?v=4ef60f88 900w, assets/projetos/guarita-victoria/02.webp?v=15f82d84 1668w" sizes="320px" width="1668" height="943" alt="" loading="lazy" decoding="async"></span>
+                <span class="v4__media"><img src="assets/projetos/guarita-victoria/01-s.webp?v=ce41af21" srcset="assets/projetos/guarita-victoria/01-s.webp?v=ce41af21 900w, assets/projetos/guarita-victoria/01.webp?v=c0c9e88f 1712w" sizes="(max-width: 860px) 160vw, 680px" width="1712" height="919" alt="Render do projeto Guarita Residencial Victória" loading="lazy" decoding="async" style="object-position:40% 50%"></span>
+              </span>
+              <span class="v4__cap">
+                <span class="v4__meta">08 <i aria-hidden="true"></i> institucional</span>
+                <span class="v4__name">Guarita Residencial Victória</span>
+                <span class="v4__go">ver projeto <span aria-hidden="true">→</span></span>
+              </span>
+            </a>
+          </li>
+          <li class="v4__card" data-i="8" style="--c1:#C9905F;--c2:#8E4F22">
+            <a class="v4__link" href="projetos/quarto-ambar/">
+              <span class="v4__stack">
+                <span class="v4__layer v4__layer--3" aria-hidden="true"><img src="assets/projetos/quarto-ambar/03-s.webp?v=78745251" srcset="assets/projetos/quarto-ambar/03-s.webp?v=78745251 900w, assets/projetos/quarto-ambar/03.webp?v=45a38f75 1800w" sizes="320px" width="1800" height="1013" alt="" loading="lazy" decoding="async"></span>
+                <span class="v4__layer v4__layer--2" aria-hidden="true"><img src="assets/projetos/quarto-ambar/02-s.webp?v=e0639cd0" srcset="assets/projetos/quarto-ambar/02-s.webp?v=e0639cd0 900w, assets/projetos/quarto-ambar/02.webp?v=9b12de05 1800w" sizes="320px" width="1800" height="1013" alt="" loading="lazy" decoding="async"></span>
+                <span class="v4__media"><img src="assets/projetos/quarto-ambar/01-s.webp?v=e4d291bb" srcset="assets/projetos/quarto-ambar/01-s.webp?v=e4d291bb 900w, assets/projetos/quarto-ambar/01.webp?v=2002550c 1800w" sizes="(max-width: 860px) 160vw, 680px" width="1800" height="1013" alt="Render do projeto Quarto Âmbar" loading="lazy" decoding="async" style="object-position:50% 60%"></span>
+              </span>
+              <span class="v4__cap">
+                <span class="v4__meta">09 <i aria-hidden="true"></i> residencial</span>
+                <span class="v4__name">Quarto Âmbar</span>
+                <span class="v4__go">ver projeto <span aria-hidden="true">→</span></span>
+              </span>
+            </a>
+          </li>
+          </ul>
+          <button class="v4__arrow v4__arrow--next" id="v4Next" type="button" aria-label="Próximos projetos"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+        <div class="v4__bar" aria-hidden="true">
+          <div class="v4__progress"><i id="v4Bar"></i></div>
         </div>
       </div>
 
@@ -338,7 +668,7 @@
                   <li style="--k:3">Curadoria de soluções</li>
                 </ol>
               </div>
-              <a class="svc__link" href="#servico-consultoria-tecnica">Saiba mais <span class="sr-only">sobre Consultoria Técnica</span><span aria-hidden="true">→</span></a>
+              <a class="svc__link" href="https://wa.me/5561982367700?text=Ol%C3%A1%21%20Quero%20saber%20mais%20sobre%20Consultoria%20T%C3%A9cnica." target="_blank" rel="noopener">Saiba mais <span class="sr-only">sobre Consultoria Técnica (abre o WhatsApp em nova aba)</span><span aria-hidden="true">→</span></a>
             </div>
           </div>
         </li>
@@ -365,7 +695,7 @@
                   <li style="--k:5">Projeto executivo</li>
                 </ol>
               </div>
-              <a class="svc__link" href="#servico-projeto-de-arquitetura">Saiba mais <span class="sr-only">sobre Projeto de Arquitetura</span><span aria-hidden="true">→</span></a>
+              <a class="svc__link" href="https://wa.me/5561982367700?text=Ol%C3%A1%21%20Quero%20saber%20mais%20sobre%20Projeto%20de%20Arquitetura." target="_blank" rel="noopener">Saiba mais <span class="sr-only">sobre Projeto de Arquitetura (abre o WhatsApp em nova aba)</span><span aria-hidden="true">→</span></a>
             </div>
           </div>
         </li>
@@ -391,7 +721,7 @@
                   <li style="--k:4">Projeto executivo</li>
                 </ol>
               </div>
-              <a class="svc__link" href="#servico-projeto-de-interiores">Saiba mais <span class="sr-only">sobre Projeto de Interiores</span><span aria-hidden="true">→</span></a>
+              <a class="svc__link" href="https://wa.me/5561982367700?text=Ol%C3%A1%21%20Quero%20saber%20mais%20sobre%20Projeto%20de%20Interiores." target="_blank" rel="noopener">Saiba mais <span class="sr-only">sobre Projeto de Interiores (abre o WhatsApp em nova aba)</span><span aria-hidden="true">→</span></a>
             </div>
           </div>
         </li>
@@ -417,7 +747,7 @@
                   <li style="--k:4">Acompanhamento até a finalização</li>
                 </ol>
               </div>
-              <a class="svc__link" href="#servico-acompanhamento-de-obra">Saiba mais <span class="sr-only">sobre Acompanhamento de Obra</span><span aria-hidden="true">→</span></a>
+              <a class="svc__link" href="https://wa.me/5561982367700?text=Ol%C3%A1%21%20Quero%20saber%20mais%20sobre%20Acompanhamento%20de%20Obra." target="_blank" rel="noopener">Saiba mais <span class="sr-only">sobre Acompanhamento de Obra (abre o WhatsApp em nova aba)</span><span aria-hidden="true">→</span></a>
             </div>
           </div>
         </li>
@@ -444,7 +774,7 @@
                   <li style="--k:5">Finalização e entrega</li>
                 </ol>
               </div>
-              <a class="svc__link" href="#servico-execucao-de-obra">Saiba mais <span class="sr-only">sobre Execução de Obra</span><span aria-hidden="true">→</span></a>
+              <a class="svc__link" href="https://wa.me/5561982367700?text=Ol%C3%A1%21%20Quero%20saber%20mais%20sobre%20Execu%C3%A7%C3%A3o%20de%20Obra." target="_blank" rel="noopener">Saiba mais <span class="sr-only">sobre Execução de Obra (abre o WhatsApp em nova aba)</span><span aria-hidden="true">→</span></a>
             </div>
           </div>
         </li>
@@ -489,7 +819,7 @@
         <header class="ig__head">
           <div class="ig__headtext">
             <p class="eyebrow">instagram</p>
-            <h2 id="igTitle">Siga o <em>@<span class="ori">ori</span>.arqui</em></h2>
+            <h2 id="igTitle"><span class="sr-only">Siga o @ori.arqui</span><span aria-hidden="true">Siga o <em>@<b class="wm ig__wm"></b>.arqui</em></span></h2>
             <p class="ig__lead">Acompanhe os projetos e o dia a dia do studio.</p>
           </div>
           <div class="ig__side">
@@ -595,9 +925,10 @@
 
   <script src="vendor/gsap.min.js?v=47da594c"></script>
   <script src="vendor/ScrollTrigger.min.js?v=ba1fa78e"></script>
-  <script src="hero.js?v=12810ad9"></script>
+  <script src="hero.js?v=51274b13"></script>
   <script src="nav.js?v=3a063344"></script>
-  <script src="projetos.js?v=5e552e25"></script>
+  <script src="projetos2.js?v=fc20be7c"></script>
+  <script src="projetos.js?v=4bfe2a3f"></script>
   <script src="servicos.js?v=db9f3f0e"></script>
   <script src="sobre.js?v=c5739eeb"></script>
   <script src="instagram.js?v=43e996cb"></script>

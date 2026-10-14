@@ -3,9 +3,10 @@ Gera a página "Nossa história": historia/index.html (endereço /historia/).
 O texto fica em BLOCOS abaixo — para mudar uma frase, edite aqui e rode:  python tools/build_historia.py
 (o  python tools/build_site.py  também chama este script).
 """
-import html, os, re, sys
+import glob, html, os, re, sys
 sys.path.insert(0, os.path.dirname(__file__))
-from site_config import WHATSAPP_URL, SITE_NAME
+from PIL import Image, ImageOps
+from site_config import WHATSAPP_URL, SITE_NAME, MATERIAL_DIR
 from build_site import SYMBOL_DEF
 import seo
 
@@ -13,7 +14,7 @@ HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 esc = html.escape
 
 TITLE = f"Nossa história — {SITE_NAME}"
-DESC = "Amigas desde os 12 anos, Malu e Laura fundaram o Studio Óri em 2026. Conheça a nossa história e o que significa valorizar história e originalidade."
+DESC = "Amigas desde os 12 anos, Malu e Laura criaram o Studio Óri. Conheça a nossa história e o que significa valorizar história e originalidade."
 
 # ---------------------------------------------------------------------------
 # TEXTO (frases entre <em>…</em> ganham destaque terracota)
@@ -22,7 +23,6 @@ ABERTURA = [
     "Nos conhecemos na escola, aos 12 anos. O tempo passou, mantivemos contato, mas foi na faculdade de arquitetura que nos reaproximamos de verdade.",
     "Foi nos estágios, trabalhando juntas, que percebemos o quanto a nossa parceria dava certo. Nossas diferenças se complementavam de forma natural, unidas por um mesmo propósito.",
 ]
-DESTAQUE = "Nos formamos em 2025. O Studio Óri nasceu em 2026."
 CONTINUACAO = [
     "Abrir o escritório juntas não foi uma decisão difícil. Como já trabalhávamos lado a lado, sabíamos que daria certo. Tivemos várias ideias, fizemos reuniões, e mergulhamos de cabeça nesse sonho.",
 ]
@@ -32,6 +32,36 @@ SECOES = [
     ("O que “valorizar história e originalidade” significa para nós",
      ["É valorizar as origens e a personalidade de cada cliente, criando espaços com identidade e significado, espaços que vão além das tendências."]),
 ]
+
+def prepare_photo():
+    """Foto própria da página de história: _material-original/foto-historia.jpg (ou .jpeg/.png).
+    Sem ela, a página usa a foto do "quem somos"."""
+    found = sorted(glob.glob(os.path.join(MATERIAL_DIR, "foto-historia.*")))
+    if not found:
+        return None
+    im = ImageOps.exif_transpose(Image.open(found[0])).convert("RGB")
+    for name, w, q in (("historia-foto.webp", 1600, 80), ("historia-foto-s.webp", 900, 78)):
+        w = min(w, im.width)
+        out = im.resize((w, round(im.height * w / im.width)), Image.LANCZOS)
+        out.save(os.path.join(HERE, "assets", name), "WEBP", quality=q, method=6)
+    return im.size
+
+PHOTO_SIZE = None
+
+def figure():
+    if PHOTO_SIZE:
+        w, h = PHOTO_SIZE
+        ww = min(w, 1600)
+        return f'''      <figure class="hs__media hs__media--own">
+        <img src="../assets/historia-foto-s.webp" srcset="../assets/historia-foto-s.webp 900w, ../assets/historia-foto.webp 1600w"
+             sizes="(max-width: 860px) 86vw, 520px" width="{ww}" height="{round(h * ww / w)}" fetchpriority="high" decoding="async"
+             alt="Malu e Laura sorrindo, sentadas à mesa com amostras de materiais">
+      </figure>'''
+    return '''      <figure class="hs__media">
+        <img src="../assets/sobre-nos-s.webp" srcset="../assets/sobre-nos-s.webp 900w, ../assets/sobre-nos.webp 1600w"
+             sizes="(max-width: 860px) 86vw, 460px" width="1600" height="2400" fetchpriority="high" decoding="async"
+             alt="Malu e Laura, arquitetas do Studio Óri, sentadas no chão com amostras de materiais e plantas de projeto">
+      </figure>'''
 
 def hl(s):
     """Destaca em outra cor todo "óri"/"ori" das palavras (história, originalidade, origens, Óri...)."""
@@ -78,19 +108,13 @@ def page():
         <p class="hs__eyebrow">{hl("nossa história")}</p>
         <h1 id="hsTitle">Amigas desde os <em>12&nbsp;anos</em>.</h1>
       </div>
-      <figure class="hs__media">
-        <img src="../assets/sobre-nos-s.webp" srcset="../assets/sobre-nos-s.webp 900w, ../assets/sobre-nos.webp 1600w"
-             sizes="(max-width: 860px) 86vw, 460px" width="1600" height="2400" fetchpriority="high" decoding="async"
-             alt="Malu e Laura, arquitetas do Studio Óri, sentadas no chão com amostras de materiais e plantas de projeto">
-      </figure>
+{figure()}
     </section>
 
     <div class="hs__body">
       <section class="hs__sec hs__sec--lead">
 {paras(ABERTURA)}
       </section>
-
-      <p class="hs__quote">{hl(esc(DESTAQUE))}</p>
 
       <section class="hs__sec">
 {paras(CONTINUACAO)}
@@ -111,6 +135,8 @@ def page():
 '''
 
 def run():
+    global PHOTO_SIZE
+    PHOTO_SIZE = prepare_photo()
     d = os.path.join(HERE, "historia"); os.makedirs(d, exist_ok=True)
     open(os.path.join(d, "index.html"), "w", encoding="utf-8", newline="\n").write(page())
     print("historia/index.html gerado (nossa história).")

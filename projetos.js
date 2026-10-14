@@ -19,6 +19,7 @@
 
   const section = document.getElementById('projetos');
   if (!section) return;
+  if ((document.documentElement.dataset.projetos || '1') !== '1') return;   // variantes 2–4: ver projetos2.js
 
   const tiles = [...section.querySelectorAll('.tile')];
   const pvs = [...section.querySelectorAll('.pv')];

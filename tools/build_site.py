@@ -30,6 +30,8 @@ SYMBOL_DEF = (f'<svg width="0" height="0" style="position:absolute" aria-hidden=
 SYM_USE = f'<svg class="glyph glyph--sym" viewBox="0 0 {_vb[0]} {_vb[1]}" aria-hidden="true"><use href="#simbolo"/></svg>'
 
 def glyph(p):
+    if p.get("logo"):        # letra do logotipo oficial (máscaras em assets/ori-o|r|i.png)
+        return f'<span class="glyph glyph--{p["logo"]}" role="img" aria-label="{esc(p["letter"])}"></span>'
     return SYM_USE if p.get("symbol") else f'<span class="glyph">{esc(p["letter"])}</span>'
 
 def img_tag(slug, it, cls="", sizes="100vw", alt="", pos=None, eager=False, hero=False):
@@ -181,6 +183,86 @@ def page(i):
 # ---------------------------------------------------------------------------
 # 2) BLOCO "PROJETOS" DA HOME
 # ---------------------------------------------------------------------------
+def v2_block():
+    ARR = {"l": ARROW_L, "r": ARROW_R}
+    slides = "\n".join(f'''          <li class="v2__slide{" is-active" if i == 0 else ""}" data-i="{i}" style="--c1:{p["tone"][0]};--c2:{p["tone"][1]}">
+            <a class="v2__link" href="projetos/{p["slug"]}/">
+              <span class="v2__media">{img_tag(p["slug"], MANIFEST[p["slug"]][0], sizes="(max-width: 860px) 88vw, 860px", alt=f"Render do projeto {p['name']}", pos=p["cover_pos"], eager=False)}</span>
+              <span class="v2__cap">
+                <span class="v2__meta">{i + 1:02d} <i aria-hidden="true"></i> {esc(p["type"])}</span>
+                <span class="v2__name">{esc(p["name"])}</span>
+                <span class="v2__go">ver projeto <span aria-hidden="true">→</span></span>
+              </span>
+            </a>
+          </li>''' for i, p in enumerate(PROJECTS))
+    nums = "\n".join(f'          <button class="v2__n{" is-active" if i == 0 else ""}" type="button" data-i="{i}" aria-label="Projeto {i + 1}: {esc(p["name"])}"><span>{i + 1:02d}</span></button>' for i, p in enumerate(PROJECTS))
+    return f'''      <div class="v2" id="v2">
+        <ul class="v2__track" id="v2Track" tabindex="0" aria-label="Projetos do Studio Óri">
+{slides}
+        </ul>
+        <div class="v2__bar">
+          <div class="v2__nums" role="group" aria-label="Escolher projeto">
+{nums}
+          </div>
+          <div class="v2__arrows">
+            <button class="v2__arrow" id="v2Prev" type="button" aria-label="Projeto anterior">{ARR["l"]}</button>
+            <button class="v2__arrow" id="v2Next" type="button" aria-label="Próximo projeto">{ARR["r"]}</button>
+          </div>
+        </div>
+      </div>'''
+
+def v4_block():
+    cards = "\n".join(f'''          <li class="v4__card" data-i="{i}" style="--c1:{p["tone"][0]};--c2:{p["tone"][1]}">
+            <a class="v4__link" href="projetos/{p["slug"]}/">
+              <span class="v4__stack">
+                <span class="v4__layer v4__layer--3" aria-hidden="true">{img_tag(p["slug"], MANIFEST[p["slug"]][min(2, len(MANIFEST[p["slug"]]) - 1)], sizes="320px", alt="")}</span>
+                <span class="v4__layer v4__layer--2" aria-hidden="true">{img_tag(p["slug"], MANIFEST[p["slug"]][min(1, len(MANIFEST[p["slug"]]) - 1)], sizes="320px", alt="")}</span>
+                <span class="v4__media">{img_tag(p["slug"], MANIFEST[p["slug"]][0], sizes="(max-width: 860px) 160vw, 680px", alt=f"Render do projeto {p['name']}", pos=p["cover_pos"])}</span>
+              </span>
+              <span class="v4__cap">
+                <span class="v4__meta">{i + 1:02d} <i aria-hidden="true"></i> {esc(p["type"])}</span>
+                <span class="v4__name">{esc(p["name"])}</span>
+                <span class="v4__go">ver projeto <span aria-hidden="true">→</span></span>
+              </span>
+            </a>
+          </li>''' for i, p in enumerate(PROJECTS))
+    return f'''      <div class="v4" id="v4">
+        <div class="v4__stage">
+          <button class="v4__arrow v4__arrow--prev" id="v4Prev" type="button" aria-label="Projetos anteriores">{ARROW_L}</button>
+          <ul class="v4__track" id="v4Track" tabindex="0" aria-label="Projetos do Studio Óri">
+{cards}
+          </ul>
+          <button class="v4__arrow v4__arrow--next" id="v4Next" type="button" aria-label="Próximos projetos">{ARROW_R}</button>
+        </div>
+        <div class="v4__bar" aria-hidden="true">
+          <div class="v4__progress"><i id="v4Bar"></i></div>
+        </div>
+      </div>'''
+
+def v3_block():
+    rows = "\n".join(f'''          <li class="v3__row{" is-active" if i == 0 else ""}" data-i="{i}">
+            <a class="v3__link" href="projetos/{p["slug"]}/">
+              <svg class="v3__leaf" viewBox="0 0 1996 1969" aria-hidden="true" focusable="false"><use href="#simbolo"/></svg>
+              <span class="v3__thumb" aria-hidden="true">{img_tag(p["slug"], MANIFEST[p["slug"]][0], sizes="96px", alt="", pos=p["cover_pos"])}</span>
+              <span class="v3__name">{esc(p["name"])}</span>
+              <span class="v3__type">{esc(p["type"])}</span>
+              <span class="v3__go" aria-hidden="true">→</span>
+            </a>
+          </li>''' for i, p in enumerate(PROJECTS))
+    prev = "\n".join(f'''          <span class="v3__img{" is-active" if i == 0 else ""}" data-i="{i}" aria-hidden="true" style="--c1:{p["tone"][0]};--c2:{p["tone"][1]}">{img_tag(p["slug"], MANIFEST[p["slug"]][0], sizes="(max-width: 860px) 1px, 560px", alt="", pos=p["cover_pos"])}</span>''' for i, p in enumerate(PROJECTS))
+    return f'''      <div class="v3" id="v3">
+        <span class="v3__band" id="v3Band" aria-hidden="true"></span>
+        <ul class="v3__list" id="v3List" aria-label="Projetos do Studio Óri">
+{rows}
+        </ul>
+        <div class="v3__preview">
+{prev}
+          <span class="v3__veil" aria-hidden="true"></span>
+          <span class="v3__title" id="v3Title" aria-hidden="true">{esc(PROJECTS[0]["name"])}</span>
+          <a class="v3__cta" id="v3Cta" href="projetos/{PROJECTS[0]["slug"]}/">ver projeto <span aria-hidden="true">→</span><span class="sr-only"> {esc(PROJECTS[0]["name"])}</span></a>
+        </div>
+      </div>'''
+
 def home_block():
     TILES = [p["tile"] for p in PROJECTS]
     def tile(i, p):
@@ -214,8 +296,8 @@ def home_block():
          projetos.js só adiciona o comportamento. -->
     <section class="letters" id="projetos" aria-labelledby="lettersTitle">
       <header class="letters__head">
-        <p class="eyebrow">projetos</p>
-        <h2 id="lettersTitle">Cada letra, um projeto.<br>Cada projeto, uma <em>conversa</em>.</h2>
+        <p class="eyebrow">portfólio</p>
+        <h2 id="lettersTitle"><span class="h-v1">Cada letra, um <em>projeto</em>.</span><span class="h-v2">Nossos <em>projetos</em>.</span></h2>
         <p class="letters__hint" id="lettersHint">Passe o mouse sobre uma letra para ver o projeto.</p>
       </header>
 
@@ -244,6 +326,15 @@ def home_block():
           </div>
         </div>
       </div>
+
+      <!-- VARIANTE 2 (?projetos=2): galeria editorial. A variante 1 (letras) é o padrão. -->
+{v2_block()}
+
+      <!-- VARIANTE 3 (?projetos=3): lista tipográfica; a foto aparece ao lado quando o nome é apontado. -->
+{v3_block()}
+
+      <!-- VARIANTE 4 (?projetos=4): faixa horizontal de capas altas. -->
+{v4_block()}
 
       <div class="cta" id="cta">
         <div class="cta__row">

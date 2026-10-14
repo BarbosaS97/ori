@@ -51,7 +51,7 @@ for pg in pages:
     WA = SourceFileLoader('site_config', os.path.join(os.path.dirname(os.path.abspath(__file__)), 'site_config.py')).load_module().WHATSAPP_URL
     if re.search(r'href="[^"]*#contato"', h): issues[pg].append('ainda existe link para #contato')
     for w in set(re.findall(r'href="(https?://(?:wa\.me|api\.whatsapp\.com)[^"]*)"', h)):
-        if w != WA: issues[pg].append(f'WhatsApp diferente do site_config.py: {w}')
+        if w != WA and not w.startswith(WA + '?text='): issues[pg].append(f'WhatsApp diferente do site_config.py: {w}')
     # cabeçalhos
     hs=[int(x) for x in re.findall(r'<h([1-6])\b',h)]
     if hs.count(1)!=1: issues[pg].append(f'h1 count={hs.count(1)}')

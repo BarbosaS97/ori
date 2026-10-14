@@ -82,3 +82,10 @@ Ative "reduzir movimento" no sistema operacional para testar o modo sem animaç�
 - **"Contato" do menu** (desktop e celular) leva à página de links (`links/`).
 - **Todos os botões de conversão** ("Quero transformar o meu espaço", "Fale conosco": topo, fim do hero, seção Projetos e rodapé de cada página de projeto) abrem o **WhatsApp** em nova aba, com o mesmo link do Linktree delas.
 - O link fica em `tools/site_config.py` (`WHATSAPP_URL`). Para mudar (ou pôr uma mensagem inicial), edite lá e rode `python tools/build_site.py && python tools/build_links.py`; no `index.html` (menu, topo, hero) a troca é manual e o `audit_static.py` avisa se ficar diferente.
+
+
+## Alterações de outubro (pedido da cliente)
+- **Abertura animada removida:** o hero é estático (foto + logotipo + frase + botão). Os 201 quadros foram movidos para `../_material-original/_abertura-removida/`; `hero.js` só avisa que a página está pronta.
+- **Fonte da marca:** Glacial Indifference (livre; a Sofia Pro é paga) em `assets/fonts/`. Para usar a Sofia Pro, troque os arquivos e o `@font-face` no topo de `style.css`.
+- **Foto da página de história:** coloque `../_material-original/foto-historia.jpg` e rode `python tools/build_site.py`. Sem o arquivo, usa a mesma foto do "quem somos".
+- **"Saiba mais" dos serviços:** abre o WhatsApp com mensagem pronta (`whatsapp_com_texto()` em `tools/site_config.py`).

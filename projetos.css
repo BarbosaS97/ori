@@ -39,8 +39,8 @@
 .tile {
   -webkit-touch-callout: none;                     /* iOS: sem o menu de "pressionar e segurar" no bloco */
   position: relative; display: block; flex: none;
-  width: var(--tile); aspect-ratio: 4 / 5;
-  border-radius: 6px; text-decoration: none; -webkit-tap-highlight-color: transparent;
+  width: var(--tile); aspect-ratio: 1 / 1;
+  border-radius: 50%; text-decoration: none; -webkit-tap-highlight-color: transparent;
   transition: transform .55s cubic-bezier(.2, .7, .2, 1);
 }
 .tile:focus-visible { outline: 2px solid var(--terracota); outline-offset: 5px; }
@@ -48,7 +48,7 @@
 /* a "face" é o que recebe a entrada (giro) e a inclinação 3D via GSAP */
 .tile__face {
   position: absolute; inset: 0; display: grid; place-items: center; overflow: hidden;
-  border-radius: 6px; color: var(--offwhite); background: var(--terracota);
+  border-radius: 50%; color: var(--offwhite); background: var(--terracota);
   box-shadow: 0 1px 2px rgba(31, 31, 31, .18), 0 10px 22px -14px rgba(31, 31, 31, .45);
   transition: box-shadow .45s ease;
   will-change: transform;
@@ -58,7 +58,7 @@
 .tile[data-tile="azul"]      .tile__face { background: var(--azul); }
 .tile[data-tile="grafite"]   .tile__face { background: var(--grafite); }
 .tile__face::before {                          /* moldura interna */
-  content: ""; position: absolute; inset: 7%; border: 1px solid rgba(243, 239, 236, .3); border-radius: 3px;
+  content: ""; position: absolute; inset: 7%; border: 1px solid rgba(243, 239, 236, .3); border-radius: 50%;
   transition: inset .5s cubic-bezier(.2, .7, .2, 1), border-color .4s ease;
 }
 .tile__face::after {                           /* brilho que acompanha a inclinação */
@@ -66,11 +66,11 @@
   background: radial-gradient(circle at var(--mx, 50%) var(--my, 30%), rgba(255, 255, 255, .28), transparent 55%);
   transition: opacity .4s ease;
 }
-.glyph { font-family: var(--serif); font-weight: 500; font-size: calc(var(--tile) * .66); line-height: 1; transform: translateY(-3%); }
-.glyph--sym { width: calc(var(--tile) * .56); height: auto; aspect-ratio: 1996 / 1969; transform: none; }
+.glyph { font-family: var(--brand-sans); font-weight: 400; font-size: calc(var(--tile) * .5); line-height: 1; transform: translateY(-2%); }
+.glyph--sym { width: calc(var(--tile) * .46); height: auto; aspect-ratio: 1996 / 1969; transform: none; }
 
 /* barra de progresso do autoplay (só aparece no bloco ativo) */
-.tile__bar { position: absolute; left: 14%; right: 14%; bottom: 10%; height: 2px; background: rgba(243, 239, 236, .22); opacity: 0; transition: opacity .3s ease; }
+.tile__bar { position: absolute; left: 30%; right: 30%; bottom: 17%; height: 2px; background: rgba(243, 239, 236, .22); opacity: 0; transition: opacity .3s ease; }
 .tile__bar i { display: block; height: 100%; background: var(--offwhite); transform: scaleX(0); transform-origin: left; }
 .tile.is-active .tile__bar { opacity: 1; }
 
@@ -182,4 +182,52 @@
   .pvnav { transition: none; }
   .tile, .tile__face, .tile__face::before, .tile__face::after { transition: none; }
   .pvbar__auto { display: none; }
+}
+
+
+/* =========================================================================
+   Versão "clean" (pedido da cliente): menos peso visual e tudo em escala menor
+   — conteúdo contido em 1180px, título menor, letras em círculos pequenos sem moldura,
+   painel mais compacto e sem contorno/sombra pesados.
+   ========================================================================= */
+.letters { padding: clamp(72px, 10vh, 112px) var(--gutter) clamp(56px, 9vh, 96px); }
+.letters > * { max-width: 1180px; margin-left: auto; margin-right: auto; }
+.letters__head h2 { font-size: clamp(28px, 2.8vw, 42px); }
+.letters__hint { margin-top: .8em; font-size: 13.5px; }
+.lx { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: clamp(32px, 6vw, 96px); margin-top: clamp(24px, 4vh, 44px); }
+.word { --gap: clamp(10px, 1.1vw, 16px); max-width: 600px; margin-inline: 0; justify-items: start; }
+.word__row { justify-content: flex-start; }
+.word__row:nth-child(2) { padding-left: calc(var(--tile) * 1.5 + var(--gap) * 1.5); }   /* "ÓRI" centralizado sob "STUDIO" */
+.tile__face { box-shadow: none; }
+.tile__face::before { display: none; }
+.glyph { font-size: calc(var(--tile) * .52); font-weight: 400; letter-spacing: 0; text-transform: lowercase; }
+.glyph--sym { width: calc(var(--tile) * .42); }
+.tile { transition: transform .5s cubic-bezier(.2, .7, .2, 1), opacity .4s ease; }
+.tile.is-active { transform: scale(1.08); }
+.tile.is-active .tile__face { box-shadow: 0 14px 18px -8px rgba(31, 31, 31, .42), 0 5px 7px -4px rgba(31, 31, 31, .22); }   /* sombra por fora, concentrada na metade de baixo */
+.tile__bar { display: none; }
+.pvbox { width: min(100%, 540px); }
+.pvframe { aspect-ratio: 4 / 3; border-radius: 4px; box-shadow: none; }
+.pvframe::before { display: none; }
+.pv, .pv::after { border-radius: 4px; }
+.pv__cap strong { font-size: 4.4cqw; }
+.pvbar { margin-top: 18px; }
+.cta { margin-top: clamp(32px, 5vh, 52px); }
+@media (max-width: 860px), (max-aspect-ratio: 4 / 5) {
+  .letters__head h2 { font-size: clamp(26px, 7.4vw, 36px); }
+  .lx { grid-template-columns: minmax(0, 1fr); row-gap: 28px; }
+  .word { --gap: 8px; max-width: 360px; margin-inline: auto; justify-items: center; }
+  .word__row { justify-content: center; }
+  .word__row:nth-child(2) { padding-left: 0; }
+  .glyph { font-size: calc(var(--tile) * .46); }
+  .tile.is-active .tile__face { box-shadow: 0 10px 14px -7px rgba(31, 31, 31, .42), 0 4px 6px -3px rgba(31, 31, 31, .22); }
+  .pvbox { width: 100%; }
+}
+
+/* como na referência da cliente: todas as bolinhas em verde-sálvia, letra off-white; a ativa ganha borda fina terracota e sombra por fora */
+.tile[data-tile] .tile__face { background: var(--salvia); color: var(--offwhite); }
+.tile.is-active { transform: scale(1.04); }
+.tile.is-active .tile__face { box-shadow: 0 0 0 1.5px var(--terracota), 0 12px 18px -8px rgba(151, 67, 21, .5); }
+@media (max-width: 860px), (max-aspect-ratio: 4 / 5) {
+  .tile.is-active .tile__face { box-shadow: 0 0 0 1.5px var(--terracota), 0 8px 12px -6px rgba(151, 67, 21, .5); }
 }

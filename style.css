@@ -1,3 +1,7 @@
+/* Fonte da marca: Glacial Indifference (a Sofia Pro é paga; esta é livre). Usada no menu, no hero, nas letras e no título do Instagram. */
+@font-face { font-family: "Glacial Indifference"; src: url("assets/fonts/GlacialIndifference-Regular.woff") format("woff"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Glacial Indifference"; src: url("assets/fonts/GlacialIndifference-Bold.woff") format("woff"); font-weight: 700; font-style: normal; font-display: swap; }
+
 /* Tokens — cores amostradas do manual de marca */
 :root {
   --terracota: #974315;
@@ -8,16 +12,16 @@
 
   --sans: "Jost", "Helvetica Neue", Arial, sans-serif;
   --serif: "Cormorant Garamond", Georgia, serif;
+  --brand-sans: "Glacial Indifference", "Jost", "Helvetica Neue", Arial, sans-serif;
 
   --gutter: max(clamp(16px, 4vw, 56px), env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));   /* celular deitado com notch: conteúdo não fica sob o recorte */
-  --ox: 74%;   /* ponto para onde a câmera avança (definido também no JS) */
-  --oy: 58%;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; background: var(--offwhite); touch-action: manipulation; }   /* sem atraso/zoom de toque duplo; cor certa no "puxão" (overscroll) */
 body {
   margin: 0;
+  overflow-x: clip;                     /* nada mais largo que a tela pode alargar a página (o Safari do iPhone "encolhe" tudo para caber) */
   background: var(--offwhite);
   color: var(--grafite);
   font-family: var(--sans);
@@ -47,21 +51,15 @@ button { font: inherit; color: inherit; }
 .wm { display: inline-block; flex: none; height: .86em; aspect-ratio: 1000 / 509; background: currentColor;
       -webkit-mask: url("assets/ori-wordmark.png") center / contain no-repeat; mask: url("assets/ori-wordmark.png") center / contain no-repeat; }
 .brand--mark .wm, .lockup .wm { height: 1.12em; }   /* ao lado do símbolo, o logotipo acompanha a altura das folhas */
+/* Letras do logotipo oficial (Ó, R, I): máscaras de uma cor, herdam a cor do texto; a altura acompanha o tamanho da letra do contexto */
+.glyph--o, .glyph--r, .glyph--i { display: inline-block; width: auto; background: currentColor; transform: none; }
+.glyph--o { height: .8em; aspect-ratio: 414 / 478; -webkit-mask: url("assets/ori-o.png") center / contain no-repeat; mask: url("assets/ori-o.png") center / contain no-repeat; }
+.glyph--r { height: .62em; aspect-ratio: 520 / 428; -webkit-mask: url("assets/ori-r.png") center / contain no-repeat; mask: url("assets/ori-r.png") center / contain no-repeat; }
+.glyph--i { height: .6em; aspect-ratio: 61 / 322; -webkit-mask: url("assets/ori-i.png") center / contain no-repeat; mask: url("assets/ori-i.png") center / contain no-repeat; }
 .brand--mark { align-items: center; gap: .42em; }
 .brand__leaf { width: 34px; height: auto; aspect-ratio: 1996 / 1969; flex: none; }
 .brand--lg span { font-size: 15px; }
 .brand--lg b { font-size: 46px; }
-
-/* ---------- Loader ---------- */
-.loader {
-  position: fixed; inset: 0; z-index: 100;
-  display: grid; place-content: center; justify-items: center; gap: 28px;
-  background: var(--offwhite); color: var(--terracota);
-  transition: opacity .7s ease, visibility .7s;
-}
-.loader.is-done { opacity: 0; visibility: hidden; }
-.loader__bar { width: 120px; height: 1px; background: rgba(151, 67, 21, .2); overflow: hidden; }
-.loader__bar i { display: block; height: 100%; width: 100%; background: var(--terracota); transform: scaleX(0); transform-origin: left; }
 
 /* ---------- Navegação ---------- */
 .nav {
@@ -78,7 +76,18 @@ button { font: inherit; color: inherit; }
   background: linear-gradient(rgba(31, 31, 31, .32), rgba(31, 31, 31, 0)); opacity: 0; transition: opacity .5s ease;
 }
 .nav.on-dark::before { opacity: 1; }
-.nav__links { display: flex; gap: clamp(18px, 2.6vw, 40px); font-size: 13px; letter-spacing: .14em; text-transform: lowercase; font-weight: 400; }
+.nav__links { display: flex; gap: clamp(20px, 2.4vw, 40px); margin-left: auto; margin-right: clamp(14px, 2vw, 32px); font-family: var(--brand-sans); font-size: 18.5px; letter-spacing: .02em; font-weight: 400; color: var(--terracota); }
+.nav__social { display: flex; align-items: center; gap: 2px; color: var(--terracota); }
+.nav__social a { position: relative; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; transition: background .3s ease, color .3s ease; }
+.nav__social a:hover, .nav__social a:focus-visible { background: var(--terracota); color: var(--offwhite); }
+.nav__social a:focus-visible { outline: 2px solid var(--terracota); outline-offset: 2px; }
+.nav__social svg { width: 27px; height: 27px; }
+@media (max-width: 860px) {            /* celular: só o WhatsApp fica à vista (os outros estão no menu) */
+  .nav__social { margin-left: auto; }
+  .nav__social a:not(:first-child) { display: none; }
+  .nav__social a { width: 44px; height: 44px; border: 1px solid rgba(151, 67, 21, .5); }
+  .nav__social svg { width: 24px; height: 24px; }
+}
 .nav__links a { position: relative; padding: 6px 0; }
 .nav__links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform .4s ease; }
 .nav__links a:hover::after, .nav__links a:focus-visible::after { transform: scaleX(1); }
@@ -90,71 +99,32 @@ button { font: inherit; color: inherit; }
 .pill:hover, .pill:focus-visible { background: var(--terracota); border-color: var(--terracota); color: var(--offwhite); }
 .pill__short { display: none; }
 
-/* ---------- Hero (pinned) ---------- */
-.hero { position: relative; }
-.stage { position: relative; height: 100vh; height: 100svh; overflow: hidden; background: var(--offwhite); }
-
-.sceneA, .portal { position: absolute; inset: 0; }
-.photo { position: absolute; inset: 0; transform-origin: var(--ox) var(--oy); will-change: transform; }
+/* ---------- Hero (estático: foto + logotipo + frase + botão) ---------- */
+.hero { position: relative; height: 100vh; height: 100svh; min-height: 560px; overflow: hidden; background: var(--offwhite); }
+.photo { position: absolute; inset: 0; }
 .photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; }
 
-.headline {
-  position: absolute; z-index: 2;
-  right: var(--gutter); top: 34%;
-  width: min(44vw, 620px);
-  will-change: transform, opacity;
-}
-/* assinatura acima da frase: símbolo · fio · "studio" sobre "ÓRI" */
-.lockup { display: flex; align-items: center; gap: clamp(14px, 1.5vw, 22px); margin: 0 0 clamp(22px, 3.4vh, 36px); color: var(--terracota); line-height: 1; }
-.lockup__leaf { width: clamp(52px, 5vw, 76px); height: auto; aspect-ratio: 1996 / 1969; flex: none; }
-.lockup__rule { align-self: stretch; width: 1px; background: currentColor; opacity: .35; }
-.lockup__name { display: grid; gap: .5em; }
-.lockup__studio { font-size: clamp(11px, .95vw, 14px); letter-spacing: .5em; text-transform: lowercase; padding-left: .15em; }
-.lockup b { font-family: var(--serif); font-weight: 500; font-size: clamp(46px, 5.2vw, 84px); letter-spacing: .03em; line-height: .9; }
+.headline { position: absolute; z-index: 2; right: var(--gutter); top: 31%; width: min(46vw, 640px); }
+/* logotipo oficial ÓRI + "arquitetura e interiores" ao lado (como no PDF de alterações) */
+.lockup { display: flex; align-items: center; gap: clamp(14px, 1.6vw, 26px); margin: 0 0 clamp(18px, 3vh, 32px); color: var(--terracota); line-height: 1; }
+.lockup .lockup__wm { height: clamp(66px, 7.6vw, 124px); }
+.lockup__tag { font-family: var(--brand-sans); font-size: clamp(13px, 1.2vw, 19px); letter-spacing: .32em; text-transform: lowercase; line-height: 1.55; }
 @media (prefers-reduced-motion: no-preference) {
   .lockup > * { animation: lockIn 1.1s cubic-bezier(.2, .7, .2, 1) both; }
-  .lockup__rule { animation-delay: .15s; transform-origin: top; animation-name: lockRule; }
-  .lockup__name { animation-delay: .25s; }
+  .lockup__tag { animation-delay: .2s; }
+  .headline h1 { animation: lockIn 1.1s .3s cubic-bezier(.2, .7, .2, 1) both; }
+  .hero__cta { animation: lockIn 1.1s .45s cubic-bezier(.2, .7, .2, 1) both; }
 }
-@keyframes lockIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
-@keyframes lockRule { from { transform: scaleY(0); } to { transform: none; } }
-.headline h1 {
-  margin: 0; font-weight: 300; font-size: clamp(34px, 4.2vw, 68px); line-height: 1.1; letter-spacing: -.01em;
-}
+@keyframes lockIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+.headline h1 { margin: 0; font-family: var(--brand-sans); font-weight: 400; font-size: clamp(34px, 4.2vw, 68px); line-height: 1.1; letter-spacing: -.005em; }
 .headline em { font-style: normal; color: var(--terracota); }
-.headline__sub { margin: 1.6em 0 0; font-size: 13px; letter-spacing: .28em; text-transform: lowercase; color: rgba(31, 31, 31, .72); }
-
-.hint {
-  position: absolute; z-index: 2; left: 50%; bottom: 28px; transform: translateX(-50%);
-  display: grid; justify-items: center; gap: 10px;
-  font-size: 11px; letter-spacing: .3em; text-transform: lowercase; color: rgba(31, 31, 31, .72);
-}
-.hint i { width: 1px; height: 38px; background: rgba(31, 31, 31, .35); transform-origin: top; animation: hint 2.2s ease-in-out infinite; }
-@keyframes hint { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
-
-/* Estado inicial da animação (o JS assume a partir daqui) */
-.hero:not(.reduced) .portal { clip-path: circle(0px at var(--ox) var(--oy)); visibility: hidden; }
-
-.filmwrap { position: absolute; inset: 0; transform-origin: var(--ox) var(--oy); will-change: transform; }
-.filmwrap canvas { width: 100%; height: 100%; }
-
-.veil {
-  position: absolute; inset: 0; opacity: 0; pointer-events: none;
-  background: radial-gradient(ellipse 70% 62% at 50% 50%, rgba(243, 239, 236, .93) 0%, rgba(243, 239, 236, .78) 45%, rgba(243, 239, 236, .28) 100%);
-}
-.endtext {
-  position: absolute; inset: 0; z-index: 2;
-  display: grid; place-content: center; justify-items: center; text-align: center;
-  padding: 0 var(--gutter); opacity: 0; pointer-events: none;
-}
-.endtext.is-live { pointer-events: auto; }
-.endtext h2 { margin: 0; font-family: var(--serif); font-weight: 500; font-size: clamp(38px, 5.6vw, 88px); line-height: 1.02; letter-spacing: -.01em; }
-.endtext__p { max-width: 34em; margin: 1.6em 0 0; font-size: clamp(15px, 1.25vw, 18px); }
-.endtext__cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 2.2em; }
+.hero__cta { margin-top: clamp(22px, 4vh, 40px); }
 
 .btn { display: inline-flex; align-items: center; gap: .7em; padding: 15px 28px; border-radius: 999px; font-size: 14px; font-weight: 400; letter-spacing: .04em; border: 1px solid var(--terracota); transition: background .3s ease, color .3s ease; }
 .btn--solid { background: var(--terracota); color: var(--offwhite); }
 .btn--solid:hover, .btn--solid:focus-visible { background: var(--grafite); border-color: var(--grafite); }
+.btn--white { background: #fff; border-color: #fff; color: var(--terracota); }
+.btn--white:hover, .btn--white:focus-visible { background: var(--terracota); border-color: var(--terracota); color: var(--offwhite); }
 .btn--ghost { color: var(--terracota); }
 .btn--ghost:hover, .btn--ghost:focus-visible { background: var(--terracota); color: var(--offwhite); }
 
@@ -175,33 +145,8 @@ button { font: inherit; color: inherit; }
 .pill { display: inline-flex; align-items: center; gap: .6em; padding-left: 16px; }
 @media (prefers-reduced-motion: reduce) { .btn::before, .pill::before { transition: none; } }
 
-.ring {
-  position: absolute; z-index: 3; left: var(--ox); top: var(--oy);
-  width: 0; height: 0; border-radius: 50%;
-  border: 1px solid rgba(243, 239, 236, .9);
-  box-shadow: 0 0 0 1px rgba(151, 67, 21, .35);
-  transform: translate(-50%, -50%); pointer-events: none; opacity: 0;
-}
-
-.hud {
-  position: absolute; z-index: 4; left: var(--gutter); right: var(--gutter); bottom: 26px;
-  display: flex; justify-content: flex-end; align-items: flex-end; gap: 16px;
-  font-size: 11px; letter-spacing: .24em; text-transform: lowercase; pointer-events: none;
-  color: rgba(31, 31, 31, .72); transition: color .5s ease;
-}
-.hud.on-dark { color: rgba(243, 239, 236, .85); }
-.hud__tag { opacity: 0; }
-.skip {
-  position: absolute; z-index: 5; right: var(--gutter); bottom: 52px;
-  background: none; border: 0; padding: 6px 0; cursor: pointer;
-  font-size: 11px; letter-spacing: .24em; text-transform: lowercase; color: inherit;
-  border-bottom: 1px solid currentColor; color: rgba(31, 31, 31, .65); transition: color .5s ease, opacity .4s ease;
-}
-.skip.on-dark { color: rgba(243, 239, 236, .9); }
-
 /* ---------- Retrato / mobile ---------- */
 @media (max-width: 860px) {
-  :root { --ox: 78%; --oy: 55%; }
   .nav { padding: 16px var(--gutter); }
   .nav__links { display: none; }
   .brand b { font-size: 26px; }
@@ -210,31 +155,18 @@ button { font: inherit; color: inherit; }
   .pill__long { display: none; }
   .pill__short { display: inline; }
   .photo img { object-position: 12% 50%; }   /* enquadra as duas sócias */
-  /* celular: assinatura centralizada no topo; a frase desce para a parte baixa, com um halo off-white bem leve atrás das letras */
+  /* celular: logotipo centralizado no topo; frase na altura dos braços, com um halo off-white leve; botão logo abaixo */
   .headline { left: var(--gutter); right: var(--gutter); top: 0; bottom: 0; width: auto; }
   .lockup { position: absolute; left: 0; right: 0; top: 14%; margin: 0; justify-content: center; gap: 14px; }
-  .lockup__leaf { width: 46px; }
-  .lockup b { font-size: 40px; }
-  .lockup__studio { font-size: 10px; letter-spacing: .42em; }
+  .lockup .lockup__wm { height: 56px; }
+  .lockup__tag { font-size: 12px; letter-spacing: .28em; }
   .headline h1 {
     position: absolute; left: 0; right: 0; top: 43%; text-align: center; font-size: clamp(30px, 8.6vw, 48px);
     text-shadow: 0 0 10px rgba(243, 239, 236, .9), 0 0 22px rgba(243, 239, 236, .8), 0 0 40px rgba(243, 239, 236, .6);
   }
-  .headline__sub { display: none; }
-  .hud { bottom: 20px; }
-  .skip { bottom: 44px; }
-  .endtext__cta { flex-direction: column; align-items: stretch; width: 100%; max-width: 340px; }
+  .hero__cta { position: absolute; left: 50%; top: calc(43% + clamp(100px, 27vw, 140px)); margin: 0; transform: translateX(-50%); white-space: nowrap; animation: none; }
   .btn { justify-content: center; }
 }
-
-/* ---------- Sem animação (prefers-reduced-motion) ---------- */
-.hero.reduced .stage { height: auto; overflow: visible; }
-.hero.reduced .sceneA { position: relative; height: 100vh; height: 100svh; }
-.hero.reduced .portal { position: relative; height: 100vh; height: 100svh; clip-path: none; visibility: visible; }
-.hero.reduced .veil { opacity: 1; }
-.hero.reduced .endtext { opacity: 1; pointer-events: auto; }
-.hero.reduced .hint, .hero.reduced .ring, .hero.reduced .hud, .hero.reduced .skip { display: none; }
-@media (prefers-reduced-motion: reduce) { .hint i { animation: none; transform: none; } }
 
 /* utilitário: visível só para leitor de tela */
 .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
@@ -267,6 +199,9 @@ button { font: inherit; color: inherit; }
 .menu-open .navpanel nav a { opacity: 1; transform: none; }
 .menu-open .navpanel nav a:nth-child(2) { transition-delay: .05s; } .menu-open .navpanel nav a:nth-child(3) { transition-delay: .1s; }
 .menu-open .navpanel nav a:nth-child(4) { transition-delay: .15s; } .menu-open .navpanel nav a:nth-child(5) { transition-delay: .2s; }
+.navpanel__social { display: flex; gap: 6px; margin: 22px 0 0; color: var(--terracota); }
+.navpanel__social a { display: grid; place-items: center; width: 48px; height: 48px; border: 1px solid rgba(151, 67, 21, .45); border-radius: 50%; }
+.navpanel__social svg { width: 24px; height: 24px; }
 .navpanel__foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 16px; margin: 0; font-size: 14px; color: rgba(31, 31, 31, .72); }
 .navpanel__foot em { font-style: normal; color: var(--terracota); }
 .navpanel__foot a { color: var(--terracota); border-bottom: 1px solid currentColor; }

@@ -113,7 +113,7 @@ def section():
         <header class="ig__head">
           <div class="ig__headtext">
             <p class="eyebrow">instagram</p>
-            <h2 id="igTitle">Siga o <em>@<span class="ori">ori</span>.arqui</em></h2>
+            <h2 id="igTitle"><span class="sr-only">Siga o @{HANDLE}</span><span aria-hidden="true">Siga o <em>@<b class="wm ig__wm"></b>.arqui</em></span></h2>
             <p class="ig__lead">Acompanhe os projetos e o dia a dia do studio.</p>
           </div>
           <div class="ig__side">
