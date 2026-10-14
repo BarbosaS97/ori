@@ -234,9 +234,6 @@ def v4_block():
           </ul>
           <button class="v4__arrow v4__arrow--next" id="v4Next" type="button" aria-label="Próximos projetos">{ARROW_R}</button>
         </div>
-        <div class="v4__bar" aria-hidden="true">
-          <div class="v4__progress"><i id="v4Bar"></i></div>
-        </div>
       </div>'''
 
 def v3_block():

@@ -12,6 +12,25 @@
   const panel = document.getElementById('navPanel');
   if (!btn || !panel) return;
 
+  /* ---------- cor do topo conforme a seção que passa por baixo ----------
+     Seções escuras (terracota, azul): o topo ganha fundo da própria cor e texto claro. Nas claras, segue como está. */
+  const nav = document.getElementById('nav');
+  const DARK = { servicos: 'terracota', instagram: 'azul' };
+  const darkEls = Object.keys(DARK).map((id) => [document.getElementById(id), DARK[id]]).filter((x) => x[0]);
+  let navTick = false;
+  const paintNav = () => {
+    navTick = false;
+    if (!nav) return;
+    const y = nav.offsetHeight / 2;
+    let tone = '';
+    for (const [el, t] of darkEls) { const r = el.getBoundingClientRect(); if (r.top <= y && r.bottom > y) tone = t; }
+    nav.classList.toggle('on-dark', !!tone);
+    nav.dataset.tone = tone;
+  };
+  addEventListener('scroll', () => { if (!navTick) { navTick = true; requestAnimationFrame(paintNav); } }, { passive: true });
+  addEventListener('resize', paintNav);
+  paintNav();
+
   const mqNarrow = matchMedia('(max-width: 860px)');
   const root = document.documentElement;
 

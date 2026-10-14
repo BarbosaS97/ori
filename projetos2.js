@@ -46,14 +46,11 @@
   if (variant === '4') {
     const tr = document.getElementById('v4Track');
     if (!tr) return;
-    const bar = document.getElementById('v4Bar');
     const pv = document.getElementById('v4Prev'), nx = document.getElementById('v4Next');
     const rm = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const stepPx = () => { const c = tr.children[0]; return (c ? c.getBoundingClientRect().width : 280) + (parseFloat(getComputedStyle(tr).columnGap) || 16); };
     const upd = () => {
       const max = tr.scrollWidth - tr.clientWidth, x = tr.scrollLeft;
-      const vis = tr.clientWidth / tr.scrollWidth;
-      bar.style.transform = 'scaleX(' + (max > 0 ? (vis + (1 - vis) * Math.min(1, x / max)).toFixed(3) : 1) + ')';
       pv.disabled = x <= 2; nx.disabled = x >= max - 2;
     };
     let t = false;

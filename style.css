@@ -236,3 +236,17 @@ button { font: inherit; color: inherit; }
   .navpanel { padding-top: 84px; padding-bottom: 20px; }
   .navpanel nav a { padding: 10px 0; font-size: clamp(26px, 6vw, 34px); }
 }
+
+/* ---------- Topo sobre seções escuras: fundo da própria seção + texto claro (sempre legível) ---------- */
+.nav.on-dark, .nav.is-solid.on-dark { color: var(--offwhite); box-shadow: none; }
+.nav.is-solid.on-dark[data-tone="terracota"] { background: rgba(151, 67, 21, .96); }
+.nav.is-solid.on-dark[data-tone="azul"] { background: rgba(49, 61, 101, .96); }
+.nav.on-dark .nav__links, .nav.on-dark .nav__social, .nav.on-dark .brand--mark { color: var(--offwhite); }
+.nav.on-dark .nav__social a:hover, .nav.on-dark .nav__social a:focus-visible { background: var(--offwhite); color: var(--terracota); }
+.nav.on-dark .nav__social a:focus-visible { outline-color: var(--offwhite); }
+@media (max-width: 860px) { .nav.on-dark .nav__social a { border-color: rgba(243, 239, 236, .55); } }
+.nav.on-dark::before { opacity: 0; }
+.nav, .nav__links, .nav__social { transition: background-color .35s ease, color .35s ease; }
+/* menu aberto: volta ao claro */
+.menu-open .nav.is-solid.on-dark, .menu-open .nav.on-dark { color: var(--grafite); background: transparent; }
+.menu-open .nav.on-dark .nav__social, .menu-open .nav.on-dark .brand--mark { color: var(--terracota); }
