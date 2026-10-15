@@ -36,7 +36,7 @@ PROJECTS = [
          lead="Pedra, madeira e vidro em um refúgio à beira do lago, aberto para a paisagem."),
     dict(slug="rr", letter="D", name="Projeto R&R", type="residencial", tile="grafite",
          tone=("#D8C9B8", "#A98B72"), src="projetos residenciais/Projeto R&R",
-         picks=[4, 3, 8, 1, 7, 13, 12, 15, 20, 19], cover_pos="50% 60%",
+         picks=[21, 4, 3, 8, 1, 7, 13, 12, 15, 20], cover_pos="50% 55%",
          lead="Uma área de lazer com piscina, deck e cobogós, pensada para receber ao ar livre."),
     dict(slug="jo", letter="I", name="Projeto JO", type="residencial", tile="terracota",
          tone=("#A9B39A", "#6F7B5E"), src="projetos residenciais/Projeto JO",

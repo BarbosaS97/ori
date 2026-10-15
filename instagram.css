@@ -26,7 +26,7 @@
 .ig .eyebrow { margin-bottom: .6em; color: rgba(243, 239, 236, .92); }
 .ig h2 { margin: 0; font-family: var(--brand-sans); font-weight: 400; font-size: clamp(32px, 4.2vw, 60px); line-height: 1.02; letter-spacing: 0; }
 .ig h2 em { font-style: normal; }
-.ig h2 .ig__wm { height: .98em; vertical-align: -.07em; color: #F0A07A; }   /* logotipo ÓRI em terracota claro (o terracota puro quase some sobre o azul) */      /* o "ori" em terracota claro (o terracota puro quase some sobre o azul: 1,6:1; este dá 5:1) */
+.ig h2 .ig__wm { height: .98em; vertical-align: -.07em; color: #F0A07A; }   /* logotipo ÓRI em terracota claro, destacado (o terracota puro quase some sobre o azul) */      /* o "ori" em terracota claro (o terracota puro quase some sobre o azul: 1,6:1; este dá 5:1) */
 .ig__lead { margin: .7em 0 0; max-width: 30rem; font-size: clamp(14px, 1.1vw, 16px); color: rgba(243, 239, 236, .92); }
 
 .ig__side { display: flex; align-items: center; gap: 18px; flex: none; }
@@ -132,3 +132,6 @@
   .js .ig__item { opacity: 1; transform: none; }
   .igcard, .igcard__media img, .igcard__cta span, .ig__arrow { transition: none; }
 }
+
+/* cabeçalho da seção inteiro na fonte da marca */
+.ig .eyebrow, .ig__lead { font-family: var(--brand-sans); }

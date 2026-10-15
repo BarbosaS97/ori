@@ -250,3 +250,11 @@ button { font: inherit; color: inherit; }
 /* menu aberto: volta ao claro */
 .menu-open .nav.is-solid.on-dark, .menu-open .nav.on-dark { color: var(--grafite); background: transparent; }
 .menu-open .nav.on-dark .nav__social, .menu-open .nav.on-dark .brand--mark { color: var(--terracota); }
+
+/* ---------- Efeitos nos botões com as folhas da logo (sem brilho) ---------- */
+.btn::before, .pill::before { transition: transform .8s cubic-bezier(.2, .7, .2, 1); }
+.btn > span[aria-hidden="true"]:last-child { display: inline-block; transition: transform .45s cubic-bezier(.2, .7, .2, 1); }
+.btn:hover > span[aria-hidden="true"]:last-child, .btn:focus-visible > span[aria-hidden="true"]:last-child { transform: translateX(5px); }
+.btn:hover::before, .btn:focus-visible::before, .pill:hover::before, .pill:focus-visible::before { transform: rotate(72deg) scale(1.12); }
+.btn:active::before, .pill:active::before { transform: rotate(144deg) scale(.94); transition-duration: .25s; }
+@media (prefers-reduced-motion: reduce) { .btn > span[aria-hidden="true"]:last-child { transition: none; } }

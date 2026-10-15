@@ -119,7 +119,6 @@ def page(i):
       </div>
       <div class="pjhero__shade" aria-hidden="true"></div>
       <div class="pjhero__inner">
-        <div class="pjhero__letter" aria-hidden="true">{glyph(p)}</div>
         <p class="pjhero__eyebrow">{esc(p["type"])} · projeto {i + 1:02d}</p>
         <h1 id="pjTitle">{name}</h1>
         <p class="pjhero__lead">{esc(p["lead"])}</p>
@@ -197,16 +196,14 @@ def v2_block():
           </li>''' for i, p in enumerate(PROJECTS))
     nums = "\n".join(f'          <button class="v2__n{" is-active" if i == 0 else ""}" type="button" data-i="{i}" aria-label="Projeto {i + 1}: {esc(p["name"])}"><span>{i + 1:02d}</span></button>' for i, p in enumerate(PROJECTS))
     return f'''      <div class="v2" id="v2">
+        <button class="v2__arrow v2__arrow--prev" id="v2Prev" type="button" aria-label="Projeto anterior">{ARR["l"]}</button>
+        <button class="v2__arrow v2__arrow--next" id="v2Next" type="button" aria-label="Próximo projeto">{ARR["r"]}</button>
         <ul class="v2__track" id="v2Track" tabindex="0" aria-label="Projetos do Studio Óri">
 {slides}
         </ul>
         <div class="v2__bar">
           <div class="v2__nums" role="group" aria-label="Escolher projeto">
 {nums}
-          </div>
-          <div class="v2__arrows">
-            <button class="v2__arrow" id="v2Prev" type="button" aria-label="Projeto anterior">{ARR["l"]}</button>
-            <button class="v2__arrow" id="v2Next" type="button" aria-label="Próximo projeto">{ARR["r"]}</button>
           </div>
         </div>
       </div>'''

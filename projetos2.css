@@ -239,3 +239,26 @@ html:is([data-projetos="2"], [data-projetos="3"], [data-projetos="4"]) .letters_
 .v3__name { transition: transform .45s cubic-bezier(.2, .7, .2, 1); }
 .v3__type { white-space: nowrap; }
 @media (max-width: 860px) { .v3__name { white-space: normal; } .v3__row.is-active .v3__name { transform: none; } }
+
+/* variação 2: setas dos dois lados da foto (na altura do meio da imagem), em vez de no canto de baixo */
+.v2 { position: relative; container-type: inline-size; }
+.v2__arrow--prev, .v2__arrow--next {
+  position: absolute; z-index: 5; top: calc(min(70cqw, 860px) * 9 / 16 / 2); transform: translateY(-50%);
+  background: rgba(243, 239, 236, .92); border-color: rgba(31, 31, 31, .2); box-shadow: 0 8px 18px -12px rgba(31, 31, 31, .5);
+}
+.v2__arrow--prev { left: 14px; }
+.v2__arrow--next { right: 14px; }
+.v2__arrow:disabled { opacity: 0; pointer-events: none; }
+@media (max-width: 860px) {
+  .v2__arrow--prev, .v2__arrow--next { top: calc(min(88cqw, 860px) * 3 / 8); }
+}
+
+/* setas de voltar/avançar: círculo limpo, sem folha por dentro */
+.v2__arrow--prev, .v2__arrow--next, .v4__arrow--prev, .v4__arrow--next { width: 52px; height: 52px; }
+.v2__arrow svg, .v4__arrow svg { width: 22px; height: 22px; }
+
+/* desktop: setas bem no canto da tela (alinhadas à margem da página, não ao miolo do conteúdo) */
+@media (min-width: 861px) {
+  .v2__arrow--prev, .v4__arrow--prev { left: calc(50% - 50vw + 104px); }
+  .v2__arrow--next, .v4__arrow--next { right: calc(50% - 50vw + 104px); }
+}

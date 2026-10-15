@@ -64,7 +64,7 @@
 .lk__brand { margin: 0; display: inline-flex; align-items: baseline; gap: .7em; line-height: 1; color: var(--terracota); }
 .lk__brand span { font-size: 15px; letter-spacing: .34em; font-weight: 400; }
 .lk__brand b { font-family: var(--serif); font-weight: 500; font-size: 58px; letter-spacing: .02em; }
-.lk__role { margin: 10px 0 0; font-size: 12px; letter-spacing: .32em; text-transform: lowercase; color: rgba(31, 31, 31, .72); }
+.lk__role { margin: 4px 0 0; font-size: 12px; letter-spacing: .32em; text-transform: lowercase; color: rgba(31, 31, 31, .72); }
 .lk__slogan { margin: 22px 0 0; font-family: var(--serif); font-size: clamp(21px, 5.6vw, 26px); line-height: 1.25; }
 .lk__slogan em { font-style: normal; color: var(--terracota); }      /* o "ori" de "originalidade" */
 

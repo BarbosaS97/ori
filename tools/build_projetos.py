@@ -24,7 +24,7 @@ def card(i, p):
         img = img.replace('loading="lazy"', 'loading="eager"')
     return f'''        <li class="pcard" data-tipo="{esc(p["type"])}" style="--accent:{t["hex"]};--on-accent:{t["on"]};--c1:{p["tone"][0]};--c2:{p["tone"][1]}">
           <a class="pcard__link" href="{p["slug"]}/?de=lista">
-            <span class="pcard__media">{img}<span class="pcard__letter" aria-hidden="true">{glyph(p)}</span></span>
+            <span class="pcard__media">{img}</span>
             <span class="pcard__body">
               <span class="pcard__type">{esc(p["type"])} · {i + 1:02d}</span>
               <span class="pcard__name">{esc(p["name"])}</span>
