@@ -85,7 +85,9 @@ def page(i):
   <meta name="theme-color" content="{t["hex"]}">
   <meta name="color-scheme" content="light">
   {seo.head_tags(f"projetos/{p['slug']}/", f"{p['name']} — Studio Óri", p["lead"], f"assets/og/{p['slug']}.jpg")}
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%23974315'/%3E%3C/svg%3E">
+  <link rel="icon" href="../../favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32.png">
+  <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
@@ -233,101 +235,18 @@ def v4_block():
         </div>
       </div>'''
 
-def v3_block():
-    rows = "\n".join(f'''          <li class="v3__row{" is-active" if i == 0 else ""}" data-i="{i}">
-            <a class="v3__link" href="projetos/{p["slug"]}/">
-              <svg class="v3__leaf" viewBox="0 0 1996 1969" aria-hidden="true" focusable="false"><use href="#simbolo"/></svg>
-              <span class="v3__thumb" aria-hidden="true">{img_tag(p["slug"], MANIFEST[p["slug"]][0], sizes="96px", alt="", pos=p["cover_pos"])}</span>
-              <span class="v3__name">{esc(p["name"])}</span>
-              <span class="v3__type">{esc(p["type"])}</span>
-              <span class="v3__go" aria-hidden="true">→</span>
-            </a>
-          </li>''' for i, p in enumerate(PROJECTS))
-    prev = "\n".join(f'''          <span class="v3__img{" is-active" if i == 0 else ""}" data-i="{i}" aria-hidden="true" style="--c1:{p["tone"][0]};--c2:{p["tone"][1]}">{img_tag(p["slug"], MANIFEST[p["slug"]][0], sizes="(max-width: 860px) 1px, 560px", alt="", pos=p["cover_pos"])}</span>''' for i, p in enumerate(PROJECTS))
-    return f'''      <div class="v3" id="v3">
-        <span class="v3__band" id="v3Band" aria-hidden="true"></span>
-        <ul class="v3__list" id="v3List" aria-label="Projetos do Studio Óri">
-{rows}
-        </ul>
-        <div class="v3__preview">
-{prev}
-          <span class="v3__veil" aria-hidden="true"></span>
-          <span class="v3__title" id="v3Title" aria-hidden="true">{esc(PROJECTS[0]["name"])}</span>
-          <a class="v3__cta" id="v3Cta" href="projetos/{PROJECTS[0]["slug"]}/">ver projeto <span aria-hidden="true">→</span><span class="sr-only"> {esc(PROJECTS[0]["name"])}</span></a>
-        </div>
-      </div>'''
-
 def home_block():
-    TILES = [p["tile"] for p in PROJECTS]
-    def tile(i, p):
-        label = f'Letra {p["letter"]}: {p["name"]}, projeto {p["type"]}. Ver projeto'
-        return (f'            <a class="tile{" is-active" if i == 0 else ""}" href="projetos/{p["slug"]}/" data-i="{i}" data-slug="{p["slug"]}" '
-                f'data-tile="{TILES[i]}" aria-label="{esc(label)}"{" aria-current=\"true\"" if i == 0 else ""}>\n'
-                f'              <span class="tile__face">{glyph(p)}<span class="tile__bar" aria-hidden="true"><i></i></span></span>\n'
-                f'            </a>')
-    def pv(i, p):
-        cover = MANIFEST[p["slug"]][0]
-        return f'''          <figure class="pv{" is-active" if i == 0 else ""}" data-i="{i}" style="--c1:{p["tone"][0]};--c2:{p["tone"][1]}">
-            <div class="pv__img">
-              {deferred_img(p["slug"], cover, sizes="(max-width: 860px) 100vw, 46vw", alt=f"Render do projeto {p['name']}", pos=p["cover_pos"])}
-            </div>
-            <figcaption class="pv__cap">
-              <span class="pv__num">{i + 1:02d}</span>
-              <small>{esc(p["type"])}</small>
-              <strong>{esc(p["name"])}</strong>
-              <span class="pv__cta">ver projeto <span aria-hidden="true">→</span></span>
-            </figcaption>
-            <a class="pv__link" href="projetos/{p["slug"]}/" tabindex="-1" aria-hidden="true"></a>
-            <!-- carregamento (mesma linguagem do loader do site): some quando a foto do projeto termina de carregar -->
-            <div class="pv__loader" aria-hidden="true"><span class="brand brand--lg"><span>studio</span><b class="wm" role="img" aria-label="Óri"></b></span><i></i></div>
-          </figure>'''
-    row1 = "\n".join(tile(i, PROJECTS[i]) for i in range(6))
-    row2 = "\n".join(tile(i, PROJECTS[i]) for i in range(6, 9))
-    pvs = "\n".join(pv(i, PROJECTS[i]) for i in range(N))
     return f'''<!-- PROJETOS:START (gerado por tools/build_site.py — edite tools/projects_data.py) -->
-    <!-- PROJETOS: o nome "STUDIO ÓRI" já formado. Cada letra é um projeto:
-         passar o mouse / focar / tocar mostra o projeto no painel ao lado; clicar abre a página do projeto.
-         projetos.js só adiciona o comportamento. -->
+    <!-- PROJETOS: galeria editorial no computador (variação 2) e faixa de capas no celular (variação 4).
+         projetos2.js só adiciona o comportamento; o CSS mostra uma das duas conforme a largura da tela. -->
     <section class="letters" id="projetos" aria-labelledby="lettersTitle">
       <header class="letters__head">
         <p class="eyebrow">portfólio</p>
-        <h2 id="lettersTitle"><span class="h-v1">Cada letra, um <em>projeto</em>.</span><span class="h-v2">Nossos <em>projetos</em>.</span></h2>
-        <p class="letters__hint" id="lettersHint">Passe o mouse sobre uma letra para ver o projeto.</p>
+        <h2 id="lettersTitle">Nossos <em>projetos</em>.</h2>
       </header>
 
-      <div class="lx">
-        <!-- O nome: 6 letras (STUDIO) + 3 (ÓRI). O "O" de STUDIO é o símbolo das folhas. -->
-        <div class="word" id="word" role="group" aria-label="STUDIO ÓRI — um projeto por letra">
-          <div class="word__row">
-{row1}
-          </div>
-          <div class="word__row">
-{row2}
-          </div>
-        </div>
-
-        <!-- Painel de pré-visualização: um <figure> por projeto, empilhados; projetos.js faz a transição -->
-        <div class="pvbox">
-          <div class="pvframe" id="pvFrame">
-{pvs}
-            <!-- setas laterais (só no celular): projeto anterior / próximo, mudando a letra ativa -->
-            <button class="pvnav pvnav--prev" id="pvPrev" type="button" aria-label="Projeto anterior">{ARROW_L}</button>
-            <button class="pvnav pvnav--next" id="pvNext" type="button" aria-label="Próximo projeto">{ARROW_R}</button>
-          </div>
-          <div class="pvbar">
-            <span class="pvbar__count" aria-hidden="true"><b id="pvCount">01</b> / 09</span>
-            <button class="pvbar__auto" id="autoBtn" type="button" aria-pressed="false">pausar</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- VARIANTE 2 (?projetos=2): galeria editorial. A variante 1 (letras) é o padrão. -->
 {v2_block()}
 
-      <!-- VARIANTE 3 (?projetos=3): lista tipográfica; a foto aparece ao lado quando o nome é apontado. -->
-{v3_block()}
-
-      <!-- VARIANTE 4 (?projetos=4): faixa horizontal de capas altas. -->
 {v4_block()}
 
       <div class="cta" id="cta">

@@ -4,34 +4,36 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <script>document.documentElement.classList.add('js');
-  /* seção Projetos: variação 2 (galeria) no computador e 4 (faixa de capas) no celular. ?projetos=1..4 força outra, para teste. */
-  (function(){var v=matchMedia('(max-width: 860px)').matches?'4':'2';try{var q=new URLSearchParams(location.search).get('projetos');if(/^[1-4]$/.test(q||'')){sessionStorage.setItem('ori-projetos',q);v=q}else{v=sessionStorage.getItem('ori-projetos')||v}}catch(e){}document.documentElement.dataset.projetos=v})();</script>
+  /* seção Projetos: galeria (2) no computador e faixa de capas (4) no celular; recarrega se a janela cruzar o limite */
+  (function(){var q=matchMedia('(max-width: 860px)');document.documentElement.dataset.projetos=q.matches?'4':'2';if(q.addEventListener)q.addEventListener('change',function(){location.reload()})})();</script>
   <!-- SEO:START (gerado por tools/build_seo.py — edite site_config.py) -->
   <title>Studio Óri — Arquitetura e Interiores</title>
   <meta name="description" content="Studio Óri Arquitetura e Interiores. Valorizamos história e originalidade.">
-  <meta name="robots" content="noindex, nofollow">
-  <link rel="canonical" href="https://projeto-studioori.vercel.app/">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://oriarquitetura.com.br/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Studio Óri">
   <meta property="og:locale" content="pt_BR">
   <meta property="og:title" content="Studio Óri — Arquitetura e Interiores">
   <meta property="og:description" content="Studio Óri Arquitetura e Interiores. Valorizamos história e originalidade.">
-  <meta property="og:url" content="https://projeto-studioori.vercel.app/">
-  <meta property="og:image" content="https://projeto-studioori.vercel.app/assets/og/home.jpg">
+  <meta property="og:url" content="https://oriarquitetura.com.br/">
+  <meta property="og:image" content="https://oriarquitetura.com.br/assets/og/home.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <!-- SEO:END -->
   <meta name="theme-color" content="#F3EFEC">
   <meta name="color-scheme" content="light">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%23974315'/%3E%3C/svg%3E">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=fb3b105d">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png?v=618e31eb">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="assets/hero-socias.webp?v=1f391e0a" type="image/webp">
-  <link rel="stylesheet" href="style.css?v=5c964824">
-  <link rel="stylesheet" href="projetos2.css?v=b2f7e026">
-  <link rel="stylesheet" href="projetos.css?v=69766107">
+  <link rel="stylesheet" href="style.css?v=12ab6529">
+  <link rel="stylesheet" href="projetos2.css?v=3de95f04">
+  <link rel="stylesheet" href="projetos.css?v=f4117d25">
   <link rel="stylesheet" href="servicos.css?v=26872383">
   <link rel="stylesheet" href="sobre.css?v=80d26841">
   <link rel="stylesheet" href="instagram.css?v=0e17db59">
@@ -87,193 +89,14 @@
     </section>
 
     <!-- PROJETOS:START (gerado por tools/build_site.py — edite tools/projects_data.py) -->
-    <!-- PROJETOS: o nome "STUDIO ÓRI" já formado. Cada letra é um projeto:
-         passar o mouse / focar / tocar mostra o projeto no painel ao lado; clicar abre a página do projeto.
-         projetos.js só adiciona o comportamento. -->
+    <!-- PROJETOS: galeria editorial no computador (variação 2) e faixa de capas no celular (variação 4).
+         projetos2.js só adiciona o comportamento; o CSS mostra uma das duas conforme a largura da tela. -->
     <section class="letters" id="projetos" aria-labelledby="lettersTitle">
       <header class="letters__head">
         <p class="eyebrow">portfólio</p>
-        <h2 id="lettersTitle"><span class="h-v1">Cada letra, um <em>projeto</em>.</span><span class="h-v2">Nossos <em>projetos</em>.</span></h2>
-        <p class="letters__hint" id="lettersHint">Passe o mouse sobre uma letra para ver o projeto.</p>
+        <h2 id="lettersTitle">Nossos <em>projetos</em>.</h2>
       </header>
 
-      <div class="lx">
-        <!-- O nome: 6 letras (STUDIO) + 3 (ÓRI). O "O" de STUDIO é o símbolo das folhas. -->
-        <div class="word" id="word" role="group" aria-label="STUDIO ÓRI — um projeto por letra">
-          <div class="word__row">
-            <a class="tile is-active" href="projetos/casa-aconchego/" data-i="0" data-slug="casa-aconchego" data-tile="terracota" aria-label="Letra S: Casa Aconchego, projeto residencial. Ver projeto" aria-current="true">
-              <span class="tile__face"><span class="glyph">S</span><span class="tile__bar" aria-hidden="true"><i></i></span></span>
-            </a>
-            <a class="tile" href="projetos/apartamento-mar/" data-i="1" data-slug="apartamento-mar" data-tile="salvia" aria-label="Letra T: Apartamento Mar, projeto residencial. Ver projeto">
-              <span class="tile__face"><span class="glyph">T</span><span class="tile__bar" aria-hidden="true"><i></i></span></span>
-            </a>
-            <a class="tile" href="projetos/rancho-oc/" data-i="2" data-slug="rancho-oc" data-tile="azul" aria-label="Letra U: Rancho OC, projeto residencial. Ver projeto">
-              <span class="tile__face"><span class="glyph">U</span><span class="tile__bar" aria-hidden="true"><i></i></span></span>
-            </a>
-            <a class="tile" href="projetos/rr/" data-i="3" data-slug="rr" data-tile="grafite" aria-label="Letra D: Projeto R&amp;R, projeto residencial. Ver projeto">
-              <span class="tile__face"><span class="glyph">D</span><span class="tile__bar" aria-hidden="true"><i></i></span></span>
-            </a>
-            <a class="tile" href="projetos/jo/" data-i="4" data-slug="jo" data-tile="terracota" aria-label="Letra I: Projeto JO, projeto residencial. Ver projeto">
-              <span class="tile__face"><span class="glyph">I</span><span class="tile__bar" aria-hidden="true"><i></i></span></span>
-            </a>
-            <a class="tile" href="projetos/oliva/" data-i="5" data-slug="oliva" data-tile="salvia" aria-label="Letra O: Apartamento Oliva, projeto residencial. Ver projeto">
-              <span class="tile__face"><svg class="glyph glyph--sym" viewBox="0 0 1996 1969" aria-hidden="true"><use href="#simbolo"/></svg><span class="tile__bar" aria-hidden="true"><i></i></span></span>
-            </a>
-          </div>
-          <div class="word__row">
-            <a class="tile" href="projetos/olie/" data-i="6" data-slug="olie" data-tile="azul" aria-label="Letra Ó: Ólie Beauty Clinic, projeto comercial. Ver projeto">
-              <span class="tile__face"><span class="glyph glyph--o" role="img" aria-label="Ó"></span><span class="tile__bar" aria-hidden="true"><i></i></span></span>
-            </a>
-            <a class="tile" href="projetos/guarita-victoria/" data-i="7" data-slug="guarita-victoria" data-tile="terracota" aria-label="Letra R: Guarita Residencial Victória, projeto institucional. Ver projeto">
-              <span class="tile__face"><span class="glyph glyph--r" role="img" aria-label="R"></span><span class="tile__bar" aria-hidden="true"><i></i></span></span>
-            </a>
-            <a class="tile" href="projetos/quarto-ambar/" data-i="8" data-slug="quarto-ambar" data-tile="grafite" aria-label="Letra I: Quarto Âmbar, projeto residencial. Ver projeto">
-              <span class="tile__face"><span class="glyph glyph--i" role="img" aria-label="I"></span><span class="tile__bar" aria-hidden="true"><i></i></span></span>
-            </a>
-          </div>
-        </div>
-
-        <!-- Painel de pré-visualização: um <figure> por projeto, empilhados; projetos.js faz a transição -->
-        <div class="pvbox">
-          <div class="pvframe" id="pvFrame">
-          <figure class="pv is-active" data-i="0" style="--c1:#C9A98A;--c2:#8A5A3A">
-            <div class="pv__img">
-              <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="assets/projetos/casa-aconchego/01-s.webp?v=ec2da7bc" data-srcset="assets/projetos/casa-aconchego/01-s.webp?v=ec2da7bc 900w, assets/projetos/casa-aconchego/01.webp?v=4bc8640c 1600w" sizes="(max-width: 860px) 100vw, 46vw" width="1600" height="901" alt="Render do projeto Casa Aconchego" decoding="async" style="object-position:50% 55%">
-            </div>
-            <figcaption class="pv__cap">
-              <span class="pv__num">01</span>
-              <small>residencial</small>
-              <strong>Casa Aconchego</strong>
-              <span class="pv__cta">ver projeto <span aria-hidden="true">→</span></span>
-            </figcaption>
-            <a class="pv__link" href="projetos/casa-aconchego/" tabindex="-1" aria-hidden="true"></a>
-            <!-- carregamento (mesma linguagem do loader do site): some quando a foto do projeto termina de carregar -->
-            <div class="pv__loader" aria-hidden="true"><span class="brand brand--lg"><span>studio</span><b class="wm" role="img" aria-label="Óri"></b></span><i></i></div>
-          </figure>
-          <figure class="pv" data-i="1" style="--c1:#B9C4C0;--c2:#6F8480">
-            <div class="pv__img">
-              <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="assets/projetos/apartamento-mar/01-s.webp?v=146baf73" data-srcset="assets/projetos/apartamento-mar/01-s.webp?v=146baf73 600w, assets/projetos/apartamento-mar/01.webp?v=223da71f 1000w" sizes="(max-width: 860px) 100vw, 46vw" width="1000" height="1500" alt="Render do projeto Apartamento Mar" decoding="async" style="object-position:50% 62%">
-            </div>
-            <figcaption class="pv__cap">
-              <span class="pv__num">02</span>
-              <small>residencial</small>
-              <strong>Apartamento Mar</strong>
-              <span class="pv__cta">ver projeto <span aria-hidden="true">→</span></span>
-            </figcaption>
-            <a class="pv__link" href="projetos/apartamento-mar/" tabindex="-1" aria-hidden="true"></a>
-            <!-- carregamento (mesma linguagem do loader do site): some quando a foto do projeto termina de carregar -->
-            <div class="pv__loader" aria-hidden="true"><span class="brand brand--lg"><span>studio</span><b class="wm" role="img" aria-label="Óri"></b></span><i></i></div>
-          </figure>
-          <figure class="pv" data-i="2" style="--c1:#B8B29A;--c2:#6E6A4F">
-            <div class="pv__img">
-              <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="assets/projetos/rancho-oc/01-s.webp?v=fe469c63" data-srcset="assets/projetos/rancho-oc/01-s.webp?v=fe469c63 900w, assets/projetos/rancho-oc/01.webp?v=0bb6e6bb 1254w" sizes="(max-width: 860px) 100vw, 46vw" width="1254" height="1254" alt="Render do projeto Rancho OC" decoding="async" style="object-position:50% 50%">
-            </div>
-            <figcaption class="pv__cap">
-              <span class="pv__num">03</span>
-              <small>residencial</small>
-              <strong>Rancho OC</strong>
-              <span class="pv__cta">ver projeto <span aria-hidden="true">→</span></span>
-            </figcaption>
-            <a class="pv__link" href="projetos/rancho-oc/" tabindex="-1" aria-hidden="true"></a>
-            <!-- carregamento (mesma linguagem do loader do site): some quando a foto do projeto termina de carregar -->
-            <div class="pv__loader" aria-hidden="true"><span class="brand brand--lg"><span>studio</span><b class="wm" role="img" aria-label="Óri"></b></span><i></i></div>
-          </figure>
-          <figure class="pv" data-i="3" style="--c1:#D8C9B8;--c2:#A98B72">
-            <div class="pv__img">
-              <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="assets/projetos/rr/01-s.webp?v=07f60c7f" data-srcset="assets/projetos/rr/01-s.webp?v=07f60c7f 900w, assets/projetos/rr/01.webp?v=30d9a5e0 1800w" sizes="(max-width: 860px) 100vw, 46vw" width="1800" height="1013" alt="Render do projeto Projeto R&amp;R" decoding="async" style="object-position:50% 55%">
-            </div>
-            <figcaption class="pv__cap">
-              <span class="pv__num">04</span>
-              <small>residencial</small>
-              <strong>Projeto R&amp;R</strong>
-              <span class="pv__cta">ver projeto <span aria-hidden="true">→</span></span>
-            </figcaption>
-            <a class="pv__link" href="projetos/rr/" tabindex="-1" aria-hidden="true"></a>
-            <!-- carregamento (mesma linguagem do loader do site): some quando a foto do projeto termina de carregar -->
-            <div class="pv__loader" aria-hidden="true"><span class="brand brand--lg"><span>studio</span><b class="wm" role="img" aria-label="Óri"></b></span><i></i></div>
-          </figure>
-          <figure class="pv" data-i="4" style="--c1:#A9B39A;--c2:#6F7B5E">
-            <div class="pv__img">
-              <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="assets/projetos/jo/01-s.webp?v=00b9721b" data-srcset="assets/projetos/jo/01-s.webp?v=00b9721b 900w, assets/projetos/jo/01.webp?v=92110daf 1800w" sizes="(max-width: 860px) 100vw, 46vw" width="1800" height="1013" alt="Render do projeto Projeto JO" decoding="async" style="object-position:50% 55%">
-            </div>
-            <figcaption class="pv__cap">
-              <span class="pv__num">05</span>
-              <small>residencial</small>
-              <strong>Projeto JO</strong>
-              <span class="pv__cta">ver projeto <span aria-hidden="true">→</span></span>
-            </figcaption>
-            <a class="pv__link" href="projetos/jo/" tabindex="-1" aria-hidden="true"></a>
-            <!-- carregamento (mesma linguagem do loader do site): some quando a foto do projeto termina de carregar -->
-            <div class="pv__loader" aria-hidden="true"><span class="brand brand--lg"><span>studio</span><b class="wm" role="img" aria-label="Óri"></b></span><i></i></div>
-          </figure>
-          <figure class="pv" data-i="5" style="--c1:#C7B7A3;--c2:#8B7B6A">
-            <div class="pv__img">
-              <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="assets/projetos/oliva/01-s.webp?v=2341a643" data-srcset="assets/projetos/oliva/01-s.webp?v=2341a643 720w, assets/projetos/oliva/01.webp?v=cd458def 1080w" sizes="(max-width: 860px) 100vw, 46vw" width="1080" height="1350" alt="Render do projeto Apartamento Oliva" decoding="async" style="object-position:50% 60%">
-            </div>
-            <figcaption class="pv__cap">
-              <span class="pv__num">06</span>
-              <small>residencial</small>
-              <strong>Apartamento Oliva</strong>
-              <span class="pv__cta">ver projeto <span aria-hidden="true">→</span></span>
-            </figcaption>
-            <a class="pv__link" href="projetos/oliva/" tabindex="-1" aria-hidden="true"></a>
-            <!-- carregamento (mesma linguagem do loader do site): some quando a foto do projeto termina de carregar -->
-            <div class="pv__loader" aria-hidden="true"><span class="brand brand--lg"><span>studio</span><b class="wm" role="img" aria-label="Óri"></b></span><i></i></div>
-          </figure>
-          <figure class="pv" data-i="6" style="--c1:#E2CFC1;--c2:#BC9E8D">
-            <div class="pv__img">
-              <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="assets/projetos/olie/01-s.webp?v=31923a6a" data-srcset="assets/projetos/olie/01-s.webp?v=31923a6a 900w, assets/projetos/olie/01.webp?v=36da3f0f 1500w" sizes="(max-width: 860px) 100vw, 46vw" width="1500" height="1500" alt="Render do projeto Ólie Beauty Clinic" decoding="async" style="object-position:50% 55%">
-            </div>
-            <figcaption class="pv__cap">
-              <span class="pv__num">07</span>
-              <small>comercial</small>
-              <strong>Ólie Beauty Clinic</strong>
-              <span class="pv__cta">ver projeto <span aria-hidden="true">→</span></span>
-            </figcaption>
-            <a class="pv__link" href="projetos/olie/" tabindex="-1" aria-hidden="true"></a>
-            <!-- carregamento (mesma linguagem do loader do site): some quando a foto do projeto termina de carregar -->
-            <div class="pv__loader" aria-hidden="true"><span class="brand brand--lg"><span>studio</span><b class="wm" role="img" aria-label="Óri"></b></span><i></i></div>
-          </figure>
-          <figure class="pv" data-i="7" style="--c1:#7F8794;--c2:#3F4652">
-            <div class="pv__img">
-              <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="assets/projetos/guarita-victoria/01-s.webp?v=ce41af21" data-srcset="assets/projetos/guarita-victoria/01-s.webp?v=ce41af21 900w, assets/projetos/guarita-victoria/01.webp?v=c0c9e88f 1712w" sizes="(max-width: 860px) 100vw, 46vw" width="1712" height="919" alt="Render do projeto Guarita Residencial Victória" decoding="async" style="object-position:40% 50%">
-            </div>
-            <figcaption class="pv__cap">
-              <span class="pv__num">08</span>
-              <small>institucional</small>
-              <strong>Guarita Residencial Victória</strong>
-              <span class="pv__cta">ver projeto <span aria-hidden="true">→</span></span>
-            </figcaption>
-            <a class="pv__link" href="projetos/guarita-victoria/" tabindex="-1" aria-hidden="true"></a>
-            <!-- carregamento (mesma linguagem do loader do site): some quando a foto do projeto termina de carregar -->
-            <div class="pv__loader" aria-hidden="true"><span class="brand brand--lg"><span>studio</span><b class="wm" role="img" aria-label="Óri"></b></span><i></i></div>
-          </figure>
-          <figure class="pv" data-i="8" style="--c1:#C9905F;--c2:#8E4F22">
-            <div class="pv__img">
-              <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="assets/projetos/quarto-ambar/01-s.webp?v=e4d291bb" data-srcset="assets/projetos/quarto-ambar/01-s.webp?v=e4d291bb 900w, assets/projetos/quarto-ambar/01.webp?v=2002550c 1800w" sizes="(max-width: 860px) 100vw, 46vw" width="1800" height="1013" alt="Render do projeto Quarto Âmbar" decoding="async" style="object-position:50% 60%">
-            </div>
-            <figcaption class="pv__cap">
-              <span class="pv__num">09</span>
-              <small>residencial</small>
-              <strong>Quarto Âmbar</strong>
-              <span class="pv__cta">ver projeto <span aria-hidden="true">→</span></span>
-            </figcaption>
-            <a class="pv__link" href="projetos/quarto-ambar/" tabindex="-1" aria-hidden="true"></a>
-            <!-- carregamento (mesma linguagem do loader do site): some quando a foto do projeto termina de carregar -->
-            <div class="pv__loader" aria-hidden="true"><span class="brand brand--lg"><span>studio</span><b class="wm" role="img" aria-label="Óri"></b></span><i></i></div>
-          </figure>
-            <!-- setas laterais (só no celular): projeto anterior / próximo, mudando a letra ativa -->
-            <button class="pvnav pvnav--prev" id="pvPrev" type="button" aria-label="Projeto anterior"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-            <button class="pvnav pvnav--next" id="pvNext" type="button" aria-label="Próximo projeto"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-          </div>
-          <div class="pvbar">
-            <span class="pvbar__count" aria-hidden="true"><b id="pvCount">01</b> / 09</span>
-            <button class="pvbar__auto" id="autoBtn" type="button" aria-pressed="false">pausar</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- VARIANTE 2 (?projetos=2): galeria editorial. A variante 1 (letras) é o padrão. -->
       <div class="v2" id="v2">
         <button class="v2__arrow v2__arrow--prev" id="v2Prev" type="button" aria-label="Projeto anterior"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <button class="v2__arrow v2__arrow--next" id="v2Next" type="button" aria-label="Próximo projeto"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -384,109 +207,6 @@
         </div>
       </div>
 
-      <!-- VARIANTE 3 (?projetos=3): lista tipográfica; a foto aparece ao lado quando o nome é apontado. -->
-      <div class="v3" id="v3">
-        <span class="v3__band" id="v3Band" aria-hidden="true"></span>
-        <ul class="v3__list" id="v3List" aria-label="Projetos do Studio Óri">
-          <li class="v3__row is-active" data-i="0">
-            <a class="v3__link" href="projetos/casa-aconchego/">
-              <svg class="v3__leaf" viewBox="0 0 1996 1969" aria-hidden="true" focusable="false"><use href="#simbolo"/></svg>
-              <span class="v3__thumb" aria-hidden="true"><img src="assets/projetos/casa-aconchego/01-s.webp?v=ec2da7bc" srcset="assets/projetos/casa-aconchego/01-s.webp?v=ec2da7bc 900w, assets/projetos/casa-aconchego/01.webp?v=4bc8640c 1600w" sizes="96px" width="1600" height="901" alt="" loading="lazy" decoding="async" style="object-position:50% 55%"></span>
-              <span class="v3__name">Casa Aconchego</span>
-              <span class="v3__type">residencial</span>
-              <span class="v3__go" aria-hidden="true">→</span>
-            </a>
-          </li>
-          <li class="v3__row" data-i="1">
-            <a class="v3__link" href="projetos/apartamento-mar/">
-              <svg class="v3__leaf" viewBox="0 0 1996 1969" aria-hidden="true" focusable="false"><use href="#simbolo"/></svg>
-              <span class="v3__thumb" aria-hidden="true"><img src="assets/projetos/apartamento-mar/01-s.webp?v=146baf73" srcset="assets/projetos/apartamento-mar/01-s.webp?v=146baf73 600w, assets/projetos/apartamento-mar/01.webp?v=223da71f 1000w" sizes="96px" width="1000" height="1500" alt="" loading="lazy" decoding="async" style="object-position:50% 62%"></span>
-              <span class="v3__name">Apartamento Mar</span>
-              <span class="v3__type">residencial</span>
-              <span class="v3__go" aria-hidden="true">→</span>
-            </a>
-          </li>
-          <li class="v3__row" data-i="2">
-            <a class="v3__link" href="projetos/rancho-oc/">
-              <svg class="v3__leaf" viewBox="0 0 1996 1969" aria-hidden="true" focusable="false"><use href="#simbolo"/></svg>
-              <span class="v3__thumb" aria-hidden="true"><img src="assets/projetos/rancho-oc/01-s.webp?v=fe469c63" srcset="assets/projetos/rancho-oc/01-s.webp?v=fe469c63 900w, assets/projetos/rancho-oc/01.webp?v=0bb6e6bb 1254w" sizes="96px" width="1254" height="1254" alt="" loading="lazy" decoding="async" style="object-position:50% 50%"></span>
-              <span class="v3__name">Rancho OC</span>
-              <span class="v3__type">residencial</span>
-              <span class="v3__go" aria-hidden="true">→</span>
-            </a>
-          </li>
-          <li class="v3__row" data-i="3">
-            <a class="v3__link" href="projetos/rr/">
-              <svg class="v3__leaf" viewBox="0 0 1996 1969" aria-hidden="true" focusable="false"><use href="#simbolo"/></svg>
-              <span class="v3__thumb" aria-hidden="true"><img src="assets/projetos/rr/01-s.webp?v=07f60c7f" srcset="assets/projetos/rr/01-s.webp?v=07f60c7f 900w, assets/projetos/rr/01.webp?v=30d9a5e0 1800w" sizes="96px" width="1800" height="1013" alt="" loading="lazy" decoding="async" style="object-position:50% 55%"></span>
-              <span class="v3__name">Projeto R&amp;R</span>
-              <span class="v3__type">residencial</span>
-              <span class="v3__go" aria-hidden="true">→</span>
-            </a>
-          </li>
-          <li class="v3__row" data-i="4">
-            <a class="v3__link" href="projetos/jo/">
-              <svg class="v3__leaf" viewBox="0 0 1996 1969" aria-hidden="true" focusable="false"><use href="#simbolo"/></svg>
-              <span class="v3__thumb" aria-hidden="true"><img src="assets/projetos/jo/01-s.webp?v=00b9721b" srcset="assets/projetos/jo/01-s.webp?v=00b9721b 900w, assets/projetos/jo/01.webp?v=92110daf 1800w" sizes="96px" width="1800" height="1013" alt="" loading="lazy" decoding="async" style="object-position:50% 55%"></span>
-              <span class="v3__name">Projeto JO</span>
-              <span class="v3__type">residencial</span>
-              <span class="v3__go" aria-hidden="true">→</span>
-            </a>
-          </li>
-          <li class="v3__row" data-i="5">
-            <a class="v3__link" href="projetos/oliva/">
-              <svg class="v3__leaf" viewBox="0 0 1996 1969" aria-hidden="true" focusable="false"><use href="#simbolo"/></svg>
-              <span class="v3__thumb" aria-hidden="true"><img src="assets/projetos/oliva/01-s.webp?v=2341a643" srcset="assets/projetos/oliva/01-s.webp?v=2341a643 720w, assets/projetos/oliva/01.webp?v=cd458def 1080w" sizes="96px" width="1080" height="1350" alt="" loading="lazy" decoding="async" style="object-position:50% 60%"></span>
-              <span class="v3__name">Apartamento Oliva</span>
-              <span class="v3__type">residencial</span>
-              <span class="v3__go" aria-hidden="true">→</span>
-            </a>
-          </li>
-          <li class="v3__row" data-i="6">
-            <a class="v3__link" href="projetos/olie/">
-              <svg class="v3__leaf" viewBox="0 0 1996 1969" aria-hidden="true" focusable="false"><use href="#simbolo"/></svg>
-              <span class="v3__thumb" aria-hidden="true"><img src="assets/projetos/olie/01-s.webp?v=31923a6a" srcset="assets/projetos/olie/01-s.webp?v=31923a6a 900w, assets/projetos/olie/01.webp?v=36da3f0f 1500w" sizes="96px" width="1500" height="1500" alt="" loading="lazy" decoding="async" style="object-position:50% 55%"></span>
-              <span class="v3__name">Ólie Beauty Clinic</span>
-              <span class="v3__type">comercial</span>
-              <span class="v3__go" aria-hidden="true">→</span>
-            </a>
-          </li>
-          <li class="v3__row" data-i="7">
-            <a class="v3__link" href="projetos/guarita-victoria/">
-              <svg class="v3__leaf" viewBox="0 0 1996 1969" aria-hidden="true" focusable="false"><use href="#simbolo"/></svg>
-              <span class="v3__thumb" aria-hidden="true"><img src="assets/projetos/guarita-victoria/01-s.webp?v=ce41af21" srcset="assets/projetos/guarita-victoria/01-s.webp?v=ce41af21 900w, assets/projetos/guarita-victoria/01.webp?v=c0c9e88f 1712w" sizes="96px" width="1712" height="919" alt="" loading="lazy" decoding="async" style="object-position:40% 50%"></span>
-              <span class="v3__name">Guarita Residencial Victória</span>
-              <span class="v3__type">institucional</span>
-              <span class="v3__go" aria-hidden="true">→</span>
-            </a>
-          </li>
-          <li class="v3__row" data-i="8">
-            <a class="v3__link" href="projetos/quarto-ambar/">
-              <svg class="v3__leaf" viewBox="0 0 1996 1969" aria-hidden="true" focusable="false"><use href="#simbolo"/></svg>
-              <span class="v3__thumb" aria-hidden="true"><img src="assets/projetos/quarto-ambar/01-s.webp?v=e4d291bb" srcset="assets/projetos/quarto-ambar/01-s.webp?v=e4d291bb 900w, assets/projetos/quarto-ambar/01.webp?v=2002550c 1800w" sizes="96px" width="1800" height="1013" alt="" loading="lazy" decoding="async" style="object-position:50% 60%"></span>
-              <span class="v3__name">Quarto Âmbar</span>
-              <span class="v3__type">residencial</span>
-              <span class="v3__go" aria-hidden="true">→</span>
-            </a>
-          </li>
-        </ul>
-        <div class="v3__preview">
-          <span class="v3__img is-active" data-i="0" aria-hidden="true" style="--c1:#C9A98A;--c2:#8A5A3A"><img src="assets/projetos/casa-aconchego/01-s.webp?v=ec2da7bc" srcset="assets/projetos/casa-aconchego/01-s.webp?v=ec2da7bc 900w, assets/projetos/casa-aconchego/01.webp?v=4bc8640c 1600w" sizes="(max-width: 860px) 1px, 560px" width="1600" height="901" alt="" loading="lazy" decoding="async" style="object-position:50% 55%"></span>
-          <span class="v3__img" data-i="1" aria-hidden="true" style="--c1:#B9C4C0;--c2:#6F8480"><img src="assets/projetos/apartamento-mar/01-s.webp?v=146baf73" srcset="assets/projetos/apartamento-mar/01-s.webp?v=146baf73 600w, assets/projetos/apartamento-mar/01.webp?v=223da71f 1000w" sizes="(max-width: 860px) 1px, 560px" width="1000" height="1500" alt="" loading="lazy" decoding="async" style="object-position:50% 62%"></span>
-          <span class="v3__img" data-i="2" aria-hidden="true" style="--c1:#B8B29A;--c2:#6E6A4F"><img src="assets/projetos/rancho-oc/01-s.webp?v=fe469c63" srcset="assets/projetos/rancho-oc/01-s.webp?v=fe469c63 900w, assets/projetos/rancho-oc/01.webp?v=0bb6e6bb 1254w" sizes="(max-width: 860px) 1px, 560px" width="1254" height="1254" alt="" loading="lazy" decoding="async" style="object-position:50% 50%"></span>
-          <span class="v3__img" data-i="3" aria-hidden="true" style="--c1:#D8C9B8;--c2:#A98B72"><img src="assets/projetos/rr/01-s.webp?v=07f60c7f" srcset="assets/projetos/rr/01-s.webp?v=07f60c7f 900w, assets/projetos/rr/01.webp?v=30d9a5e0 1800w" sizes="(max-width: 860px) 1px, 560px" width="1800" height="1013" alt="" loading="lazy" decoding="async" style="object-position:50% 55%"></span>
-          <span class="v3__img" data-i="4" aria-hidden="true" style="--c1:#A9B39A;--c2:#6F7B5E"><img src="assets/projetos/jo/01-s.webp?v=00b9721b" srcset="assets/projetos/jo/01-s.webp?v=00b9721b 900w, assets/projetos/jo/01.webp?v=92110daf 1800w" sizes="(max-width: 860px) 1px, 560px" width="1800" height="1013" alt="" loading="lazy" decoding="async" style="object-position:50% 55%"></span>
-          <span class="v3__img" data-i="5" aria-hidden="true" style="--c1:#C7B7A3;--c2:#8B7B6A"><img src="assets/projetos/oliva/01-s.webp?v=2341a643" srcset="assets/projetos/oliva/01-s.webp?v=2341a643 720w, assets/projetos/oliva/01.webp?v=cd458def 1080w" sizes="(max-width: 860px) 1px, 560px" width="1080" height="1350" alt="" loading="lazy" decoding="async" style="object-position:50% 60%"></span>
-          <span class="v3__img" data-i="6" aria-hidden="true" style="--c1:#E2CFC1;--c2:#BC9E8D"><img src="assets/projetos/olie/01-s.webp?v=31923a6a" srcset="assets/projetos/olie/01-s.webp?v=31923a6a 900w, assets/projetos/olie/01.webp?v=36da3f0f 1500w" sizes="(max-width: 860px) 1px, 560px" width="1500" height="1500" alt="" loading="lazy" decoding="async" style="object-position:50% 55%"></span>
-          <span class="v3__img" data-i="7" aria-hidden="true" style="--c1:#7F8794;--c2:#3F4652"><img src="assets/projetos/guarita-victoria/01-s.webp?v=ce41af21" srcset="assets/projetos/guarita-victoria/01-s.webp?v=ce41af21 900w, assets/projetos/guarita-victoria/01.webp?v=c0c9e88f 1712w" sizes="(max-width: 860px) 1px, 560px" width="1712" height="919" alt="" loading="lazy" decoding="async" style="object-position:40% 50%"></span>
-          <span class="v3__img" data-i="8" aria-hidden="true" style="--c1:#C9905F;--c2:#8E4F22"><img src="assets/projetos/quarto-ambar/01-s.webp?v=e4d291bb" srcset="assets/projetos/quarto-ambar/01-s.webp?v=e4d291bb 900w, assets/projetos/quarto-ambar/01.webp?v=2002550c 1800w" sizes="(max-width: 860px) 1px, 560px" width="1800" height="1013" alt="" loading="lazy" decoding="async" style="object-position:50% 60%"></span>
-          <span class="v3__veil" aria-hidden="true"></span>
-          <span class="v3__title" id="v3Title" aria-hidden="true">Casa Aconchego</span>
-          <a class="v3__cta" id="v3Cta" href="projetos/casa-aconchego/">ver projeto <span aria-hidden="true">→</span><span class="sr-only"> Casa Aconchego</span></a>
-        </div>
-      </div>
-
-      <!-- VARIANTE 4 (?projetos=4): faixa horizontal de capas altas. -->
       <div class="v4" id="v4">
         <div class="v4__stage">
           <button class="v4__arrow v4__arrow--prev" id="v4Prev" type="button" aria-label="Projetos anteriores"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -920,10 +640,8 @@
 
   <script src="vendor/gsap.min.js?v=47da594c"></script>
   <script src="vendor/ScrollTrigger.min.js?v=ba1fa78e"></script>
-  <script src="hero.js?v=51274b13"></script>
-  <script src="nav.js?v=6563679d"></script>
-  <script src="projetos2.js?v=712dd508"></script>
-  <script src="projetos.js?v=4bfe2a3f"></script>
+  <script src="nav.js?v=288db393"></script>
+  <script src="projetos2.js?v=238578e1"></script>
   <script src="servicos.js?v=db9f3f0e"></script>
   <script src="sobre.js?v=c5739eeb"></script>
   <script src="instagram.js?v=43e996cb"></script>

@@ -24,8 +24,8 @@ def whatsapp_com_texto(msg):
     return WHATSAPP_URL + "?text=" + urllib.parse.quote(msg)
 LINKS_PAGE = "links/"
 
-SITE_URL = "https://projeto-studioori.vercel.app/"
-INDEXAR = False
+SITE_URL = "https://oriarquitetura.com.br/"
+INDEXAR = True
 
 SITE_NAME = "Studio Óri"
 SITE_TITLE = "Studio Óri — Arquitetura e Interiores"

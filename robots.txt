@@ -1,3 +1,4 @@
-# Site em fase de testes: não listar nos buscadores (mude INDEXAR em tools/site_config.py no lançamento)
 User-agent: *
-Disallow: /
+Allow: /
+
+Sitemap: https://oriarquitetura.com.br/sitemap.xml

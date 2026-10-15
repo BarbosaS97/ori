@@ -15,6 +15,7 @@
   /* ---------- cor do topo conforme a seção que passa por baixo ----------
      Seções escuras (terracota, azul): o topo ganha fundo da própria cor e texto claro. Nas claras, segue como está. */
   const nav = document.getElementById('nav');
+  const projEl = document.getElementById('projetos');
   const DARK = { servicos: 'terracota', instagram: 'azul' };
   const darkEls = Object.keys(DARK).map((id) => [document.getElementById(id), DARK[id]]).filter((x) => x[0]);
   let navTick = false;
@@ -22,6 +23,7 @@
     navTick = false;
     if (!nav) return;
     const y = nav.offsetHeight / 2;
+    if (projEl) nav.classList.toggle('is-solid', projEl.getBoundingClientRect().top <= 70);   // fundo sólido depois do hero
     let tone = '';
     for (const [el, t] of darkEls) { const r = el.getBoundingClientRect(); if (r.top <= y && r.bottom > y) tone = t; }
     nav.classList.toggle('on-dark', !!tone);
@@ -35,7 +37,7 @@
   const root = document.documentElement;
 
   function setOpen(open, { restoreFocus = true } = {}) {
-    if (open) panel.hidden = false;
+    if (open) { panel.hidden = false; void panel.offsetHeight; }   // força o layout: as transições dos itens começam do estado inicial
     // um frame depois: a transição de opacidade precisa do painel já no layout
     requestAnimationFrame(() => {
       document.body.classList.toggle('menu-open', open);
@@ -48,7 +50,7 @@
       if (restoreFocus) btn.focus({ preventScroll: true });
     } else {
       // o painel só fica visível depois do próximo quadro; focar antes falha (visibility: hidden)
-      setTimeout(() => panel.querySelector('a').focus({ preventScroll: true }), 80);
+      setTimeout(() => panel.querySelector('a').focus({ preventScroll: true }), 520);   // só depois da animação de entrada
     }
   }
   const isOpen = () => btn.getAttribute('aria-expanded') === 'true';

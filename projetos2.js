@@ -1,46 +1,8 @@
-/* Seção PROJETOS — variante 2 (galeria editorial). Só roda com ?projetos=2.
+/* Seção PROJETOS — galeria editorial (computador) e faixa de capas (celular).
    Trilho com scroll-snap nativo (deslizar no toque, trackpad, setas, números e teclado ← →). */
 (() => {
   'use strict';
   const variant = document.documentElement.dataset.projetos;
-
-  /* ----- variante 3: lista tipográfica; a foto acompanha o nome apontado/focado ----- */
-  if (variant === '3') {
-    const rows = [...document.querySelectorAll('.v3__row')];
-    const imgs = [...document.querySelectorAll('.v3__img')];
-    const band = document.getElementById('v3Band');
-    const box = document.getElementById('v3');
-    let cur = 0;
-    // a faixa vai do nome do projeto ativo até a borda direita da tela
-    const place = () => {
-      const r = rows[cur].getBoundingClientRect(), b = box.getBoundingClientRect();
-      const pv = document.querySelector('.v3__preview').getBoundingClientRect();
-      const left = r.left - b.left + 4;
-      band.style.left = left + 'px';
-      band.style.height = r.height + 'px';
-      band.style.width = Math.max(0, pv.left - r.left - 28) + 'px';      // termina um pouco antes da foto, já 100% esmaecida
-      band.style.transform = 'translateY(' + (r.top - b.top) + 'px)';
-      band.style.opacity = '1';
-    };
-    const cta = document.getElementById('v3Cta');
-    const title = document.getElementById('v3Title');
-    let swapT;
-    const names = rows.map((r) => r.querySelector('.v3__name').textContent);
-    const hrefs = rows.map((r) => r.querySelector('a').getAttribute('href'));
-    const set = (i) => { cur = i;
-      cta.href = hrefs[i]; cta.querySelector('.sr-only').textContent = ' ' + names[i];
-      title.classList.add('is-swap');
-      clearTimeout(swapT); swapT = setTimeout(() => { title.textContent = names[i]; title.classList.remove('is-swap'); }, 160);
-      rows.forEach((r, k) => r.classList.toggle('is-active', k === i)); imgs.forEach((m, k) => m.classList.toggle('is-active', k === i)); place(); };
-    addEventListener('resize', place);
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
-    place();
-    rows.forEach((r, i) => {
-      r.addEventListener('mouseenter', () => set(i));
-      r.addEventListener('focusin', () => set(i));
-    });
-    return;
-  }
 
   /* ----- variante 4: faixa de capas altas (rolagem horizontal) ----- */
   if (variant === '4') {
