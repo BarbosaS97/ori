@@ -112,7 +112,6 @@ def build():
       </figure>
 
       <!-- logotipo: "studio" pequeno + ÓRI grande, com o símbolo acima -->
-      {leaf("lk__mark")}
       <p class="lk__role">arquitetura e interiores</p>
       <p class="lk__slogan">Valorizamos história e <em>ori</em>ginalidade.</p>
     </header>
