@@ -100,7 +100,7 @@ def build():
   <div class="lk__bg" aria-hidden="true">{leaf("lk__bgleaf")}</div>
 
   <main class="lk__wrap">
-    <a class="lk__back" href="../">← voltar ao site</a>
+    <a class="lk__back" href="../" aria-label="Ir para o site do Studio Óri"><span aria-hidden="true">←</span></a>
     <header class="lk__head">
       <h1 class="sr-only">Studio Óri — Arquitetura e Interiores</h1>
 
