@@ -258,3 +258,8 @@ button { font: inherit; color: inherit; }
 .btn:hover::before, .btn:focus-visible::before, .pill:hover::before, .pill:focus-visible::before { transform: rotate(72deg) scale(1.12); }
 .btn:active::before, .pill:active::before { transform: rotate(144deg) scale(.94); transition-duration: .25s; }
 @media (prefers-reduced-motion: reduce) { .btn > span[aria-hidden="true"]:last-child { transition: none; } }
+
+/* topo 100% parado: camada própria na GPU (sem repintar junto com a rolagem) e logo sem subpixel */
+.nav { transform: translate3d(0, 0, 0); will-change: transform; backface-visibility: hidden; }
+.nav .brand--mark, .nav .brand__leaf, .nav .wm { transform: translate3d(0, 0, 0); backface-visibility: hidden; }
+.nav .brand--mark { -webkit-font-smoothing: antialiased; }
