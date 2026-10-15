@@ -257,8 +257,8 @@ html:is([data-projetos="2"], [data-projetos="3"], [data-projetos="4"]) .letters_
 .v2__arrow--prev, .v2__arrow--next, .v4__arrow--prev, .v4__arrow--next { width: 52px; height: 52px; }
 .v2__arrow svg, .v4__arrow svg { width: 22px; height: 22px; }
 
-/* desktop: setas bem no canto da tela (alinhadas à margem da página, não ao miolo do conteúdo) */
+/* desktop: setas logo fora das bordas das imagens (100 px do miolo do conteúdo); se não houver espaço na tela, encostam a 8 px da borda */
 @media (min-width: 861px) {
-  .v2__arrow--prev, .v4__arrow--prev { left: calc(50% - 50vw + 104px); }
-  .v2__arrow--next, .v4__arrow--next { right: calc(50% - 50vw + 104px); }
+  .v2__arrow--prev, .v4__arrow--prev { left: max(-100px, calc(8px + 50% - 50vw)); }
+  .v2__arrow--next, .v4__arrow--next { right: max(-100px, calc(8px + 50% - 50vw)); }
 }
