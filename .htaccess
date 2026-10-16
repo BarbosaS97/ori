@@ -5,13 +5,13 @@ DirectoryIndex index.html
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
+  # sem www -> com www (endereço oficial: https://www.oriarquitetura.com.br)
+  RewriteCond %{HTTP_HOST} ^oriarquitetura\.com\.br$ [NC]
+  RewriteRule ^ https://www.oriarquitetura.com.br%{REQUEST_URI} [L,R=301]
   # força HTTPS
   RewriteCond %{HTTPS} !=on
   RewriteCond %{HTTP:X-Forwarded-Proto} !=https
-  RewriteRule ^ https://oriarquitetura.com.br%{REQUEST_URI} [L,R=301]
-  # www -> sem www
-  RewriteCond %{HTTP_HOST} ^www\.oriarquitetura\.com\.br$ [NC]
-  RewriteRule ^ https://oriarquitetura.com.br%{REQUEST_URI} [L,R=301]
+  RewriteRule ^ https://www.oriarquitetura.com.br%{REQUEST_URI} [L,R=301]
 </IfModule>
 
 # página "não encontrada" do site

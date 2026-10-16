@@ -1,0 +1,8 @@
+# arquivos de trabalho: ficam no repositório, mas NÃO são publicados no site
+tools
+publicar.bat
+.htaccess
+.nojekyll
+README.md
+*.md
+.claude
